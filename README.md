@@ -12,7 +12,7 @@ aruco-detector/
 ├── data/                # Provided dataset (ignored by Git)
 ├── models/              # Directory to save trained models
 ├── results/             # Directory to store results
-├── scripts/             # Python scripts for classification and detection
+├── scripts/             # Python scripts
 ├── requirements.txt     # Dependencies 
 ├── README.md            # Project documentation
 ```
@@ -21,4 +21,12 @@ aruco-detector/
 
 ```bash
 pip install -r requirements.txt
+```
+
+## Scripts
+
+Data explorer and visualiser, **data_exploration.py**:
+
+```bash
+python3 scripts/data_exploration.py 
 ```
