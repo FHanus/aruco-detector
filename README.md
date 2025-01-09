@@ -9,7 +9,7 @@ The project directory is organised as follows:
 ```
 aruco-detector/
 ├── aruco-venv/          # Virtual environment (ignored by Git)
-├── data/                # Provided dataset (ignored by Git)
+├── data/                # Provided dataset
 ├── models/              # Directory to save trained models
 ├── results/             # Directory to store results
 ├── scripts/             # Python scripts
