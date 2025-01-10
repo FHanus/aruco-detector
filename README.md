@@ -25,8 +25,16 @@ pip install -r requirements.txt
 
 ## Scripts
 
-Data explorer and visualiser, **data_exploration.py**:
+### Data Exploration
+The data explorer and visualiser (`data_exploration.py`) allows you to inspect the dataset images, view histograms, and see bounding box annotations where applicable.
 
-```bash
-python3 scripts/data_exploration.py 
-```
+### Model Training 
+The classifier training script (`train_classifier.py`) trains a simple CNN model on the ArUco marker dataset (any of the two provided). During training it will:
+
+- Train the model for the specified number of epochs
+- Save the best performing model based on validation accuracy
+- Generate training progress plots showing loss and accuracy curves
+- Create confusion matrices and classification reports
+- Save all results to the `results/` directory
+
+The trained model weights will be saved to the `models/` directory.

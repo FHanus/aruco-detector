@@ -1,0 +1,53 @@
+import torch
+from utils.data_loaders import create_dataloaders
+from utils.architectures import MinimalCNN
+from utils.training_utils import train_evaluate_test_model
+
+# Reproducibility
+SEED = 42
+torch.manual_seed(SEED)
+
+DATA_DIR_FILE2 = "./data/File2/arucoBasic"
+DATA_DIR_FILE3 = "./data/File3/arucoChallenging"
+
+def train_classifier():
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    print("Using device:", device)
+
+    train_loader_file, val_loader_file, test_loader_file = create_dataloaders(
+        DATA_DIR_FILE3,
+        batch_size=64,      
+        num_workers=4,     
+        shuffle=False,       
+        train_split=0.7,    
+        val_split=0.15    
+    )
+
+    # Print dataset sizes
+    print("\nDataset Statistics:")
+    print(f"Training samples: {len(train_loader_file.dataset)}")
+    print(f"Validation samples: {len(val_loader_file.dataset)}")
+    print(f"Test samples: {len(test_loader_file.dataset)}")
+
+    # Verify classes are what we expect
+    train_labels = [label for _, label in train_loader_file.dataset]
+    unique_labels = torch.unique(torch.tensor(train_labels))
+    print(f"\nNumber of unique classes: {len(unique_labels)}")
+    print(f"Class range: {unique_labels.min().item()} to {unique_labels.max().item()}")
+
+    print("\n=== Training Minimal Custom CNN on FILE2 data ===")
+
+    custom_model = MinimalCNN(num_classes=100).to(device)
+    
+    train_evaluate_test_model(
+        custom_model, 
+        device, 
+        train_loader_file, 
+        val_loader_file, 
+        test_loader_file, 
+        num_epochs=500,   
+        lr=3e-4           
+    )
+
+if __name__ == "__main__":
+    train_classifier()
