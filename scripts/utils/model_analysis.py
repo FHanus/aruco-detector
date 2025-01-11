@@ -129,10 +129,10 @@ def save_test_predictions(file_paths, true_labels, predicted_labels, metrics, sa
     with open(save_path, 'w') as f:
         f.write(f"Test Set Analysis: {save_path}\n")
         f.write(f"Total samples: {len(results_df)}\n")
-        f.write(f"Overall accuracy: {metrics['accuracy']:.2f}%\n")
-        f.write(f"Mean precision: {metrics['mean_precision']:.2f}%\n")
-        f.write(f"Mean recall: {metrics['mean_recall']:.2f}%\n")
-        f.write(f"Mean F1-score: {metrics['mean_f1']:.2f}%\n")
+        f.write(f"Overall accuracy: {metrics['accuracy']*100:.2f}%\n")
+        f.write(f"Mean precision: {metrics['mean_precision']*100:.2f}%\n") 
+        f.write(f"Mean recall: {metrics['mean_recall']*100:.2f}%\n")
+        f.write(f"Mean F1-score: {metrics['mean_f1']*100:.2f}%\n")
         f.write(f"Incorrect predictions: {len(results_df) - results_df['correct'].sum()}\n\n")
     
     results_df.to_csv(save_path, mode='a', index=False)

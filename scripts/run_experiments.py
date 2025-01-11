@@ -46,7 +46,7 @@ def get_transforms(transform_name):
 
 def run_experiments():
     models = ["MinimalCNN", "AlexNet", "ResNet18"]
-    batch_sizes = [32, 64, 128]
+    batch_sizes = [32, 64, 128, 256]
     transformations = ["random_rotation", "random_blur", "random_noise"]
 
     DATA_DIR_FILE = "./data/FileCustom1/arucoCombinedDif"
@@ -68,7 +68,7 @@ def run_experiments():
             num_workers=4,
             train_split=0.8,
             val_split=0.1,
-            shuffle=False, 
+            shuffle=True, 
             transform=transform
         )
         
