@@ -114,7 +114,7 @@ def train_evaluate_test_model(model, device, train_loader, val_loader, test_load
     # Plot training progress
     plot_training_progress(
         history, 
-        os.path.join(results_dir, f"{model_name}/training_progress.png")
+        os.path.join(results_dir, f"{model_name}_training_progress.png")
     )
 
     # Load best model and evaluate on test set
@@ -129,7 +129,7 @@ def train_evaluate_test_model(model, device, train_loader, val_loader, test_load
     metrics = plot_classification_metrics(
         test_labels, 
         test_preds,
-        os.path.join(results_dir, f"{model_name}/analysis.png")
+        os.path.join(results_dir, f"{model_name}_analysis.png")
     )
     
     # Save test predictions to CSV with metrics
@@ -138,7 +138,7 @@ def train_evaluate_test_model(model, device, train_loader, val_loader, test_load
         test_labels,
         test_preds,
         metrics,
-        os.path.join(results_dir, f"{model_name}/test_predictions.csv")
+        os.path.join(results_dir, f"{model_name}_test_predictions.csv")
     )
 
     return history, (val_labels, val_preds), (test_labels, test_preds)

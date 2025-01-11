@@ -2,13 +2,18 @@ import os
 import torch
 from torch.utils.data import Dataset, DataLoader
 from torchvision.io import read_image
-from torchvision.transforms import Resize
+from torchvision.transforms import v2
 
 class ArucoClassificationDataset(Dataset):
-    def __init__(self, root_dir):
+    def __init__(self, root_dir, transform=None):
         self.root_dir = root_dir
         self.samples = [] 
-        self.resize_transform = Resize((64, 64))
+        self.transform = transform
+
+        self.base_transforms = v2.Compose([
+            v2.Grayscale(num_output_channels=3),  # To be compatible with AlexNet
+            v2.Resize((64, 64))
+        ])
 
         class_folders = sorted(os.listdir(self.root_dir))
         for class_str in class_folders:
@@ -28,12 +33,17 @@ class ArucoClassificationDataset(Dataset):
     def __getitem__(self, idx):
         path, label = self.samples[idx]
         image = read_image(path)
-        image = self.resize_transform(image)
-        image = image.float() / 255.0 
+
+        image = self.base_transforms(image)
+
+        if self.transform:
+            image = self.transform(image)
+
+        image = v2.ToDtype(torch.float32, scale=True)(image)
         return image, label, path
 
-def create_dataloaders(root_dir, batch_size=8, num_workers=0, train_split=0.7, val_split=0.15, shuffle=False):
-    dataset = ArucoClassificationDataset(root_dir)
+def create_dataloaders(root_dir, batch_size=8, num_workers=0, train_split=0.7, val_split=0.15, shuffle=True, transform=None):
+    dataset = ArucoClassificationDataset(root_dir, transform=transform)
     n = len(dataset)
     n_train = int(n * train_split)
     n_val = int(n * val_split)

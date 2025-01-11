@@ -127,7 +127,7 @@ def save_test_predictions(file_paths, true_labels, predicted_labels, metrics, sa
     results_df = results_df.sort_values(['correct', 'file_path'])
     
     with open(save_path, 'w') as f:
-        f.write(f"Test Set Analysis\n")
+        f.write(f"Test Set Analysis: {save_path}\n")
         f.write(f"Total samples: {len(results_df)}\n")
         f.write(f"Overall accuracy: {metrics['accuracy']:.2f}%\n")
         f.write(f"Mean precision: {metrics['mean_precision']:.2f}%\n")
