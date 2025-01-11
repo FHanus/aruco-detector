@@ -63,15 +63,15 @@ def plot_classification_metrics(labels, preds, save_path):
     
     # 4. Confusion matrix plot
     plt.figure(figsize=(12, 10))
-    cm_normalized = cm / cm.sum(axis=1, keepdims=True)
-    heatmap = sns.heatmap(cm_normalized, annot=False, cmap='viridis')
-    plt.title('Confusion Matrix (Normalized)')
+    cm_normalised = cm / cm.sum(axis=1, keepdims=True)
+    heatmap = sns.heatmap(cm_normalised, annot=False, cmap='viridis')
+    plt.title('Confusion Matrix (Normalised)')
     plt.xlabel('Predicted Class')
     plt.ylabel('True Class')
     plt.xticks(rotation=90, fontsize=8)
     plt.yticks(rotation=0, fontsize=8)
     cbar = heatmap.collections[0].colorbar
-    cbar.set_label('Normalized Prediction Frequency')
+    cbar.set_label('Normalised Prediction Frequency')
     plt.grid(True, alpha=0.3)
     plt.savefig(f'{base_path}_confusion.png', dpi=300, bbox_inches='tight')
     plt.close()

@@ -123,7 +123,7 @@ if __name__ == "__main__":
         "--dataset",
         required=True,
         choices=[
-            "raw", "basic", "challenging", "combinedbasic", "combinedchallenging", "office"
+            "raw", "basic", "challenging", "combinedbasic", "combinedchallenging", "office", "custommix"
         ],
         help="Specify which dataset to use."
     )
@@ -140,7 +140,8 @@ if __name__ == "__main__":
         "challenging": "data/File3/arucoChallenging",
         "combinedbasic": "data/File4/combinedPicsBasic",
         "combinedchallenging": "data/File5/combinedPicsChallenging",
-        "office": "data/File6/officePics"
+        "office": "data/File6/officePics",
+        "custommix": "data/FileCustom1/arucoCombinedDif"
     }
 
     dataset_path = paths[dataset_name]
