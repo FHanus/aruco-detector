@@ -46,7 +46,7 @@ def get_transforms(transform_name):
 
 def run_experiments():
     models = ["MinimalCNN", "AlexNet", "ResNet18"]
-    batch_sizes = [32, 64, 128, 256]
+    batch_sizes = [32, 64, 128]
     transformations = ["random_rotation", "random_blur", "random_noise"]
 
     DATA_DIR_FILE = "./data/FileCustom1/arucoCombinedDif"
@@ -56,7 +56,7 @@ def run_experiments():
         print(f"Starting experiment: Model={model_name}, Batch Size={batch_size}, Transformation={transform_name}")
         
         # Define result directory
-        result_dir = os.path.join("results", model_name, f"batch_size_{batch_size}", f"transforms_{transform_name}")
+        result_dir = os.path.join("results_class_1E", model_name, f"batch_size_{batch_size}", f"transforms_{transform_name}")
         os.makedirs(result_dir, exist_ok=True)
         
         model = get_model(model_name).to('cuda' if torch.cuda.is_available() else 'cpu')

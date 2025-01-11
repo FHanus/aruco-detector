@@ -2,12 +2,13 @@ import torch
 from utils.data_loaders import create_dataloaders
 from utils.architectures import MinimalCNN
 from utils.training_utils import train_evaluate_test_model
+from run_experiments import get_model
 
 # Reproducibility
 SEED = 42
 torch.manual_seed(SEED)
 
-DATA_DIR_FILE = "./data/FileCustom1/arucoCombinedDif"
+DATA_DIR_FILE = "./data/FileCustom2/arucoAugmented"
 
 def train_classifier():
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -15,11 +16,11 @@ def train_classifier():
 
     train_loader_file, val_loader_file, test_loader_file = create_dataloaders(
         DATA_DIR_FILE,
-        batch_size=64,      
+        batch_size=128,      
         num_workers=4,     
-        shuffle=False,       
-        train_split=0.7,    
-        val_split=0.15    
+        shuffle=True,       
+        train_split=0.95,    
+        val_split=0.025    
     )
 
     # Print dataset sizes
@@ -34,9 +35,9 @@ def train_classifier():
     print(f"\nNumber of unique classes: {len(unique_labels)}")
     print(f"Class range: {unique_labels.min().item()} to {unique_labels.max().item()}")
 
-    print("\n=== Training Minimal Custom CNN on FILE2 data ===")
+    print("\n=== Training ===")
 
-    custom_model = MinimalCNN(num_classes=100).to(device)
+    custom_model = get_model("ResNet18",num_classes=100).to(device) 
     
     train_evaluate_test_model(
         custom_model, 
@@ -45,7 +46,10 @@ def train_classifier():
         val_loader_file, 
         test_loader_file, 
         num_epochs=500,   
-        lr=3e-4           
+        lr=3e-4,
+        results_dir="./results_final_class_500E",
+        models_dir="./results_final_class_500E",
+        early_stopping_threshold=99.8                   
     )
 
 if __name__ == "__main__":

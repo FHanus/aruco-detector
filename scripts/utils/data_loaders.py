@@ -10,11 +10,17 @@ class ArucoClassificationDataset(Dataset):
         self.samples = [] 
         self.transform = transform
 
+        # To be compatible with AlexNet
         self.base_transforms = v2.Compose([
-            v2.Grayscale(num_output_channels=3),  # To be compatible with AlexNet
-            v2.Resize((64, 64))
-        ])
-
+            v2.Grayscale(num_output_channels=3),
+            v2.Resize((224, 224)),
+            v2.ToDtype(torch.float32),
+            v2.Normalize(
+                mean=[0.485, 0.456, 0.406],
+                std=[0.229, 0.224, 0.225]
+            )
+            ])
+        
         class_folders = sorted(os.listdir(self.root_dir))
         for class_str in class_folders:
             class_path = os.path.join(self.root_dir, class_str)
@@ -39,7 +45,6 @@ class ArucoClassificationDataset(Dataset):
         if self.transform:
             image = self.transform(image)
 
-        image = v2.ToDtype(torch.float32, scale=True)(image)
         return image, label, path
 
 def create_dataloaders(root_dir, batch_size=8, num_workers=0, train_split=0.7, val_split=0.15, shuffle=True, transform=None):
