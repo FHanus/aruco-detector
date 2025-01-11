@@ -4,7 +4,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
-from utils.model_analysis import plot_classification_metrics, plot_training_progress
+from utils.model_analysis import plot_classification_metrics, plot_training_progress, save_test_predictions
 
 def train_one_epoch(model, device, train_loader, loss_fn, optimizer):
     model.train()
@@ -12,7 +12,7 @@ def train_one_epoch(model, device, train_loader, loss_fn, optimizer):
     total_correct = 0
     total_samples = 0
 
-    for _, (inputs, targets) in enumerate(train_loader):
+    for _, (inputs, targets, _) in enumerate(train_loader):
         inputs, targets = inputs.to(device), targets.to(device)
 
         optimizer.zero_grad()
@@ -34,7 +34,7 @@ def train_one_epoch(model, device, train_loader, loss_fn, optimizer):
     return epoch_loss, epoch_acc
 
 
-def validate_one_epoch(model, device, val_loader, loss_fn):
+def validate_one_epoch(model, device, val_loader, loss_fn, is_test=False):
     model.eval()
     total_loss = 0.0
     total_correct = 0
@@ -42,9 +42,10 @@ def validate_one_epoch(model, device, val_loader, loss_fn):
 
     all_labels = []
     all_preds = []
+    all_paths = []
 
     with torch.no_grad():
-        for _, (inputs, targets) in enumerate(val_loader):
+        for _, (inputs, targets, paths) in enumerate(val_loader):
             inputs, targets = inputs.to(device), targets.to(device)
 
             outputs = model(inputs)
@@ -59,10 +60,14 @@ def validate_one_epoch(model, device, val_loader, loss_fn):
 
             all_labels.extend(targets.cpu().numpy())
             all_preds.extend(predicted.cpu().numpy())
+            if is_test and paths is not None:
+                all_paths.extend(paths)
 
     epoch_loss = total_loss / total_samples
     epoch_acc = 100. * total_correct / total_samples
 
+    if is_test:
+        return epoch_loss, epoch_acc, all_labels, all_preds, all_paths
     return epoch_loss, epoch_acc, all_labels, all_preds
 
 def train_evaluate_test_model(model, device, train_loader, val_loader, test_loader,
@@ -101,28 +106,39 @@ def train_evaluate_test_model(model, device, train_loader, val_loader, test_load
               f"Val Loss: {val_loss:.4f} | Val Acc: {val_acc:.4f}% "
               f"Time: {epoch_time:.2f}s")
 
-    # Save final model
-    torch.save(model.state_dict(), os.path.join(models_dir, f"{model_name}_final.pth"))
+        # Save best model
+        if val_acc > best_val_acc:
+            best_val_acc = val_acc
+            torch.save(model.state_dict(), os.path.join(models_dir, f"{model_name}_best.pth"))
 
     # Plot training progress
     plot_training_progress(
         history, 
-        os.path.join(results_dir, f"{model_name}_training_progress.png")
+        os.path.join(results_dir, f"{model_name}/training_progress.png")
     )
 
-    # Load model and test
+    # Load best model and evaluate on test set
     model.load_state_dict(torch.load(os.path.join(models_dir, f"{model_name}_best.pth")))
 
-    test_loss, test_acc, test_labels, test_preds = validate_one_epoch(model, device, test_loader, loss_fn)
+    test_loss, test_acc, test_labels, test_preds, test_paths = validate_one_epoch(model, device, test_loader, loss_fn, is_test=True)
 
     print(f"\nTest Set Performance:")
     print(f"Loss: {test_loss:.4f} | Accuracy: {test_acc:.4f}%")
 
-    # Save analysis plots
-    plot_classification_metrics(
+    # Save analysis plots and get metrics
+    metrics = plot_classification_metrics(
         test_labels, 
         test_preds,
-        os.path.join(results_dir, f"{model_name}_analysis.png")
+        os.path.join(results_dir, f"{model_name}/analysis.png")
+    )
+    
+    # Save test predictions to CSV with metrics
+    save_test_predictions(
+        test_paths,
+        test_labels,
+        test_preds,
+        metrics,
+        os.path.join(results_dir, f"{model_name}/test_predictions.csv")
     )
 
     return history, (val_labels, val_preds), (test_labels, test_preds)

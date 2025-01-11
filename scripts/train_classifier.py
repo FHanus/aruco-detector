@@ -7,15 +7,14 @@ from utils.training_utils import train_evaluate_test_model
 SEED = 42
 torch.manual_seed(SEED)
 
-DATA_DIR_FILE2 = "./data/File2/arucoBasic"
-DATA_DIR_FILE3 = "./data/File3/arucoChallenging"
+DATA_DIR_FILE = "./data/FileCustom1/arucoCombinedDif"
 
 def train_classifier():
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print("Using device:", device)
 
     train_loader_file, val_loader_file, test_loader_file = create_dataloaders(
-        DATA_DIR_FILE3,
+        DATA_DIR_FILE,
         batch_size=64,      
         num_workers=4,     
         shuffle=False,       
@@ -30,7 +29,7 @@ def train_classifier():
     print(f"Test samples: {len(test_loader_file.dataset)}")
 
     # Verify classes are what we expect
-    train_labels = [label for _, label in train_loader_file.dataset]
+    train_labels = [label for _, label, _ in train_loader_file.dataset]
     unique_labels = torch.unique(torch.tensor(train_labels))
     print(f"\nNumber of unique classes: {len(unique_labels)}")
     print(f"Class range: {unique_labels.min().item()} to {unique_labels.max().item()}")

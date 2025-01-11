@@ -30,7 +30,7 @@ class ArucoClassificationDataset(Dataset):
         image = read_image(path)
         image = self.resize_transform(image)
         image = image.float() / 255.0 
-        return image, label
+        return image, label, path
 
 def create_dataloaders(root_dir, batch_size=8, num_workers=0, train_split=0.7, val_split=0.15, shuffle=False):
     dataset = ArucoClassificationDataset(root_dir)
