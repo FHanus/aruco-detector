@@ -47,8 +47,8 @@ def train_classifier():
         test_loader_file, 
         num_epochs=500,   
         lr=3e-4,
-        results_dir="./results_final_class_500E",
-        models_dir="./results_final_class_500E",
+        results_dir="./results_final_class_res_500E",
+        models_dir="./results_final_class_res_500E",
         early_stopping_threshold=99.8                   
     )
 
