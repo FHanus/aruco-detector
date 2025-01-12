@@ -72,7 +72,7 @@ def validate_one_epoch(model, device, val_loader, loss_fn, is_test=False):
 
 def train_evaluate_test_model(model, device, train_loader, val_loader, test_loader,
                        num_epochs=5, lr=1e-3, results_dir="./results", models_dir="./models",
-                       early_stopping_threshold=99.):
+                       early_stopping_threshold=99.9):
     
     os.makedirs(results_dir, exist_ok=True)
     os.makedirs(models_dir, exist_ok=True)
@@ -115,7 +115,7 @@ def train_evaluate_test_model(model, device, train_loader, val_loader, test_load
 
          # Early stopping check
         if val_acc >= early_stopping_threshold:
-            print(f"\nReached validation accuracy threshold of {early_stopping_threshold:.2%} at epoch {epoch+1} ({val_acc:.2%}).")
+            print(f"\nReached validation accuracy threshold of {early_stopping_threshold}% at epoch {epoch+1} ({val_acc:.2}%).")
             print("Early stopping triggered.")
             break
 

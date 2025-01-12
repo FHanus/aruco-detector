@@ -29,12 +29,6 @@ def train_classifier():
     print(f"Validation samples: {len(val_loader_file.dataset)}")
     print(f"Test samples: {len(test_loader_file.dataset)}")
 
-    # Verify classes are what we expect
-    train_labels = [label for _, label, _ in train_loader_file.dataset]
-    unique_labels = torch.unique(torch.tensor(train_labels))
-    print(f"\nNumber of unique classes: {len(unique_labels)}")
-    print(f"Class range: {unique_labels.min().item()} to {unique_labels.max().item()}")
-
     print("\n=== Training ===")
 
     custom_model = get_model("ResNet18",num_classes=100).to(device) 
