@@ -48,7 +48,7 @@ def get_transforms(transform_name):
             v2.RandomApply([v2.GaussianNoise(mean=0.0)], p=0.5),
         ])
     else:
-        return v2.Compose([])
+        return None
 
 def run_experiments():
     models = ["MinimalCNN",  "AlexNet-clean", "AlexNet", "ResNet18"]
