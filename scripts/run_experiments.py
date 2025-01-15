@@ -6,6 +6,9 @@ from torchvision.transforms import v2
 from utils.data_loaders import create_dataloaders
 from utils.architectures import MinimalCNN
 from utils.training_utils import train_evaluate_test_model
+import torch.backends.cudnn as cudnn
+
+cudnn.benchmark = True
 
 # Models to test
 def get_model(model_name, num_classes=100):
@@ -51,9 +54,9 @@ def get_transforms(transform_name):
         return None
 
 def run_experiments():
-    models = ["MinimalCNN",  "AlexNet-clean", "AlexNet", "ResNet18"]
-    batch_sizes = [32, 64, 128]
-    transformations = ["none", "random_rotation", "random_blur", "random_noise", "rotation_blur_noise"]
+    models = ["MinimalCNN", "AlexNet-clean", "AlexNet", "ResNet18"]
+    batch_sizes = [64, 128]
+    transformations = ["none", "rotation_blur_noise"]
     
     DATA_DIR_FILE = "./data/FileCustom1/arucoCombinedDif"
 
@@ -70,8 +73,9 @@ def run_experiments():
 
         train_loader, val_loader, test_loader = create_dataloaders(
             root_dir=DATA_DIR_FILE,
+            task='classification',
             batch_size=batch_size,
-            num_workers=4,
+            num_workers=8,
             train_split=0.8,
             val_split=0.1,
             shuffle=True, 
@@ -93,7 +97,8 @@ def run_experiments():
             num_epochs=100,
             lr=3e-4,
             results_dir=result_dir,
-            models_dir=result_dir
+            models_dir=result_dir,
+            early_stopping_threshold=99.9
         )
 
         print(f"Completed experiment: Model={model_name}, Batch Size={batch_size}, Transformation={transform_name}\n")
