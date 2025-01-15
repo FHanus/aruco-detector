@@ -1,0 +1,27 @@
+(aruco-venv) filip-ubuntu@filip-ubuntu:~/workspace/aruco-detector$ /home/filip-ubuntu/workspace/aruco-detector/aruco-venv/bin/python /home/filip-ubuntu/workspace/aruco-detector/scripts/train_classifier.py
+Using device: cuda
+
+Dataset Statistics:
+Training samples: 95000
+Validation samples: 2500
+Test samples: 2500
+
+=== Training ===
+Epoch [1/100] Train Loss: 0.2803 | Train Acc: 95.4747% Val Loss: 0.0028 | Val Acc: 100.0000% Time: 317.01s
+Epoch [2/100] Train Loss: 0.0011 | Train Acc: 99.9979% Val Loss: 0.0003 | Val Acc: 100.0000% Time: 348.80s
+
+Reached validation accuracy threshold of 99.9% at epoch 2 (1e+02%).
+Early stopping triggered.
+
+Test Set Performance:
+Loss: 0.0032 | Accuracy: 99.9600%
+./results_final_class_augmented_ToA/training_evaluation/ResNet_best.pth
+Using device: cuda
+
+=== Evaluating on Original Datasets: File2 and File3 ===
+
+Evaluating on File2...
+File2 - Loss: 0.0030 | Accuracy: 99.9900%
+
+Evaluating on File3...
+File3 - Loss: 0.0935 | Accuracy: 97.7100%
