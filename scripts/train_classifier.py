@@ -13,7 +13,7 @@ torch.manual_seed(SEED)
 
 DATA_DIR_FILE = "./data/FileCustom2/arucoAugmented"
 DATA_ORIGINAL_COMBINED_DIR_FILE = "./data/FileCustom1/arucoCombinedDif"
-EXPERIMENT_DIR = "./results_final_class_augmented_ToA"
+EXPERIMENT_DIR = "./results_final_class_augmented_ToP"
 
 def train_classifier():
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -28,17 +28,6 @@ def train_classifier():
         train_split=0.95,    
         val_split=0.025    
     )
-
-    # For validation on provided data (File2 and File3 combined)
-    # _, val_loader_file, test_loader_file = create_dataloaders(
-    #         root_dir=DATA_ORIGINAL_COMBINED_DIR_FILE,
-    #         batch_size=256,
-    #         num_workers=4,
-    #         train_split=0.0,
-    #         val_split=0.5,
-    #         shuffle=False, 
-    #         transform=None
-    # )
 
     # Print dataset sizes
     print("\nDataset Statistics:")
