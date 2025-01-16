@@ -59,8 +59,7 @@ def run_experiments():
     
     Results are saved in separate directories for each configuration.
     """
-    models = ["GoogLeNet"]
-    #models = ["MinimalCNN", "AlexNet-clean", "AlexNet", "ResNet18", "GoogLeNet"]
+    models = ["MinimalCNN", "AlexNet-clean", "AlexNet", "ResNet18", "GoogLeNet"]
     batch_sizes = [32, 64]
     transformations = ["none", "random_rotation", "rotation_blur_noise"]
 
@@ -101,7 +100,7 @@ def run_experiments():
             train_loader=train_loader,
             val_loader=val_loader,
             test_loader=test_loader,
-            num_epochs=2,
+            num_epochs=50,
             lr=3e-4,
             results_dir=result_dir,
             models_dir=result_dir,

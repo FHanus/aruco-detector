@@ -20,7 +20,7 @@ SEED = 42
 torch.manual_seed(SEED)
 
 # Dataset paths
-DATA_DIR_FILE = "./data/File4"
+DATA_DIR_FILE = "./data/FileCustom2"
 EXPERIMENT_DIR = "./results/detection/STP4_detection_trained_on_custom_data"
 
 
@@ -61,11 +61,11 @@ def train_detector():
         train_loader_file, 
         val_loader_file, 
         test_loader_file, 
-        num_epochs=1,   
+        num_epochs=15,   
         lr=1e-4,
         results_dir=os.path.join(EXPERIMENT_DIR, "training_evaluation"),
         models_dir=os.path.join(EXPERIMENT_DIR, "training_evaluation"),
-        early_stopping_threshold=95.0                   
+        early_stopping_threshold=98.0                   
     )
 
 def evaluate_test_datasets():

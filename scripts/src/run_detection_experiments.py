@@ -30,7 +30,7 @@ def run_detection_experiments():
     Not rotating because then then the tag location would have to be recalculated and nobody wants to do that just for fun.
     Results are saved in separate directories for each configuration.
     """
-    models = ["RetinaNet-ResNet50", "FasterRCNN-ResNet50", "MobileNetV3-Large-FPN", "MobileNetV3-Large-320"]
+    models = ["RetinaNet-ResNet50", "FasterRCNN-ResNet50", "MobileNetV3-Large-FPN"]
     batch_sizes = [4]  # Limited by GPU memory for detection models
 
     # Test each model configuration
@@ -50,7 +50,7 @@ def run_detection_experiments():
             root_dir=DATA_DIR_FILE,
             task='detection',
             batch_size=batch_size,
-            num_workers=2,  # Reduced workers due to higher memory usage
+            num_workers=2, 
             train_split=0.8,
             val_split=0.1,
             shuffle=True, 
@@ -70,7 +70,7 @@ def run_detection_experiments():
             train_loader=train_loader,
             val_loader=val_loader,
             test_loader=test_loader,
-            num_epochs=2,  
+            num_epochs=50,  
             lr=1e-4,
             results_dir=result_dir,
             models_dir=result_dir,

@@ -60,11 +60,11 @@ def train_classifier():
         train_loader_file, 
         val_loader_file, 
         test_loader_file, 
-        num_epochs=2,   
+        num_epochs=50,   
         lr=3e-4,
         results_dir= os.path.join(EXPERIMENT_DIR,"training_evaluation"),
         models_dir=  os.path.join(EXPERIMENT_DIR,"training_evaluation"),
-        early_stopping_threshold=99.9                   
+        early_stopping_threshold=99.6                   
     )
 
 def evaluate_original_datasets():
