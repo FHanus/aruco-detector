@@ -1,9 +1,5 @@
 /data/
 /aruco-venv/
-*.txt
+__pycache__
 __init__.py
 *.pth
-*/__pycache__/
-**/__pycache__/
-scripts/utils/__pycache__/
-scripts/__pycache__/
