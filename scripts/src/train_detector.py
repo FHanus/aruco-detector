@@ -80,7 +80,8 @@ def evaluate_test_datasets():
     
     # Load trained model
     model = get_detection_model(config['training']['final_model']).to(device)
-    model_path = os.path.join(config['paths']['EXPERIMENT_DIR'], "training_evaluation", f"{config['training']['final_model']}_best.pth")
+    model_path = os.path.join(config['paths']['EXPERIMENT_DIR'], "training_evaluation", f"{model.__class__.__name__}_best.pth")
+    print(f"Loading model weights from: {model_path}")
     model.load_state_dict(torch.load(model_path))
     
     print("Using device:", device)

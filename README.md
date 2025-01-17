@@ -221,7 +221,7 @@ python scripts/main.py
 Recommended way of running this in order to keep all of the logs, and their time of being outputted is:
 
 ```bash
-python scripts/main.py 2>&1 | ts '[%Y-%m-%d %H:%M:%S]' > results/output.log
+python -u scripts/main.py 2>&1 | ts '[%Y-%m-%d %H:%M:%S]' > results/output.log
 ```
 
 Before running, the script ensures all required data folders exist:

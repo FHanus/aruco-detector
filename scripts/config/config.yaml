@@ -9,20 +9,20 @@ run_classification_experiments:
   experiments:
     datasets: ["./data/File3/arucoChallenging", "./data/FileCustom1/arucoAugmented"]
     models: ["MinimalCNN", "AlexNet-clean", "AlexNet", "ResNet18", "GoogLeNet"]
-    batch_sizes: [64] #32, 64
-    transformations: ["none", "random_rotation"] #, "rotation_blur_noise"]
+    batch_sizes: [32, 64]
+    transformations: ["none", "random_rotation", "rotation_blur_noise"]
     num_workers: 8
     train_split: 0.8
     val_split: 0.1
-    shuffle: true
-    num_epochs: 1
+    shuffle: false
+    num_epochs: 15
     lr: 3.0e-3
-    early_stopping_threshold: 99.0
+    early_stopping_threshold: 96.0
 
 # STEP 2
 train_classifier:
   paths:
-    DATA_DIR_FILE: "./data/File3/arucoChallenging" #  "./data/FileCustom1/arucoAugmented"
+    DATA_DIR_FILE: "./data/FileCustom1/arucoAugmented"
     EXPERIMENT_DIR: "./results/classification/STP2_classification_trained_on_custom_data"
   training:
     final_model: "GoogLeNet"
@@ -31,9 +31,9 @@ train_classifier:
     shuffle: true
     train_split: 0.95
     val_split: 0.025
-    num_epochs: 1
-    lr: 3.0e-3
-    early_stopping_threshold: 99.0
+    num_epochs: 30
+    lr: 3.0e-4
+    early_stopping_threshold: 99.9
   evaluation:
     batch_size: 256
     num_workers: 4
@@ -55,14 +55,14 @@ run_detection_experiments:
     train_split: 0.8
     val_split: 0.1
     shuffle: true
-    num_epochs: 1
-    lr: 1.0e-4
-    early_stopping_threshold: 99.0
+    num_epochs: 5
+    lr: 1.0e-3
+    early_stopping_threshold: 96.0
 
 # STEP 4
 train_detector:
   paths:
-    DATA_DIR_FILE: "./data/File5" #"./data/FileCustom2" 
+    DATA_DIR_FILE: "./data/FileCustom2" 
     EXPERIMENT_DIR: "./results/detection/STP4_detection_trained_on_custom_data"
   training:
     final_model: "RetinaNet-ResNet50"
@@ -71,9 +71,9 @@ train_detector:
     shuffle: true
     train_split: 0.8
     val_split: 0.1
-    num_epochs: 1
+    num_epochs: 15
     lr: 1.0e-4
-    early_stopping_threshold: 99.0
+    early_stopping_threshold: 99.9
   evaluation:
     batch_size: 8
     num_workers: 2
