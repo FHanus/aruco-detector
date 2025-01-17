@@ -22,8 +22,6 @@ torch.manual_seed(SEED)
 
 # Load configuration
 config = get_script_config('train_classifier')
-DATA_DIR_FILE = config['paths']['DATA_DIR_FILE']
-EXPERIMENT_DIR = config['paths']['EXPERIMENT_DIR']
 
 def train_classifier():
     """Trains the final classifier model on the custom augmented dataset.
@@ -35,7 +33,7 @@ def train_classifier():
 
     # Create data loaders with specified splits
     train_loader_file, val_loader_file, test_loader_file = create_dataloaders(
-        DATA_DIR_FILE,
+        config['paths']['DATA_DIR_FILE'],
         task='classification',
         batch_size=config['training']['batch_size'],      
         num_workers=config['training']['num_workers'],     
@@ -52,8 +50,8 @@ def train_classifier():
 
     print("\n=== Training ===")
 
-    # Initialise ResNet18 model for 100-class classification
-    final_model = get_model("ResNet18",num_classes=100).to(device) 
+    # Initialise final model for 100-class classification
+    final_model = get_model(config['training']['final_model'],num_classes=100).to(device) 
     
     # Train and evaluate model
     train_evaluate_test_model(
@@ -64,8 +62,8 @@ def train_classifier():
         test_loader_file, 
         num_epochs=config['training']['num_epochs'],   
         lr=config['training']['lr'],
-        results_dir=os.path.join(EXPERIMENT_DIR,"training_evaluation"),
-        models_dir=os.path.join(EXPERIMENT_DIR,"training_evaluation"),
+        results_dir=os.path.join(config['paths']['EXPERIMENT_DIR'],"training_evaluation"),
+        models_dir=os.path.join(config['paths']['EXPERIMENT_DIR'],"training_evaluation"),
         early_stopping_threshold=config['training']['early_stopping_threshold']                   
     )
 
@@ -81,9 +79,9 @@ def evaluate_original_datasets():
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     
     # Load trained model
-    model = get_model("ResNet18", num_classes=100).to(device)
-    print(os.path.join(EXPERIMENT_DIR,"training_evaluation/ResNet_best.pth"))
-    model.load_state_dict(torch.load(os.path.join(EXPERIMENT_DIR,"training_evaluation/ResNet_best.pth")))
+    model = get_model(config['training']['final_model'], num_classes=100).to(device)
+    model_path = os.path.join(config['paths']['EXPERIMENT_DIR'], "training_evaluation", f"{config['training']['final_model']}_best.pth")
+    model.load_state_dict(torch.load(model_path))
     
     print("Using device:", device)
 
@@ -118,7 +116,7 @@ def evaluate_original_datasets():
         print(f"{dataset_name} - Loss: {loss:.4f} | Accuracy: {acc:.4f}%")
         
         # Save evaluation results
-        analysis_dir = os.path.join(EXPERIMENT_DIR, f"{dataset_name}_final_evaluation")
+        analysis_dir = os.path.join(config['paths']['EXPERIMENT_DIR'], f"{dataset_name}_final_evaluation")
         os.makedirs(analysis_dir, exist_ok=True)
         
         # Plot and save metrics

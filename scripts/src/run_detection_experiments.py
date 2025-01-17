@@ -17,9 +17,6 @@ cudnn.benchmark = True
 
 # Load configuration
 config = get_script_config('run_detection_experiments')
-DATA_DIR_FILE = config['paths']['DATA_DIR_FILE']
-CUSTOM_DATA_DIR_FILE = config['paths']['CUSTOM_DATA_DIR_FILE']
-EXPERIMENT_DIR = config['paths']['EXPERIMENT_DIR']
 
 def run_detection_experiments():
     """Runs object detection experiments with various model architectures.
@@ -33,16 +30,19 @@ def run_detection_experiments():
     Not rotating because then then the tag location would have to be recalculated and nobody wants to do that just for fun.
     Results are saved in separate directories for each configuration.
     """
-    data = [DATA_DIR_FILE, CUSTOM_DATA_DIR_FILE]
+    data = config['experiments']['datasets']
     models = config['experiments']['models']
     batch_sizes = config['experiments']['batch_sizes']
 
     # Test each model configuration
     for training_data, model_name, batch_size in itertools.product(data, models, batch_sizes):
-        print(f"Starting detection experiment: Model={model_name}, Batch Size={batch_size}")
+        print(f"Starting detection experiment: Dataset={training_data}, Model={model_name}, Batch Size={batch_size}")
+
+        # Extract the dataset name from the path (second to last directory)
+        dataset_name = os.path.normpath(training_data).split(os.sep)[1]
 
         # Set up result directory structure
-        result_dir = os.path.join(EXPERIMENT_DIR, model_name, f"batch_size_{batch_size}")
+        result_dir = os.path.join(config['paths']['EXPERIMENT_DIR'], dataset_name, model_name, f"batch_size_{batch_size}")
         os.makedirs(result_dir, exist_ok=True)
 
         # Initialise model on appropriate device
@@ -81,7 +81,7 @@ def run_detection_experiments():
             early_stopping_threshold=config['experiments']['early_stopping_threshold']
         )
 
-        print(f"Completed detection experiment: Model={model_name}, Batch Size={batch_size}\n")
+        print(f"Completed detection experiment: Dataset={training_data}, Model={model_name}, Batch Size={batch_size}\n")
 
 if __name__ == "__main__":
     run_detection_experiments()

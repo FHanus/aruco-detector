@@ -18,9 +18,6 @@ cudnn.benchmark = True
 
 # Load configuration
 config = get_script_config('run_classification_experiments')
-DATA_DIR_FILE = config['paths']['DATA_DIR_FILE']
-CUSTOM_DATA_DIR_FILE = ['paths']['CUSTOM_DATA_DIR_FILE']
-EXPERIMENT_DIR = config['paths']['EXPERIMENT_DIR']
 
 def get_transforms(transform_name):
     """Returns data augmentation transforms for training.
@@ -62,17 +59,20 @@ def run_experiments():
     
     Results are saved in separate directories for each configuration.
     """
-    data = [DATA_DIR_FILE, CUSTOM_DATA_DIR_FILE]
+    data = config['experiments']['datasets']
     models = config['experiments']['models']
     batch_sizes = config['experiments']['batch_sizes']
     transformations = config['experiments']['transformations']
 
     # Test all combinations of parameters
     for training_data, model_name, batch_size, transform_name in itertools.product(data, models, batch_sizes, transformations):
-        print(f"Starting experiment: Model={model_name}, Batch Size={batch_size}, Transformation={transform_name}")
+        print(f"Starting experiment: Dataset={training_data}, Model={model_name}, Batch Size={batch_size}, Transformation={transform_name}")
+
+        # Extract the dataset name from the path (second to last directory)
+        dataset_name = os.path.normpath(training_data).split(os.sep)[1]
 
         # Set up result directory structure
-        result_dir = os.path.join(EXPERIMENT_DIR, model_name, f"batch_size_{batch_size}", f"transforms_{transform_name}")
+        result_dir = os.path.join(config['paths']['EXPERIMENT_DIR'], dataset_name, model_name, f"batch_size_{batch_size}", f"transforms_{transform_name}")
         os.makedirs(result_dir, exist_ok=True)
 
         # Initialise model and transforms
@@ -111,7 +111,7 @@ def run_experiments():
             early_stopping_threshold=config['experiments']['early_stopping_threshold']
         )
 
-        print(f"Completed experiment: Model={model_name}, Batch Size={batch_size}, Transformation={transform_name}\n")
+        print(f"Completed experiment: Dataset={training_data}, Model={model_name}, Batch Size={batch_size}, Transformation={transform_name}\n")
 
 if __name__ == "__main__":
     run_experiments()

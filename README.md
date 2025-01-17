@@ -218,6 +218,12 @@ This is the easiest way to run this. Nothing else has to be ran, only this main 
 python scripts/main.py
 ```
 
+Recommended way of running this in order to keep all of the logs, and their time of being outputted is:
+
+```bash
+python scripts/main.py 2>&1 | ts '[%Y-%m-%d %H:%M:%S]' > results/output.log
+```
+
 Before running, the script ensures all required data folders exist:
 - File1: Contains raw ArUco images (512x512)
 - File2: Houses weakly distorted ArUco images
