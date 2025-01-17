@@ -11,13 +11,16 @@ sys.path.append(parent_dir)
 from utils.data_loaders import create_dataloaders
 from utils.training_utils import train_evaluate_test_model
 from utils.architectures import get_model
+from utils.config import get_script_config
 
 # Enable CUDA optimisations
 cudnn.benchmark = True
 
-# Dataset paths
-DATA_DIR_FILE = "./data/File3/arucoChallenging"
-EXPERIMENT_DIR = "./results/classification/STP1_classification_tests"
+# Load configuration
+config = get_script_config('run_classification_experiments')
+DATA_DIR_FILE = config['paths']['DATA_DIR_FILE']
+CUSTOM_DATA_DIR_FILE = ['paths']['CUSTOM_DATA_DIR_FILE']
+EXPERIMENT_DIR = config['paths']['EXPERIMENT_DIR']
 
 def get_transforms(transform_name):
     """Returns data augmentation transforms for training.
@@ -59,12 +62,13 @@ def run_experiments():
     
     Results are saved in separate directories for each configuration.
     """
-    models = ["MinimalCNN", "AlexNet-clean", "AlexNet", "ResNet18", "GoogLeNet"]
-    batch_sizes = [32, 64]
-    transformations = ["none", "random_rotation", "rotation_blur_noise"]
+    data = [DATA_DIR_FILE, CUSTOM_DATA_DIR_FILE]
+    models = config['experiments']['models']
+    batch_sizes = config['experiments']['batch_sizes']
+    transformations = config['experiments']['transformations']
 
     # Test all combinations of parameters
-    for model_name, batch_size, transform_name in itertools.product(models, batch_sizes, transformations):
+    for training_data, model_name, batch_size, transform_name in itertools.product(data, models, batch_sizes, transformations):
         print(f"Starting experiment: Model={model_name}, Batch Size={batch_size}, Transformation={transform_name}")
 
         # Set up result directory structure
@@ -77,13 +81,13 @@ def run_experiments():
 
         # Create data loaders with specified splits
         train_loader, val_loader, test_loader = create_dataloaders(
-            root_dir=DATA_DIR_FILE,
+            root_dir=training_data,
             task='classification',
             batch_size=batch_size,
-            num_workers=8,
-            train_split=0.8,
-            val_split=0.1,
-            shuffle=True, 
+            num_workers=config['experiments']['num_workers'],
+            train_split=config['experiments']['train_split'],
+            val_split=config['experiments']['val_split'],
+            shuffle=config['experiments']['shuffle'], 
             transform=transform
         )
 
@@ -100,11 +104,11 @@ def run_experiments():
             train_loader=train_loader,
             val_loader=val_loader,
             test_loader=test_loader,
-            num_epochs=50,
-            lr=3e-4,
+            num_epochs=config['experiments']['num_epochs'],
+            lr=config['experiments']['lr'],
             results_dir=result_dir,
             models_dir=result_dir,
-            early_stopping_threshold=99.9
+            early_stopping_threshold=config['experiments']['early_stopping_threshold']
         )
 
         print(f"Completed experiment: Model={model_name}, Batch Size={batch_size}, Transformation={transform_name}\n")

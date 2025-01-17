@@ -11,6 +11,7 @@ from utils.data_loaders import create_dataloaders
 from utils.training_utils import train_evaluate_test_model, validate_one_epoch
 from utils.architectures import get_model
 from utils.model_analysis import plot_classification_metrics, save_test_predictions
+from utils.config import get_script_config
 
 # Enable CUDA optimisations
 cudnn.benchmark = True
@@ -19,9 +20,10 @@ cudnn.benchmark = True
 SEED = 42
 torch.manual_seed(SEED)
 
-# Dataset paths
-DATA_DIR_FILE = "./data/FileCustom1/arucoAugmented"
-EXPERIMENT_DIR = "./results/classification/STP2_classification_trained_on_custom_data"
+# Load configuration
+config = get_script_config('train_classifier')
+DATA_DIR_FILE = config['paths']['DATA_DIR_FILE']
+EXPERIMENT_DIR = config['paths']['EXPERIMENT_DIR']
 
 def train_classifier():
     """Trains the final classifier model on the custom augmented dataset.
@@ -35,11 +37,11 @@ def train_classifier():
     train_loader_file, val_loader_file, test_loader_file = create_dataloaders(
         DATA_DIR_FILE,
         task='classification',
-        batch_size=32,      
-        num_workers=8,     
-        shuffle=True,       
-        train_split=0.95,    
-        val_split=0.025    
+        batch_size=config['training']['batch_size'],      
+        num_workers=config['training']['num_workers'],     
+        shuffle=config['training']['shuffle'],       
+        train_split=config['training']['train_split'],    
+        val_split=config['training']['val_split']    
     )
 
     # Log dataset statistics
@@ -60,11 +62,11 @@ def train_classifier():
         train_loader_file, 
         val_loader_file, 
         test_loader_file, 
-        num_epochs=50,   
-        lr=3e-4,
-        results_dir= os.path.join(EXPERIMENT_DIR,"training_evaluation"),
-        models_dir=  os.path.join(EXPERIMENT_DIR,"training_evaluation"),
-        early_stopping_threshold=99.6                   
+        num_epochs=config['training']['num_epochs'],   
+        lr=config['training']['lr'],
+        results_dir=os.path.join(EXPERIMENT_DIR,"training_evaluation"),
+        models_dir=os.path.join(EXPERIMENT_DIR,"training_evaluation"),
+        early_stopping_threshold=config['training']['early_stopping_threshold']                   
     )
 
 def evaluate_original_datasets():
@@ -87,10 +89,7 @@ def evaluate_original_datasets():
 
     print("\n=== Evaluating on Original Datasets: File2 and File3 ===")
     
-    original_datasets = {
-        "File2": "./data/File2/arucoBasic",
-        "File3": "./data/File3/arucoChallenging"
-    }
+    original_datasets = config['evaluation']['original_datasets']
     
     # Evaluate on each original dataset
     for dataset_name, dataset_path in original_datasets.items():
@@ -99,8 +98,8 @@ def evaluate_original_datasets():
         # Create data loader for full dataset evaluation
         loader, _, _ = create_dataloaders(
             root_dir=dataset_path,
-            batch_size=256,
-            num_workers=4,
+            batch_size=config['evaluation']['batch_size'],
+            num_workers=config['evaluation']['num_workers'],
             train_split=1.0,   # Use entire dataset for evaluation
             val_split=0.0,
             shuffle=False, 

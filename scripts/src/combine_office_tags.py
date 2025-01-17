@@ -3,16 +3,23 @@ import cv2
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
+import sys
 
-# Dataset paths
-ARUCO_DIR = "./data/FileCustom1/arucoAugmented"
-OFFICE_DIR = "./data/File6/officePics"
-OUTPUT_DIR = "./data/FileCustom2/combinedAugmented"
+parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(parent_dir)
+
+from utils.config import get_script_config
+
+# Load configuration
+config = get_script_config('combine_office_tags')
+ARUCO_DIR = config['paths']['ARUCO_DIR']
+OFFICE_DIR = config['paths']['OFFICE_DIR']
+OUTPUT_DIR = config['paths']['OUTPUT_DIR']
 
 def process_office_image(image):
-    """Process office image by first cropping 1000x1000 then resizing to 224x224."""
+    """Process office image by first cropping then resizing to final size."""
     h, w = image.shape[:2]
-    crop_size = 1000
+    crop_size = config['image_processing']['crop_size']
     
     # Get random crop position for 800x800
     x = np.random.randint(0, w - crop_size + 1)
@@ -21,13 +28,14 @@ def process_office_image(image):
     # Crop crop_size-sized square
     cropped = image[y:y+crop_size, x:x+crop_size]
     
-    final = cv2.resize(cropped, (224, 224))
+    final = cv2.resize(cropped, tuple(config['image_processing']['final_size']))
     return final
 
-def get_valid_position(office_img_size, tag_size):
+def get_valid_position(office_img_size):
     """Get random valid position for tag that ensures it's fully visible."""
-    max_x = office_img_size[1] - tag_size[1]
-    max_y = office_img_size[0] - tag_size[0]
+    tag_size = config['image_processing']['tag_size']
+    max_x = office_img_size[1] - tag_size[0]
+    max_y = office_img_size[0] - tag_size[1]
     
     x = np.random.randint(0, max_x)
     y = np.random.randint(0, max_y)
@@ -64,11 +72,12 @@ def combine_images():
             tag_img = cv2.imread(tag_path)
             
             # Just like Files 4 and 5
-            tag_img = cv2.resize(tag_img, (34, 34))
+            tag_img = cv2.resize(tag_img, tuple(config['image_processing']['tag_size']))
             
-            x, y = get_valid_position(office_img.shape, tag_img.shape)
+            x, y = get_valid_position(office_img.shape)
             output_img = office_img.copy()
-            output_img[y:y+34, x:x+34] = tag_img
+            tag_size = config['image_processing']['tag_size']
+            output_img[y:y+tag_size[1], x:x+tag_size[0]] = tag_img
             
             output_filename = f"office{office_idx:04d}_class{class_name}_{tag_file}"
             output_path = os.path.join(OUTPUT_DIR, output_filename)
@@ -76,7 +85,7 @@ def combine_images():
             
             csv_data.append({
                 'fileNames': os.path.join("combinedAugmented",output_filename),
-                'bBox': [x, y, 34, 34],  # [x, y, width, height]
+                'bBox': [x, y, tag_size[0], tag_size[1]],  # [x, y, width, height]
                 'class': class_name
             })
     

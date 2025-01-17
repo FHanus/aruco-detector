@@ -10,13 +10,16 @@ sys.path.append(parent_dir)
 from utils.data_loaders import create_dataloaders
 from utils.training_utils import train_evaluate_test_detection_model
 from utils.architectures import get_detection_model
+from utils.config import get_script_config
 
 # Enable CUDA optimisations
 cudnn.benchmark = True
 
-# Dataset paths
-DATA_DIR_FILE = "./data/File5"
-EXPERIMENT_DIR = "./results/detection/STP3_detection_tests"
+# Load configuration
+config = get_script_config('run_detection_experiments')
+DATA_DIR_FILE = config['paths']['DATA_DIR_FILE']
+CUSTOM_DATA_DIR_FILE = config['paths']['CUSTOM_DATA_DIR_FILE']
+EXPERIMENT_DIR = config['paths']['EXPERIMENT_DIR']
 
 def run_detection_experiments():
     """Runs object detection experiments with various model architectures.
@@ -30,11 +33,12 @@ def run_detection_experiments():
     Not rotating because then then the tag location would have to be recalculated and nobody wants to do that just for fun.
     Results are saved in separate directories for each configuration.
     """
-    models = ["RetinaNet-ResNet50", "FasterRCNN-ResNet50", "MobileNetV3-Large-FPN"]
-    batch_sizes = [4]  # Limited by GPU memory for detection models
+    data = [DATA_DIR_FILE, CUSTOM_DATA_DIR_FILE]
+    models = config['experiments']['models']
+    batch_sizes = config['experiments']['batch_sizes']
 
     # Test each model configuration
-    for model_name, batch_size in itertools.product(models, batch_sizes):
+    for training_data, model_name, batch_size in itertools.product(data, models, batch_sizes):
         print(f"Starting detection experiment: Model={model_name}, Batch Size={batch_size}")
 
         # Set up result directory structure
@@ -47,13 +51,13 @@ def run_detection_experiments():
 
         # Create data loaders for detection task
         train_loader, val_loader, test_loader = create_dataloaders(
-            root_dir=DATA_DIR_FILE,
+            root_dir=training_data,
             task='detection',
             batch_size=batch_size,
-            num_workers=2, 
-            train_split=0.8,
-            val_split=0.1,
-            shuffle=True, 
+            num_workers=config['experiments']['num_workers'], 
+            train_split=config['experiments']['train_split'],
+            val_split=config['experiments']['val_split'],
+            shuffle=config['experiments']['shuffle']
         )
 
         # Uncomment to verify detection data format
@@ -70,11 +74,11 @@ def run_detection_experiments():
             train_loader=train_loader,
             val_loader=val_loader,
             test_loader=test_loader,
-            num_epochs=50,  
-            lr=1e-4,
+            num_epochs=config['experiments']['num_epochs'],  
+            lr=config['experiments']['lr'],
             results_dir=result_dir,
             models_dir=result_dir,
-            early_stopping_threshold=99.0
+            early_stopping_threshold=config['experiments']['early_stopping_threshold']
         )
 
         print(f"Completed detection experiment: Model={model_name}, Batch Size={batch_size}\n")

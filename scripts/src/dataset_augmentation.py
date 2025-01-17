@@ -2,12 +2,19 @@ import os
 import cv2
 import numpy as np
 from tqdm import tqdm
+import sys
 
-# Dataset paths
-DATA_DIR_RAW = "./data/File1/arucoRaw"
-DATA_DIR_AUGMENTED = "./data/FileCustom1/arucoAugmented"
+parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(parent_dir)
 
-def create_augmentation_transforms(total_transforms = 1000):
+from utils.config import get_script_config
+
+# Load configuration
+config = get_script_config('dataset_augmentation')
+DATA_DIR_RAW = config['paths']['DATA_DIR_RAW']
+DATA_DIR_AUGMENTED = config['paths']['DATA_DIR_AUGMENTED']
+
+def create_augmentation_transforms(total_transforms=None):
     """Generates a list of random transformation parameters.
     
     Creates transforms with:
@@ -18,17 +25,18 @@ def create_augmentation_transforms(total_transforms = 1000):
     """
     transforms = []
     
-    while len(transforms) < 1000:
+    total = total_transforms or config['augmentation']['total_transforms']
+    while len(transforms) < total:
         transforms.append({
-            'rotation': np.random.uniform(0, 360),
-            'blur': np.random.choice(np.arange(0, 14, 0.2)),
-            'noise': np.random.choice(np.arange(0.0, 0.1, 0.025)),
-            'scale': np.random.uniform(0.5, 1.0)
+            'rotation': np.random.uniform(*config['augmentation']['rotation_range']),
+            'blur': np.random.choice(np.arange(*config['augmentation']['blur_range'], 0.2)),
+            'noise': np.random.choice(np.arange(*config['augmentation']['noise_range'], config['augmentation']['noise_step'])),
+            'scale': np.random.uniform(*config['augmentation']['scale_range'])
         })
     
-    return transforms[:total_transforms]
+    return transforms[:total]
 
-def apply_augmentations(image, params, padding = 20):
+def apply_augmentations(image, params, padding=None):
     """Applies a set of augmentations to an image.
     
     Args:
@@ -39,6 +47,7 @@ def apply_augmentations(image, params, padding = 20):
     Returns:
         Augmented image
     """
+    padding = padding or config['augmentation']['padding']
     h, w = image.shape[:2]
     
     # Create black background for placement
