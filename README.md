@@ -349,9 +349,9 @@ The final test was performed on a 1000 samples:
 
 | Model Config | Details | Metrics |
 |-------------|---------|---------|
-| RetinaNet-ResNet50<br>batch size: 4 | - Mean IoU: 98.05%<br>- Mean MAE: 98.25%<br>- IoUs over 50%: 100.00% |
-| FasterRCNN-ResNet50<br>batch size: 4 | - Mean IoU: 97.80%<br>- Mean MAE: 97.60%<br>- IoUs over 50%: 100.00% |
-| MobileNetV3-Large-FPN<br>batch size: 4 | - Mean IoU: 95.93%<br>- Mean MAE: 96.32%<br>- IoUs over 50%: 100.00% |
+| RetinaNet-ResNet50 | batch size: 4 | - Mean IoU: 98.05%<br>- Mean MAE: 98.25%<br>- IoUs over 50%: 100.00% |
+| FasterRCNN-ResNet50 | batch size: 4 | - Mean IoU: 97.80%<br>- Mean MAE: 97.60%<br>- IoUs over 50%: 100.00% |
+| MobileNetV3-Large-FPN | batch size: 4 | - Mean IoU: 95.93%<br>- Mean MAE: 96.32%<br>- IoUs over 50%: 100.00% |
 
 #### Step 4
 
