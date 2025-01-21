@@ -8,17 +8,17 @@ This project implements deep learning techniques for robust ArUco marker detecti
 .
 ├── data/                                      
 │   ├── File1/                                
-│   │   └── arucoRaw/                          # Clean ArUco images (512x512)
+│   │   └── arucoRaw/                          # Clean ArUco images (100 images, 512x512)
 │   ├── File2/                
-│   │   └── arucoBasic/                        # Weakly distorted ArUco images
+│   │   └── arucoBasic/                        # Weakly distorted ArUco images (100 images, 512x512, in each of the 100 class folders)
 │   ├── File3/                             
-│   │   └── arucoChallenging/                  # Strongly distorted ArUco images
+│   │   └── arucoChallenging/                  # Strongly distorted ArUco images (100 images, 512x512, in each of the 100 class folders)
 │   ├── File4/       
-│   │   └── combinedPicsBasic/                 # Office with randomly placed ArUco (File2) images
+│   │   └── combinedPicsBasic/                 # Office with randomly placed ArUco (File2) images (100 images, 224x224, and bboxes CSV file)
 │   ├── File5/ 
-│   │   └── combinedPicsChallenging/           # Office with randomly placed ArUco (File3) images
+│   │   └── combinedPicsChallenging/           # Office with randomly placed ArUco (File3) images (100 images, 224x224, and bboxes CSV file)
 │   ├── File6/                                 
-│   │   └── officePics/                        # Original office images
+│   │   └── officePics/                        # Original office images (100 images 2560x1440)
 │   ├── FileCustom1/                         
 │   │   └── arucoAugmented                     # Custom dataset approximating Files 2 and 3
 │   └── FileCustom2/                           
@@ -48,7 +48,7 @@ This project implements deep learning techniques for robust ArUco marker detecti
 ### Main Scripts
 
 #### main.py
-The primary execution script that orchestrates the entire pipeline:
+The primary execution script that manages the entire pipeline:
 - Ensures all required data folders exist before processing
 - Manages GPU memory between steps (cache clearing and stats reset)
 - Provides clear progress updates
@@ -76,8 +76,8 @@ python3 data_exploration.py --detection
 Part 1 of the pipeline. Outputs ArUco tag variations by:
 - Rotating (0-360°)
 - Blurring (σ ranging from 0-14)
-- Adding noise (up to 10% of pixels)
-- Resizing (50-100% of original)
+- Adding noise (up to 10%<br>of pixels)
+- Resizing (50-100%<br>of original)
 - The generated dataset is meant for 'train_classifier.py'
 
 #### combine_office_tags.py
@@ -258,12 +258,13 @@ The script handles GPU memory cleanup between steps and provides clear progress 
 - GoogLeNet (with weights)
 
 Final model:
-- ResNet18 architecture
+- GoogLeNet architecture
 - Training configuration:
-  * Adam optimizer (β1=0.9, β2=0.999)
+  * Adam optimizer
   * CrossEntropy loss
   * Learning rate: 3e-4
   * Batch size: 32
+  * Number of epochs: 50
 - Evaluation:
   * Separate testing on File2 and File3
   * Per-class performance analysis
@@ -286,8 +287,7 @@ Final model:
   * Adam optimizer
   * Learning rate: 1e-4
   * Batch size: 4 (could not fit larger)
-  * Early stopping at 99.0% IoU
-  * Best model checkpointing
+  * Number of epochs: 50
 - Evaluation:
   * Separate testing on File4 and File5
   * IoU and coordinate-wise metrics
@@ -297,8 +297,68 @@ Final model:
 
 ### Classification Results
 
-TBD
+#### Step 1
+
+The classification experiments showed varying results across different architectures. It was trained, validated and tested on the File3 dataset.
+The final test was performed on a 1000 samples:
+
+| Model Config | Details | Metrics |
+|-------------|---------|---------|
+| AlexNet (clean)<br>batch size: 32<br>no transforms | Incorrect predictions: 40 | - Accuracy: 96.00%<br>- Mean precision: 95.70%<br>- Mean recall: 96.36%<br>- Mean F1-score: 95.74% |
+| AlexNet (clean)<br>batch size: 32<br>random rotations | Incorrect predictions: 29 | - Accuracy: 97.10%<br>- Mean precision: 97.24%<br>- Mean recall: 97.11%<br>- Mean F1-score: 96.99% |
+| AlexNet (clean)<br>batch size: 32<br>random rotations, blur and noise | Incorrect predictions: 29 | - Accuracy: 97.10%<br>- Mean precision: 97.24%<br>- Mean recall: 97.11%<br>- Mean F1-score: 96.99% |
+| AlexNet (clean)<br>batch size: 64<br>no transforms | Incorrect predictions: 54 | - Accuracy: 94.60%<br>- Mean precision: 95.02%<br>- Mean recall: 94.77%<br>- Mean F1-score: 94.61% |
+| AlexNet (clean)<br>batch size: 64<br>random rotations | Incorrect predictions: 14 | - Accuracy: 98.60%<br>- Mean precision: 98.67%<br>- Mean recall: 98.59%<br>- Mean F1-score: 98.51% |
+| AlexNet (clean)<br>batch size: 64<br>random rotations, blur and noise | Incorrect predictions: 993 | - Accuracy: 0.70%<br>- Mean precision: 0.01%<br>- Mean recall: 1.00%<br>- Mean F1-score: 0.01% |
+| AlexNet<br>batch size: 32<br>no transforms | Incorrect predictions: 283 | - Accuracy: 71.70%<br>- Mean precision: 73.64%<br>- Mean recall: 71.74%<br>- Mean F1-score: 70.49% |
+| AlexNet<br>batch size: 32<br>random rotations | Incorrect predictions: 319 | - Accuracy: 68.10%<br>- Mean precision: 70.55%<br>- Mean recall: 68.59%<br>- Mean F1-score: 67.09% |
+| AlexNet<br>batch size: 32<br>random rotations, blur and noise | Incorrect predictions: 293 | - Accuracy: 70.70%<br>- Mean precision: 72.13%<br>- Mean recall: 70.77%<br>- Mean F1-score: 69.49% |
+| AlexNet<br>batch size: 64<br>no transforms | Incorrect predictions: 274 | - Accuracy: 72.60%<br>- Mean precision: 75.89%<br>- Mean recall: 73.40%<br>- Mean F1-score: 72.52% |
+| AlexNet<br>batch size: 64<br>random rotations | Incorrect predictions: 307 | - Accuracy: 69.30%<br>- Mean precision: 71.13%<br>- Mean recall: 70.16%<br>- Mean F1-score: 68.40% |
+| AlexNet<br>batch size: 64<br>random rotations, blur and noise | Incorrect predictions: 263 | - Accuracy: 73.70%<br>- Mean precision: 74.85%<br>- Mean recall: 73.63%<br>- Mean F1-score: 72.15% |
+| ResNet18<br>batch size: 32<br>no transforms | Incorrect predictions: 0 | - Accuracy: 100.00%<br>- Mean precision: 100.00%<br>- Mean recall: 100.00%<br>- Mean F1-score: 100.00% |
+| ResNet18<br>batch size: 32<br>random rotations | Incorrect predictions: 1 | - Accuracy: 99.90%<br>- Mean precision: 99.93%<br>- Mean recall: 99.83%<br>- Mean F1-score: 99.87% |
+| ResNet18<br>batch size: 32<br>random rotations, blur and noise | Incorrect predictions: 10 | - Accuracy: 99.00%<br>- Mean precision: 99.00%<br>- Mean recall: 98.82%<br>- Mean F1-score: 98.79% |
+| ResNet18<br>batch size: 64<br>no transforms | Incorrect predictions: 2 | - Accuracy: 99.80%<br>- Mean precision: 99.79%<br>- Mean recall: 99.84%<br>- Mean F1-score: 99.81% |
+| ResNet18<br>batch size: 64<br>random rotations | Incorrect predictions: 3 | - Accuracy: 99.70%<br>- Mean precision: 99.71%<br>- Mean recall: 99.72%<br>- Mean F1-score: 99.70% |
+| ResNet18<br>batch size: 64<br>random rotations, blur and noise | Incorrect predictions: 5 | - Accuracy: 99.50%<br>- Mean precision: 99.46%<br>- Mean recall: 99.52%<br>- Mean F1-score: 99.45% | 
+| GoogLeNet<br>batch size: 32<br>no transforms | Incorrect predictions: 1 | - Accuracy: 99.90%<br>- Mean precision: 99.83%<br>- Mean recall: 99.92%<br>- Mean F1-score: 99.87% |
+| GoogLeNet<br>batch size: 32<br>random rotations | Incorrect predictions: 5 | - Accuracy: 99.50%<br>- Mean precision: 99.57%<br>- Mean recall: 99.55%<br>- Mean F1-score: 99.54% |
+| GoogLeNet<br>batch size: 32<br>random rotations, blur and noise | Incorrect predictions: 5 | - Accuracy: 99.50%<br>- Mean precision: 99.49%<br>- Mean recall: 99.38%<br>- Mean F1-score: 99.40% | 
+| GoogLeNet<br>batch size: 64<br>no transforms | Incorrect predictions: 2 | - Accuracy: 99.80%<br>- Mean precision: 99.76%<br>- Mean recall: 99.85%<br>- Mean F1-score: 99.79% |
+| GoogLeNet<br>batch size: 64<br>random rotations | Incorrect predictions: 13 | - Accuracy: 98.70%<br>- Mean precision: 98.56%<br>- Mean recall: 98.86%<br>- Mean F1-score: 98.62% |
+| GoogLeNet<br>batch size: 64<br>random rotations, blur and noise | Incorrect predictions: 5 | - Accuracy: 99.50%<br>- Mean precision: 99.60%<br>- Mean recall: 99.34%<br>- Mean F1-score: 99.42% |
+
+#### Step 2
+
+The classification final training showed varying results across different architectures. It was trained, validated and tested on the FileCustom1 dataset:
+
+| Model Config | Details | Metrics |
+|-------------|---------|---------|
+| GoogLeNet<br>Training Evaluation<br>Total test samples: 2500 | Incorrect predictions: 0 | - Accuracy: 100.00%<br>- Mean precision: 100.00%<br>- Mean recall: 100.00%<br>- Mean F1-score: 100.00% |
+| GoogLeNet<br>File 2 Evaluation<br>Total test samples: 10000 | Incorrect predictions: 0 | - Accuracy: 100.00%<br>- Mean precision: 100.00%<br>- Mean recall: 100.00%<br>- Mean F1-score: 100.00% |
+| GoogLeNet<br>File 3 Evaluation<br>Total test samples: 10000 | Incorrect predictions: 252 | - Accuracy: 97.48%<br>- Mean precision: 97.68%<br>- Mean recall: 97.48%<br>- Mean F1-score: 97.51% |
 
 ### Detection Results
 
-TBD
+#### Step 3
+
+The detection experiments were limited compared to the classification experiments. The code is ready for easy implementation of a similar set of experiments, if a GPU with more VRAM would be used.
+The experiments showed varying results across different architectures. It was trained, validated and tested on the File5 dataset.
+The final test was performed on a 1000 samples:
+
+| Model Config | Details | Metrics |
+|-------------|---------|---------|
+| RetinaNet-ResNet50<br>batch size: 4 | - Mean IoU: 98.05%<br>- Mean MAE: 98.25%<br>- IoUs over 50%: 100.00% |
+| FasterRCNN-ResNet50<br>batch size: 4 | - Mean IoU: 97.80%<br>- Mean MAE: 97.60%<br>- IoUs over 50%: 100.00% |
+| MobileNetV3-Large-FPN<br>batch size: 4 | - Mean IoU: 95.93%<br>- Mean MAE: 96.32%<br>- IoUs over 50%: 100.00% |
+
+#### Step 4
+
+The classification final training showed varying results across different architectures. It was trained, validated and tested on the FileCustom1 dataset:
+
+| Model Config | Details | Metrics |
+|-------------|---------|---------|
+| RetinaNet-ResNet50<br>Training Evaluation | Total test samples: 1000 | - Mean IoU: 99.70%<br>- Mean MAE: 99.76%<br>- IoUs over 50%: 100.00% |
+| RetinaNet-ResNet50<br>File 4 Evaluation | Total test samples: 100 | - Mean IoU: 89.00%<br>- Mean MAE: 89.01%<br>- IoUs over 50%: 100.00% |
+| RetinaNet-ResNet50<br>File 5 Evaluation | Total test samples: 100 | - Mean IoU: 85.64%<br>- Mean MAE: 88.94%<br>- IoUs over 50%: 97.00% |
