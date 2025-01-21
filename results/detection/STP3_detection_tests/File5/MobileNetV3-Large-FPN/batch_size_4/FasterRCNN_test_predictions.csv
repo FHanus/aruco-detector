@@ -1,0 +1,16 @@
+Detection Analysis: ./results/detection/STP3_detection_tests/File5/MobileNetV3-Large-FPN/batch_size_4/FasterRCNN_test_predictions.csv
+Total samples: 10
+Mean IoU: 0.9593
+Mean MAE: 0.9632
+Accuracy: 1.0000
+file_path,pred_boxes,true_boxes
+./data/File5/combinedPicsChallenging/0068.png,"39.9,126.7,74.9,160.6","40.0,127.0,74.0,161.0"
+./data/File5/combinedPicsChallenging/0003.png,"110.1,148.9,143.9,182.9","110.0,149.0,144.0,183.0"
+./data/File5/combinedPicsChallenging/0086.png,"35.0,35.1,69.0,69.4","35.0,35.0,69.0,69.0"
+./data/File5/combinedPicsChallenging/0037.png,"93.5,172.5,127.4,206.4","93.0,173.0,127.0,207.0"
+./data/File5/combinedPicsChallenging/0010.png,"141.9,152.5,175.7,186.6","142.0,153.0,176.0,187.0"
+./data/File5/combinedPicsChallenging/0092.png,"39.2,86.9,73.0,121.0","39.0,87.0,73.0,121.0"
+./data/File5/combinedPicsChallenging/0062.png,"81.8,115.2,115.7,148.9","82.0,115.0,116.0,149.0"
+./data/File5/combinedPicsChallenging/0098.png,"111.1,39.2,144.8,72.4","112.0,40.0,146.0,74.0"
+./data/File5/combinedPicsChallenging/0066.png,"172.7,135.5,206.9,169.8","173.0,136.0,207.0,170.0"
+./data/File5/combinedPicsChallenging/0014.png,"53.2,139.5,87.5,173.4","53.0,140.0,87.0,174.0"

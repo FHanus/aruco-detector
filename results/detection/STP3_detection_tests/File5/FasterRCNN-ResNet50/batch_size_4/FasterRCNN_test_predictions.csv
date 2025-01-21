@@ -1,0 +1,16 @@
+Detection Analysis: ./results/detection/STP3_detection_tests/File5/FasterRCNN-ResNet50/batch_size_4/FasterRCNN_test_predictions.csv
+Total samples: 10
+Mean IoU: 0.9780
+Mean MAE: 0.9760
+Accuracy: 1.0000
+file_path,pred_boxes,true_boxes
+./data/File5/combinedPicsChallenging/0068.png,"40.1,126.9,73.4,161.1","40.0,127.0,74.0,161.0"
+./data/File5/combinedPicsChallenging/0076.png,"173.2,124.0,206.8,158.0","173.0,124.0,207.0,158.0"
+./data/File5/combinedPicsChallenging/0035.png,"145.0,74.6,178.7,109.2","145.0,75.0,179.0,109.0"
+./data/File5/combinedPicsChallenging/0060.png,"49.0,162.0,83.2,196.3","49.0,162.0,83.0,196.0"
+./data/File5/combinedPicsChallenging/0027.png,"18.2,135.0,51.7,169.2","18.0,135.0,52.0,169.0"
+./data/File5/combinedPicsChallenging/0098.png,"112.6,39.8,145.8,73.7","112.0,40.0,146.0,74.0"
+./data/File5/combinedPicsChallenging/0052.png,"10.0,74.9,44.0,109.4","10.0,75.0,44.0,109.0"
+./data/File5/combinedPicsChallenging/0024.png,"91.1,54.4,125.0,88.9","91.0,55.0,125.0,89.0"
+./data/File5/combinedPicsChallenging/0090.png,"114.2,183.0,148.2,217.3","114.0,183.0,148.0,217.0"
+./data/File5/combinedPicsChallenging/0097.png,"93.4,113.0,126.8,147.2","93.0,113.0,127.0,147.0"

@@ -7,16 +7,16 @@ run_classification_experiments:
     CUSTOM_DATA_DIR_FILE: "./data/FileCustom1/arucoAugmented"
     EXPERIMENT_DIR: "./results/classification/STP1_classification_tests"
   experiments:
-    datasets: ["./data/File3/arucoChallenging", "./data/FileCustom1/arucoAugmented"]
+    datasets: ["./data/File3/arucoChallenging"]
     models: ["MinimalCNN", "AlexNet-clean", "AlexNet", "ResNet18", "GoogLeNet"]
     batch_sizes: [32, 64]
     transformations: ["none", "random_rotation", "rotation_blur_noise"]
     num_workers: 8
     train_split: 0.8
     val_split: 0.1
-    shuffle: false
-    num_epochs: 15
-    lr: 3.0e-3
+    shuffle: true
+    num_epochs: 50
+    lr: 3.0e-4
     early_stopping_threshold: 96.0
 
 # STEP 2
@@ -31,7 +31,7 @@ train_classifier:
     shuffle: true
     train_split: 0.95
     val_split: 0.025
-    num_epochs: 30
+    num_epochs: 50
     lr: 3.0e-4
     early_stopping_threshold: 99.9
   evaluation:
@@ -48,16 +48,16 @@ run_detection_experiments:
     CUSTOM_DATA_DIR_FILE: "./data/FileCustom2"
     EXPERIMENT_DIR: "./results/detection/STP3_detection_tests"
   experiments:
-    datasets: ["./data/File5", "./data/FileCustom2"]
+    datasets: ["./data/File5"]
     models: ["RetinaNet-ResNet50", "FasterRCNN-ResNet50", "MobileNetV3-Large-FPN"]
     batch_sizes: [4]
     num_workers: 2
     train_split: 0.8
     val_split: 0.1
     shuffle: true
-    num_epochs: 5
-    lr: 1.0e-3
-    early_stopping_threshold: 96.0
+    num_epochs: 100
+    lr: 1.0e-4
+    early_stopping_threshold: 98.0
 
 # STEP 4
 train_detector:
@@ -71,9 +71,9 @@ train_detector:
     shuffle: true
     train_split: 0.8
     val_split: 0.1
-    num_epochs: 15
+    num_epochs: 50
     lr: 1.0e-4
-    early_stopping_threshold: 99.9
+    early_stopping_threshold: 99.6
   evaluation:
     batch_size: 8
     num_workers: 2
