@@ -1,65 +1,8 @@
 \documentclass[conference]{IEEEtran}
 \IEEEoverridecommandlockouts
 
-\usepackage{amsmath,amssymb,amsfonts}
-\usepackage{algorithmic}
-\usepackage{graphicx}
-\usepackage{textcomp}
-\usepackage{xcolor}
-\usepackage{graphicx}
-\usepackage{subcaption}
-\usepackage{booktabs}
-\usepackage{siunitx}
+\input{template}
 
-% Add biblatex with Harvard style
-\usepackage[style=authoryear, backend=biber, dashed=false, maxnames=999, maxcitenames=3, giveninits=true, urldate=long, uniquename=false, uniquelist=false]{biblatex}
-\addbibresource{references.bib}
-
-% Modify citation format to add comma before year
-\renewcommand*{\nameyeardelim}{\addcomma\space}
-
-% Remove quotes from titles and customize bibliography format
-\DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,unpublished]{title}{#1}
-\DeclareFieldFormat{journaltitle}{\emph{#1}}
-
-% Add [online] for articles and remove "In:"
-\renewbibmacro*{journal+issuetitle}{%
-  \usebibmacro{journal}%
-  \setunit*{\addspace}%
-  \iffieldundef{series}
-    {}
-    {\newunit
-     \printfield{series}%
-     \setunit{\addspace}}%
-  \printtext[brackets]{online}%
-  \printtext{.}\space%
-  \usebibmacro{volume+number+eid}%
-  \setunit{\addcomma\space}%
-  \usebibmacro{issue+date}%
-  \setunit{\addcolon\space}%
-  \usebibmacro{issue}%
-  \newunit}
-
-% Format author names with family name first, followed by initials
-\DeclareNameFormat{sortname}{%
-  \nameparts{#1}%
-  \usebibmacro{name:family-given}
-    {\namepartfamily}
-    {\namepartgiveni}
-    {\namepartprefix}
-    {\namepartsuffix}%
-}
-\DeclareNameAlias{default}{sortname}
-
-% Format name delimiters
-\DeclareDelimFormat{multinamedelim}{\addcomma\space}
-\DeclareDelimAlias{finalnamedelim}{multinamedelim}
-
-% Remove "In:" prefix for all entry types
-\renewbibmacro{in:}{}
-
-\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
-    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
 \title{Adaptive Dynamic Exoskeleton Joint and Software Tooling for User-Specific Therapy}
@@ -91,7 +34,8 @@ Exoskeleton, Wearable Device, Bio-Inspired Robotics.
 
 \section{Introduction}
 
-Blabla \parencite{HRR93}.
+Blabla \parencite{HRR93}
+test \parencite{Atkins_wearable_shoulder_exoskeleton}.
 
 Key contributions:
 \begin{enumerate}
@@ -128,7 +72,6 @@ Blabla
 
 The authors gratefully acknowledge the support of the United Kingdom National Institute for Health and Care Research (NIHR) under grant reference NIHR206099, the REACH Group in the Bristol Robotics Laboratory, and also of Rose Industries Ltd and its resources.
 
-% Replace traditional bibliography commands with biblatex's
-\printbibliography[title=References]
+\printbibsection
 
 \end{document}
