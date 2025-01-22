@@ -5,19 +5,17 @@
 
 \begin{document}
 
-\title{Adaptive Dynamic Exoskeleton Joint and Software Tooling for User-Specific Therapy}
+\title{Deep Learning Methods for ArUco Marker Detection and Classification Under Challenging Distortions}
 
 \author{
 \IEEEauthorblockN{
     Filip Hanuš\IEEEauthorrefmark{1},
-    Appolinaire Etoundi\IEEEauthorrefmark{1}
 }
 \IEEEauthorblockA{
     \IEEEauthorrefmark{1}School of Engineering, College of Art, Technology and Environment,\\
     University of the West of England, Bristol, UK\\
-    Email: \{filip2.hanus, appolinaire.etoundi\}@uwe.ac.uk}
+    Email: filip2.hanus@uwe.ac.uk}
 }
-
 
 \maketitle
 \begin{abstract}
@@ -27,51 +25,139 @@ Blabla
 \end{abstract}
 
 \begin{IEEEkeywords}
-
-Exoskeleton, Wearable Device, Bio-Inspired Robotics.
-
+ArUco Markers, Deep Learning, Computer Vision, Object Detection, Image Classification, Fiducial Markers
 \end{IEEEkeywords}
 
 \section{Introduction}
 
-Blabla \parencite{HRR93}
-test \parencite{Atkins_wearable_shoulder_exoskeleton}.
+ArUco markers are small, square visual codes or tags designed for easy detection and identification by computer vision algorithms. They are used for camera pose
+estimation and localisation. Some examples of ArUco marker usage can be seen in Figure \ref{fig:aruco_markers}. For their use in these applications, 
+they need to be tracked and/or recognised, which brings out the need for robust detection and classification methods.
 
-Key contributions:
-\begin{enumerate}
-\item 1.
-\item 2.
-\item 3.
-\end{enumerate}
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/aruco-example-1.png}
+        \caption{Robot localisation (\cite{AI-Assisted-Drone-Localization})}
+        \label{fig:aruco1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/aruco-example-2.png}
+        \caption{Drone localisation (\cite{Nakajima2024AboutAE})}
+        \label{fig:aruco2}
+    \end{subfigure}
+    \caption{Examples of ArUco markers in different conditions}
+    \label{fig:aruco_markers}
+\end{figure}
 
-Blabla
+As \textcite{FiducialMarkerNoisy} point out, traditional detection methods perform quite well under controlled conditions, but less reliably when in real-world challenges,
+such with rotations and noise. Building on that, this work explores deep learning approaches to enhance both detection and classification of ArUco markers under varying
+challenging conditions. 
 
-\section{Literature Review}
+\section{Classification}
 
-Blabla
+\subsection{Method: Classification}
 
-Blabla
+Overview of classification approach
 
-\section{Design and Methodology}
+Data preparation and augmentation strategies
+Selection and justification of network architectures (e.g., MinimalCNN, AlexNet, ResNet18, GoogLeNet)
+Training configurations and hyperparameter choices
 
-Blabla
+Algorithmic workflow (with diagrams/pseudocode)
 
-\section{Testing and Results}
+Preprocessing steps
+Model training loop
+Validation and selection criteria
 
-Blabla
+Key decisions and considerations
 
-\section{Future Work}
+Handling distortions: rotations, blur, noise
+Experimentation with multiple architectures and batch sizes
 
-Blabla
+\subsection{Results: Classification}
+
+Presentation of experimental setup
+
+Datasets used (Files 2, 3, and custom datasets)
+Evaluation metrics (accuracy, precision, recall, F1-score)
+
+Numerical results and analysis
+
+Comparison across different network architectures
+Effect of parameters (learning rate, batch size, number of training images)
+Graphs illustrating training accuracy, confusion matrices
+
+Discussion of performance trends
+
+Strengths and weaknesses observed
+Cases of misclassification and potential causes
+
+\section{Detection}
+
+\subsection{Method: Detection}
+
+Overview of detection approach
+
+Data preparation: merging ArUco markers with office images
+Selection of detection models (e.g., RetinaNet-ResNet50, FasterRCNN-ResNet50, MobileNetV3-Large-FPN)
+Training configuration and hyperparameters
+
+Algorithmic workflow (with diagrams/pseudocode)
+
+Preprocessing and annotation generation
+Model training loop for detection
+Post-processing steps (bounding box adjustments, non-max suppression)
+
+Challenges and considerations
+
+Handling strong distortions and occlusions
+GPU memory management and batch size limitations
+
+\subsection{Results: Detection}
+
+Presentation of experimental setup
+
+Datasets used (Files 4, 5, and custom datasets)
+Evaluation metrics (Mean IoU, MAE, detection success rates)
+
+Numerical results and analysis
+
+Performance comparison of different detection architectures
+Impact of distortions on detection accuracy
+Visualisation of detection outputs and failure cases
+
+Discussion on detection performance
+
+Analysis of false negatives/positives
+Critical factors affecting detection success
 
 \section{Conclusion}
 
-Blabla
+Summary of methodologies and key findings in classification and detection
+Critical analysis of strengths and weaknesses of approaches
+Insights into factors affecting performance
+Suggestions for improvements and areas for future research
 
-\section{Acknowledgments}
-
-The authors gratefully acknowledge the support of the United Kingdom National Institute for Health and Care Research (NIHR) under grant reference NIHR206099, the REACH Group in the Bristol Robotics Laboratory, and also of Rose Industries Ltd and its resources.
+Further dataset expansion (synthetic or real-world captures)
+Refinement of network architectures and training strategies
+Enhanced evaluation techniques and theoretical analysis
 
 \printbibsection
+
+\appendices
+
+\renewcommand{\thesection}{\Alph{section}}
+
+\section{Detailed Network Architecture}
+
+Appendix 1
+
+\section{Classification Network}
+
+Appendix 2
 
 \end{document}
