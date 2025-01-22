@@ -1,6 +1,10 @@
 \documentclass[conference]{IEEEtran}
 \IEEEoverridecommandlockouts
 
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{float}
+
 \input{template}
 
 \begin{document}
@@ -30,9 +34,18 @@ ArUco Markers, Deep Learning, Computer Vision, Object Detection, Image Classific
 
 \section{Introduction}
 
-ArUco markers are small, square visual codes or tags designed for easy detection and identification by computer vision algorithms. They are used for camera pose
-estimation and localisation. Some examples of ArUco marker usage can be seen in Figure \ref{fig:aruco_markers}. For their use in these applications, 
-they need to be tracked and/or recognised, which brings out the need for robust detection and classification methods.
+ArUco markers (figure \ref{fig:aruco_marker_basic}) are square visual codes designed for easy detection and identification by computer vision algorithms. 
+They are used for positioning, tracking, and navigation in various applications such as robotics, virtual reality, or industrial automation.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.1\textwidth]{images/aruco-marker-1.png}
+    \caption{Basic ArUco marker example}
+    \label{fig:aruco_marker_basic}
+\end{figure}
+
+Some specific examples of ArUco marker usage can be seen in Figure \ref{fig:aruco_markers}. For their use in these applications, 
+they need to be tracked and/or recognised, which creates the need for robust detection and classification methods.
 
 \begin{figure}[h]
     \centering
@@ -53,30 +66,119 @@ they need to be tracked and/or recognised, which brings out the need for robust 
     \label{fig:aruco_markers}
 \end{figure}
 
-As \textcite{FiducialMarkerNoisy} point out, traditional detection methods perform quite well under controlled conditions, but less reliably when in real-world challenges,
-such with rotations and noise. Building on that, this work explores deep learning approaches to enhance both detection and classification of ArUco markers under varying
-challenging conditions. 
+As \textcite{FiducialMarkerNoisy}, \textcite{ROMERORAMIREZ2021104094}, and others point out, traditional detection methods perform well under controlled 
+conditions, but less reliably with real-world challenges, such as rotations, blur and noise. Building on that, this work explores deep learning 
+approaches to enhance both detection and classification of ArUco markers under varying conditions. 
+
+This project solves the following challenges:
+
+\begin{enumerate}
+  \item Classification of slightly and strongly blurred, noisy and/or rotated ArUco markers,
+  \item Detection of slightly and strongly blurred, noisy or rotated ArUco markers in office photos
+\end{enumerate}
 
 \section{Classification}
 
-\subsection{Method: Classification}
+\subsection{Classification Method}
 
-Overview of classification approach
+The classification problem was broken down into the following steps:
 
-Data preparation and augmentation strategies
-Selection and justification of network architectures (e.g., MinimalCNN, AlexNet, ResNet18, GoogLeNet)
-Training configurations and hyperparameter choices
+\begin{enumerate}
+  \item Create a data plotter for datasets and results
+  \item Develop data augmentation script for prepation of a larger dataset  
+  \item Prepare classification network architectures
+  \item Design experiment to compare classification architectures and parameters
+  \item Train and test the final selected classification model
+\end{enumerate}
 
-Algorithmic workflow (with diagrams/pseudocode)
+\subsubsection{Data Preparation}
 
-Preprocessing steps
-Model training loop
-Validation and selection criteria
+Firstly, the dataset browser was developed. It allows for easy browsing. It was initially used to browse the dataset and to get an idea of the data. 
+The idea was that this same tool would later be used to plot the data and results. This can be seen in Figure \ref{fig:data_browser_1}.
 
-Key decisions and considerations
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{images/aruco-dataset-browser-1.png}
+  \caption{Dataset browser used with the File2 dataset}
+  \label{fig:data_browser_1}
+\end{figure}
 
-Handling distortions: rotations, blur, noise
-Experimentation with multiple architectures and batch sizes
+The training pipeline incorporated several data augmentation techniques:
+
+\begin{itemize}
+    \item \textbf{Geometric Transformations}:
+    \begin{itemize}
+        \item Rotations: 0-360° range
+        \item Scale variations: 50-100\% of original size
+    \end{itemize}
+    
+    \item \textbf{Image Quality Variations}:
+    \begin{itemize}
+        \item Gaussian blur ($\sigma$ = 0-14)
+        \item Random noise (up to 10\% of pixels)
+    \end{itemize}
+\end{itemize}
+
+
+The methodology can be broken down into several key components:
+
+\subsubsection{Network Architectures}
+
+Multiple architectures were evaluated to find the optimal balance between performance and computational efficiency:
+
+\begin{itemize}
+    \item \textbf{MinimalCNN}: A lightweight custom architecture with:
+    \begin{itemize}
+        \item Three convolutional blocks (32$\rightarrow$64$\rightarrow$128 features)
+        \item Batch normalization and dropout for regularization
+        \item Global average pooling for dimension reduction
+    \end{itemize}
+    
+    \item \textbf{AlexNet Variants}:
+    \begin{itemize}
+        \item Clean implementation without pre-training
+        \item Version with frozen ImageNet pre-trained features
+    \end{itemize}
+    
+    \item \textbf{ResNet18}: Pre-trained on ImageNet with skip connections
+    \item \textbf{GoogLeNet}: Pre-trained implementation with inception modules
+\end{itemize}
+
+\subsubsection{Training Configuration}
+
+The final training setup was optimized based on experimental results:
+
+\begin{itemize}
+    \item \textbf{Optimizer}: Adam with learning rate 3e-4
+    \item \textbf{Loss Function}: Cross-entropy
+    \item \textbf{Batch Size}: 32 (optimal for memory/performance trade-off)
+    \item \textbf{Training Duration}: 50 epochs with early stopping
+    \item \textbf{Data Split}: 95\% training, 2.5\% validation, 2.5\% test
+\end{itemize}
+
+\subsubsection{Key Design Decisions}
+
+The implementation followed this algorithmic workflow:
+
+\begin{figure}[H]
+\begin{algorithm}[H]
+\caption{ArUco Classification Training Pipeline}
+\begin{algorithmic}[1]
+\STATE Load pre-trained model (GoogLeNet)
+\STATE Apply data augmentation transforms
+\FOR{each epoch in training}
+    \STATE Forward pass through network
+    \STATE Calculate cross-entropy loss
+    \STATE Backpropagate and update weights
+    \IF{validation accuracy > 99.9\%}
+        \STATE Early stopping
+    \ENDIF
+\ENDFOR
+\STATE Evaluate on File2 (basic) and File3 (challenging)
+\end{algorithmic}
+\end{algorithm}
+\caption{Classification training workflow}
+\end{figure}
 
 \subsection{Results: Classification}
 
@@ -97,6 +199,25 @@ Strengths and weaknesses observed
 Cases of misclassification and potential causes
 
 \section{Detection}
+
+The detection problem was broken down into the following steps:
+
+\begin{enumerate}
+  \item Adapt and prepare the data plotter for detection datasets and results
+  \item Develop data augmentation script
+  \item Prepare detection network architectures
+  \item Design experiment to compare detection architectures and settings
+  \item Train and test the final detection model
+\end{enumerate}
+
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{images/aruco-dataset-browser-2.png}
+  \caption{Dataset browser used with the File4 dataset}
+  \label{fig:data_browser_2}
+\end{figure}
+
 
 \subsection{Method: Detection}
 
