@@ -1,83 +1,134 @@
-\documentclass[12pt, oneside]{report}
-\usepackage{IEEEtrantools}
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
 
-\usepackage[margin=.85in]{geometry}
-\linespread{1.25}
-\usepackage{mathptmx}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
 \usepackage{xcolor}
-\usepackage[colorlinks=false, linkbordercolor=white,  citebordercolor=white, 
-    filebordercolor=white,    urlbordercolor=white]{hyperref}
-    
-\usepackage[style=authoryear, defernumbers=true, backend=biber,dashed=false, maxnames=999,maxcitenames=3,giveninits=true,urldate=long,uniquename=false,uniquelist=false
-]{biblatex}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{siunitx}
+
+% Add biblatex with Harvard style
+\usepackage[style=authoryear, backend=biber, dashed=false, maxnames=999, maxcitenames=3, giveninits=true, urldate=long, uniquename=false, uniquelist=false]{biblatex}
 \addbibresource{references.bib}
 
-%% pretty captions
-\usepackage{caption}
+% Modify citation format to add comma before year
+\renewcommand*{\nameyeardelim}{\addcomma\space}
 
-%%% allows you to create Rules, Definitions, Lemmas, Theorems etc.
-\usepackage{amsthm}
-\usepackage{amsmath}
-\usepackage{amsfonts}
+% Remove quotes from titles and customize bibliography format
+\DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,unpublished]{title}{#1}
+\DeclareFieldFormat{journaltitle}{\emph{#1}}
 
-\newtheorem{theorem}{Theorem}
-\newtheorem{definition}{Definition}
-\newtheorem{lemma}{Lemma}
-\newtheorem{Rule}{Rule}
-\numberwithin{definition}{chapter}
-\numberwithin{theorem}{chapter}  
-\numberwithin{lemma}{chapter}  
-\numberwithin{Rule}{chapter}  
-\numberwithin{equation}{chapter} 
+% Add [online] for articles and remove "In:"
+\renewbibmacro*{journal+issuetitle}{%
+  \usebibmacro{journal}%
+  \setunit*{\addspace}%
+  \iffieldundef{series}
+    {}
+    {\newunit
+     \printfield{series}%
+     \setunit{\addspace}}%
+  \printtext[brackets]{online}%
+  \printtext{.}\space%
+  \usebibmacro{volume+number+eid}%
+  \setunit{\addcomma\space}%
+  \usebibmacro{issue+date}%
+  \setunit{\addcolon\space}%
+  \usebibmacro{issue}%
+  \newunit}
 
- \usepackage[super]{nth} 
- 
-\usepackage{graphicx}
-\usepackage{placeins}
-
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{csquotes}
-
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\renewcommand{\headrulewidth}{0.4pt}
-%\renewcommand{\footrulewidth}{0.4pt}
-\fancyhead{}
-\fancyhead[L]{Report Title} %%% CHANGE AS APPROPRIATE (you may need to use a shortened form of the title)
-\fancyhead[R]{student ID} %%% CHANGE AS APPROPRIATE
-\fancyfoot{}
-\fancyfoot[C]{\thepage}
-
-\usepackage{titlesec}
-\titlespacing{\chapter}{0pt}{*4}{*2.5}
-
-\titleformat{\chapter}{\normalfont\huge\bf}{\thechapter}{20pt}{\huge\bf}
-%% prevents Chapter 1 (then new line and Introduction) - turns into 1. Introduction
-
-\DeclareSourcemap{
-  \maps[datatype=bibtex]{
-    \map{
-      \perdatasource{references.bib}
-      \step[fieldset=keywords, fieldvalue={, primary}, append]
-    }
-  }
+% Format author names with family name first, followed by initials
+\DeclareNameFormat{sortname}{%
+  \nameparts{#1}%
+  \usebibmacro{name:family-given}
+    {\namepartfamily}
+    {\namepartgiveni}
+    {\namepartprefix}
+    {\namepartsuffix}%
 }
-\input{formatting}
-\setcounter{tocdepth}{1} % allow only sections (not subsections in table of contents)
+\DeclareNameAlias{default}{sortname}
 
+% Format name delimiters
+\DeclareDelimFormat{multinamedelim}{\addcomma\space}
+\DeclareDelimAlias{finalnamedelim}{multinamedelim}
+
+% Remove "In:" prefix for all entry types
+\renewbibmacro{in:}{}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
-\input{titlepage}
-\input{Abstract} %% any other "Front matter" should go here before the table of contents - format in a style similar to the file Abstract.tex
-\tableofcontents 
-\addtocontents{toc}{~\hfill\textbf{Page}\par} % comment this line out if you want to remove "Page"
-\input{Chapter1} % standard chapter format
 
-%\input{Conclusions}
-\appendix
-\input{appendix}  % uncomment out these two lines of code if you have an appendix!
-% you can have more than one appendix if (really) needed.
+\title{Adaptive Dynamic Exoskeleton Joint and Software Tooling for User-Specific Therapy}
 
-\printbibliography[keyword=primary, title=References]\addcontentsline{toc}{chapter}{References}
+\author{
+\IEEEauthorblockN{
+    Filip Hanuš\IEEEauthorrefmark{1},
+    Appolinaire Etoundi\IEEEauthorrefmark{1}
+}
+\IEEEauthorblockA{
+    \IEEEauthorrefmark{1}School of Engineering, College of Art, Technology and Environment,\\
+    University of the West of England, Bristol, UK\\
+    Email: \{filip2.hanus, appolinaire.etoundi\}@uwe.ac.uk}
+}
+
+
+\maketitle
+\begin{abstract}
+
+Blabla
+
+\end{abstract}
+
+\begin{IEEEkeywords}
+
+Exoskeleton, Wearable Device, Bio-Inspired Robotics.
+
+\end{IEEEkeywords}
+
+\section{Introduction}
+
+Blabla \parencite{HRR93}.
+
+Key contributions:
+\begin{enumerate}
+\item 1.
+\item 2.
+\item 3.
+\end{enumerate}
+
+Blabla
+
+\section{Literature Review}
+
+Blabla
+
+Blabla
+
+\section{Design and Methodology}
+
+Blabla
+
+\section{Testing and Results}
+
+Blabla
+
+\section{Future Work}
+
+Blabla
+
+\section{Conclusion}
+
+Blabla
+
+\section{Acknowledgments}
+
+The authors gratefully acknowledge the support of the United Kingdom National Institute for Health and Care Research (NIHR) under grant reference NIHR206099, the REACH Group in the Bristol Robotics Laboratory, and also of Rose Industries Ltd and its resources.
+
+% Replace traditional bibliography commands with biblatex's
+\printbibliography[title=References]
 
 \end{document}
