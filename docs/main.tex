@@ -24,15 +24,12 @@
 \maketitle
 \begin{abstract}
 
-This paper explores deep learning approaches for ArUco marker detection and classification under challenging distortion conditions.
-Two key challenges were investigated: classifying marker variations and tracking marker positions in images affected by blur, noise, and rotation.
-For classification, multiple architectures were evaluated, with GoogLeNet achieving 100\% accuracy on weakly distorted markers and 97.48\% on severely distorted ones.
-For detection, RetinaNet, Faster R-CNN, and MobileNetV3 architectures were implemented and compared, with RetinaNet-ResNet50 achieving the best performance
-(89.00\% IoU on standard conditions, 85.64\% IoU under severe distortions).
-The applied methodology includes synthetic dataset generation and comprehensive architecture evaluation,
-demonstrating that transfer learning from pre-trained models outperforms custom architectures.
-The results show that deep learning approaches can provide robust ArUco marker detection and classification under real-world
-conditions, though computational constraints suggest potential for further improvements with increased resources.
+This project investigates deep learning methodologies for detecting and classifying ArUco markers in the presence of severe distortions such as blur,
+noise, and rotations. The project addresses two primary challenges: marker classification under varying distortion levels and accurate localisation in
+affected images. For classification, several architectures were evaluated, with GoogLeNet achieving 100\% accuracy on weakly distorted markers and
+97.48\% under severe distortions. For detection, RetinaNet-ResNet50 showed impressive performance at 89.00\% IoU in standard conditions and 85.64\%
+under severe distortions. Using synthetic datasets and transfer learning, the results confirm that pre-trained models outperform custom architectures.
+While effective in real-world conditions, further improvements are feasible with enhanced computational resources.
 
 \end{abstract}
 
@@ -42,8 +39,9 @@ ArUco Markers, Deep Learning, Computer Vision, Object Detection, Image Classific
 
 \section{Introduction}
 
-ArUco markers (figure \ref{fig:aruco_marker_basic}) are square visual codes designed for easy detection and identification by computer vision algorithms. 
-They are used for positioning, tracking, and navigation in various applications such as robotics, virtual reality, or industrial automation.
+ArUco markers (Figure \ref{fig:aruco_marker_basic}) are square visual codes designed for efficient detection and identification
+using computer vision algorithms. They are widely used in applications such as robotics, virtual reality, and industrial automation
+for positioning, tracking, and navigation tasks. Examples of these markers in use are shown in Figure \ref{fig:aruco_markers}.
 
 \begin{figure}[h]
     \centering
@@ -51,9 +49,6 @@ They are used for positioning, tracking, and navigation in various applications 
     \caption{Basic ArUco marker example}
     \label{fig:aruco_marker_basic}
 \end{figure}
-
-Some specific examples of ArUco marker usage can be seen in Figure \ref{fig:aruco_markers}. For their use in these applications, 
-they need to be tracked and/or recognised, which creates the need for robust detection and classification methods.
 
 \begin{figure}[h]
     \centering
@@ -74,13 +69,13 @@ they need to be tracked and/or recognised, which creates the need for robust det
     \label{fig:aruco_markers}
 \end{figure}
 
-As \textcite{FiducialMarkerNoisy}, \textcite{ROMERORAMIREZ2021104094}, and others point out, traditional detection methods perform well under controlled 
-conditions, but less reliably with real-world challenges, such as rotations, blur and noise. Building on that, this work explores deep learning 
-approaches to solve the following challenges:
+However, as noted by \textcite{FiducialMarkerNoisy} and \textcite{ROMERORAMIREZ2021104094}, traditional detection methods perform well
+under controlled conditions but struggle with real-world challenges such as rotation, blur, and noise. This project investigates deep
+learning approaches to address these limitations. The key objectives are:
 
 \begin{enumerate}
-  \item Recognising which variation of the marker is present: Classifying ArUco markers under varying blur, noise, and rotation conditions. 
-  \item Tracking marker's position in the image: Detecting ArUco markers under varying blur, noise, and rotation conditions. 
+  \item Classifying ArUco markers under challenging conditions (blur, noise, and rotation).
+  \item Detecting and tracking marker positions in noisy or distorted environments.
 \end{enumerate}
 
 \section{Classification}
@@ -768,12 +763,48 @@ Future improvements that could generate very interesting results could include:
 
 \renewcommand{\thesection}{\Alph{section}}
 
-\section{Detailed Network Architecture}
+\section{GitHub Repository}
 
-Appendix 1
+The GitHub repository for this project can be found at the following link: \url{https://github.com/FHanus/aruco-detector}.
 
-\section{Classification Network}
+The repository contains the following key components:
 
-Appendix 2
+\begin{enumerate}
+    \item \textbf{Classification, per trained model:}
+    \begin{itemize}
+        \item Per class accuracy plot
+        \item Per class confusion matrix
+        \item Per class precision plot
+        \item Per class recall plot
+        \item Training progress plot
+        \item CSV with evaluation predictions and data
+    \end{itemize}
+
+    \item \textbf{Classification, per trained model:}
+    \begin{itemize}
+        \item IoU distribution plot
+        \item Training progress plot
+        \item CSV with evaluation predictions and data
+    \end{itemize}
+
+    \item \textbf{Datasets:}
+    \begin{itemize}
+        \item Original datasets (File1-File5)
+        \item Custom synthetic datasets (Custom1-Custom2)
+    \end{itemize}
+
+    \item \textbf{Documentation:}
+    \begin{itemize}
+        \item This LaTeX paper
+        \item README.md
+    \end{itemize}
+
+    \item \textbf{Infrastructure:}
+    \begin{itemize}
+        \item All of the code
+    \end{itemize}
+\end{enumerate}
+
+This repository represents a complete research project on ArUco marker detection and classification, including code implementation, experimental results, and detailed documentation.
 
 \end{document}
