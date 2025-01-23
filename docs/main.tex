@@ -77,7 +77,7 @@ approaches to solve the following challenges:
 
 \section{Classification}
 
-\subsection{Classification Method}
+\subsection{Classification Methodology}
 
 \begin{figure}[h]
   \centering
@@ -127,7 +127,8 @@ There are 100 variations/classes of the ArUco marker, and the development of a s
 
 \subsubsection{Data Preparation}
 
-Firstly, the dataset browser was developed. It was initially used to browse the dataset and understand the data. It shows the image, pixel distribution, and basic dataset statistics.
+Firstly, the dataset browser was developed. It was initially used to browse the dataset and understand the data. It shows the image,
+pixel distribution, and basic dataset statistics.
 The idea was that this same tool would later be used to plot the data and results. This can be seen in Figure \ref{fig:data_browser_1}.
 
 \begin{figure}[h]
@@ -216,7 +217,7 @@ Additional settings and parameters purely for the purpose of limiting the time t
 \begin{itemize}
     \item \textbf{Loss Function}: Cross-entropy
     \item \textbf{Optimizer}: Adam with learning rate 3e-4
-    \item \textbf{Training Duration}: 50 epochs with early stopping at 96\% training accuracy
+    \item \textbf{Training Duration}: 50 epochs with early stopping at 96\% training accuracy 
 \end{itemize}
 
 After the experiments were completed, the results were plotted and analysed. The results are shown in the following section, and full results are available in the results directory
@@ -304,9 +305,9 @@ The experiments encompassed various architectures with different batch sizes and
 configuration was tested on 1000 samples from File3, with the following results:
 
 \begin{itemize}
-    \item \textbf{AlexNet (Clean Implementation)}:
+    \item \textbf{MinimalCNN}:
         \begin{itemize}
-            \item Batch size 64, rotation (training time) augmentation: 98.60\% accuracy (F1: 98.51\%)
+            \item Batch size 32, full (training time) augmentation: 5.20\% accuracy (F1: 3.62\%)
         \end{itemize}
 
     \item \textbf{AlexNet (Clean Implementation)}:
@@ -330,28 +331,59 @@ configuration was tested on 1000 samples from File3, with the following results:
         \end{itemize}
 \end{itemize}
 
-Several key trends emerged from these results. The clean AlexNet implementation surprisingly outperformed
-its pre-trained counterpart, suggesting that the ImageNet pre-training might not transfer well to ArUco marker classification. This could be
-due to the fact that the pre-trained model was trained on a different dataset, and the ArUco markers are not very similar to the ImageNet dataset. Alternatively,
-the implementation of the AlexNet model with the weights from PyTorch was not done aproproately, and the model was not able to train effectively.
-ResNet18 achieved perfect accuracy without augmentation, though its performance slightly decreased with additional augmentations.
-GoogLeNet maintained consistently high performance across all configurations, never dropping below 99.50\% accuracy.
-Retrospectively, the ResNet18 model was the best performing model, achieving perfect accuracy on the File2 dataset, and 97.48\% accuracy on the File3 dataset.
+The experiment results are shown in the figure \ref{fig:training_progress}.
 
-The results of the minimal CNN are as expected, although the model was indeed training and given many more epochs, it would likely achieve better results. Due to
-the lack of available GPU resources, and time, this was not attempted. During the initial development, this model was being tested on regularly 
-to validate the functionality, and when tested thoroughly (such as in the commit d9fd8ad), the model has achieved 92.30\% validationaccuracy after
-100 epochs of training. To solidify these results, this experiment would have to be repeated with the current codebase and for all of the combinations to
-ensure the same and unbiased results. 
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{images/training_progress_MinimalCNN.png}
+      \caption{MinimalCNN training progress}
+      \label{fig:progress_minimalcnn}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{images/training_progress_AlexNet_clean.png}
+      \caption{AlexNet (clean) training progress}
+      \label{fig:progress_alexnet_clean}
+    \end{subfigure}    
+    \vspace{0.5cm}
+    \begin{subfigure}[b]{0.45\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{images/training_progress_AlexNet.png}
+      \caption{AlexNet (pre-trained) training progress}
+      \label{fig:progress_alexnet}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/training_progress_ResNet.png}
+        \caption{ResNet18 training progress}
+        \label{fig:progress_resnet}
+    \end{subfigure}
+    \caption{Training progress for different model architectures showing training and validation accuracy over epochs (orange plot is validation accuracy,
+    blue is training accuracy)}
+    \label{fig:training_progress}
+\end{figure}
+
+All of the training progress plots show the training progress of the models with 32 batch size and no data augmentation for comparability.
+The results of the minimal CNN are as expected, although the model was indeed training and given many more epochs, it would likely achieve better results.  
+
+As expected, the AlexNet with no pre-trained weights performed very well, but converged much slower than it's pre-trained counterpart.
+ResNet18 and GoogLeNet preformed near perfectly, noticebly better without additional training transforms than with them. Only the ResNet's plot
+is shown as their are nearly the same. These two models triggered early stopping after reaching 99\% validation accuracy.
+
+For further insights, training logs and detailed analysis, additional plots, results, and data can be found in the Appendices.
 
 \subsubsection{Final Model Performance}
 
-Based on the previous findings, GoogLeNet was selected for the final model due to its consistent performance and efficient training
-characteristics. While ResNet18 achieved marginally better results in some configurations, GoogLeNet showed more stable performance
-across different parameters and required less computational resources. The model was trained on FileCustom1, a synthetic dataset created
-to approximate the conditions in Files 2 and 3.
+Based on the previous findings, GoogLeNet was selected for the final model due to its consistent performance across different parameter settings.
+The model was trained on FileCustom1, a synthetic dataset created to approximate the conditions in Files 2 and 3. This means that the training
+data increased from 9,000 samples to 95,000 samples.
 
 The final evaluation yielded these results:
+
 \begin{itemize}
     \item \textbf{Training Evaluation} (2,500 samples):
         \begin{itemize}
@@ -376,99 +408,330 @@ The final evaluation yielded these results:
         \end{itemize}
 \end{itemize}
 
-These results demonstrate the model's robust performance across different distortion conditions. The perfect scores on File2 indicate excellent handling of weak distortions, while the strong performance on File3 (misclassifying only 252 out of 10,000 samples) shows good resilience to more challenging conditions.
+These results demonstrate the model's near-perfect performance (as shown in figure \ref{fig:final_analysis}) across different distortion conditions.
+The perfect scores on File2 indicate excellent handling of weak distortions, while the very good performance on File3
+(misclassifying only 252 out of 10,000 samples) shows good resilience to more challenging conditions. Based on the accuracy, precision, and recall
+plots per class, we can clearly see that the model fails to identify marker 33 the most as that's where it's precision is the lowest,
+whilst markers 14 and 39 are the most frequently missed ones due to the lowest recall. This can be better visualised in the confusion matrix (this can be seen in
+the appendices).
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/File3_final_analysis_accuracy.png}
+        \caption{Per-class accuracy analysis}
+        \label{fig:final_accuracy}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/File3_final_analysis_precision.png}
+        \caption{Per-class precision analysis}
+        \label{fig:final_precision}
+    \end{subfigure}
+    
+    \vspace{0.5cm}
+    
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/File3_final_analysis_recall.png}
+        \caption{Per-class recall analysis}
+        \label{fig:final_recall}
+    \end{subfigure}
+    \caption{Final model performance analysis on File3 dataset showing per-class metrics}
+    \label{fig:final_analysis}
+\end{figure}
 
 \section{Detection}
 
-The detection problem was broken down into the following steps:
-
-\begin{enumerate}
-  \item Adapt and prepare the data plotter for detection datasets and results
-  \item Develop data augmentation script
-  \item Prepare detection network architectures
-  \item Design experiment to compare detection architectures and settings
-  \item Train and test the final detection model
-\end{enumerate}
-
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.5\textwidth]{images/aruco-dataset-browser-2.png}
-  \caption{Dataset browser used with the File4 dataset}
-  \label{fig:data_browser_2}
-\end{figure}
+\subsection{Detection Methodology}
 
 \begin{figure}[h]
   \centering
   \begin{subfigure}[b]{0.2\textwidth}
       \centering
-      \includegraphics[width=\textwidth]{images/aruco-file3-detection-1.png}
-      \caption{Detection example 1}
-      \label{fig:det_ex1}
+      \includegraphics[width=\textwidth]{images/aruco-file4-detection-1.png}
+      \caption{Marker in office placement example 1}
+      \label{fig:det_ex_1}
   \end{subfigure}
   \hfill
   \begin{subfigure}[b]{0.2\textwidth}
       \centering
-      \includegraphics[width=\textwidth]{images/aruco-file3-detection-2.png}
-      \caption{Detection example 2}
-      \label{fig:det_ex2}
+      \includegraphics[width=\textwidth]{images/aruco-file4-detection-2.png}
+      \caption{Marker in office placement example 2}
+      \label{fig:det_ex_2}
   \end{subfigure}
   
   \vspace{0.5cm}
   
   \begin{subfigure}[b]{0.2\textwidth}
       \centering
-      \includegraphics[width=\textwidth]{images/aruco-file3-detection-3.png}
-      \caption{Detection example 3}
-      \label{fig:det_ex3}
+      \includegraphics[width=\textwidth]{images/aruco-file4-detection-3.png}
+      \caption{Marker in office placement example 3}
+      \label{fig:det_ex_3}
   \end{subfigure}
   \hfill
   \begin{subfigure}[b]{0.2\textwidth}
       \centering
-      \includegraphics[width=\textwidth]{images/aruco-file3-detection-4.png}
-      \caption{Detection example 4}
-      \label{fig:det_ex4}
+      \includegraphics[width=\textwidth]{images/aruco-file4-detection-4.png}
+      \caption{Marker in office placement example 4}
+      \label{fig:det_ex_4}
   \end{subfigure}
-  \caption{Examples of ArUco marker detection under different conditions (from the provided dataset)}
+  \caption{Examples of ArUco marker placements (from the provided dataset)}
   \label{fig:detection_examples}
 \end{figure}
 
-\subsection{Method: Detection}
+The detection dataset examples are visible in figure \ref{fig:detection_examples}.
+There are 100 examples of the ArUco marker placement and a CSV file with the position of the marker in each one of them.
 
-Overview of detection approach
+The detection problem was approached in a similar way to classification, with the following key steps:
 
-Data preparation: merging ArUco markers with office images
-Selection of detection models (e.g., RetinaNet-ResNet50, FasterRCNN-ResNet50, MobileNetV3-Large-FPN)
-Training configuration and hyperparameters
+\begin{enumerate}
+  \item Adapt and prepare the data plotter for detection datasets and results
+  \item Develop data augmentation script for office images with ArUco markers
+  \item Prepare detection network architectures
+  \item Design experiment to compare detection architectures and settings
+  \item Train and test the final detection model
+\end{enumerate}
 
-Algorithmic workflow (with diagrams/pseudocode)
+\subsubsection{Data Preparation}
 
-Preprocessing and annotation generation
-Model training loop for detection
-Post-processing steps (bounding box adjustments, non-max suppression)
+Firstly, the dataset browser was asdapted to handle detection data viewing (and results).
+It shows the image, it's bounding box (ground truth and prediction if available), pixel distribution, and basic dataset statistics.
+This can be seen in Figure \ref{fig:data_browser_2}.
 
-Challenges and considerations
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.45\textwidth]{images/aruco-dataset-browser-2.png}
+  \caption{Dataset browser used with the File4 dataset}
+  \label{fig:data_browser_2}
+\end{figure}
 
-Handling strong distortions and occlusions
-GPU memory management and batch size limitations
+After analysing the data, the data augmentation script was developed. It was used to create a larger dataset for training, as the provided one
+for this task was insufficient compared to the classification task. The data browser was used to identify the optimal way to approach this.
 
-\subsection{Results: Detection}
+The methodology of the determined data augmentation pipeline is shown below:
 
-Presentation of experimental setup
+\begin{figure}[H]
+\begin{algorithm}[H]
+\caption{Detection Data Preparation Pipeline}
+\begin{algorithmic}[1]
+\STATE Load office images and ArUco tags
+\FOR{each office image}
+    \STATE Get random 1000x1000 crop from original image
+    \STATE Resize cropped image to 224x224
+    \FOR{each ArUco class}
+        \STATE Select random tag from custom dataset 1
+        \STATE Resize tag to 34x34
+        \STATE Calculate valid random position
+        \STATE Place tag at position
+        \STATE Save combined image
+        \STATE Store bounding box coordinates
+    \ENDFOR
+\ENDFOR
+\STATE Save bounding box annotations to CSV
+\end{algorithmic}
+\end{algorithm}
+\caption{Detection data preparation workflow}
+\end{figure}
 
-Datasets used (Files 4, 5, and custom datasets)
-Evaluation metrics (Mean IoU, MAE, detection success rates)
+\subsubsection{Network Architectures}
 
-Numerical results and analysis
+Multiple pre-trained architectures were implemented from the PyTorch library. Many of these were quite simple to implement and
+worked out of the box, and many (for example the ones from the lecture materials) proved troublesome to implement sucesfully.
+Final models were based on \textcite{pytorch_retinanet}, \textcite{pytorch_fasterrcnn}, and \textcite{pytorch_mobilenet_rcnn} and were
+chosen for their performance during development, and ease of implementation:
 
-Performance comparison of different detection architectures
-Impact of distortions on detection accuracy
-Visualisation of detection outputs and failure cases
+\begin{itemize}
+    \item \textbf{RetinaNet with ResNet50 backbone}: $\sim$40M parameters
+    \begin{itemize}
+        \item Pre-trained on ImageNet dataset for general object recognition
+    \end{itemize}
+    
+    \item \textbf{Faster R-CNN with ResNet50 backbone}: $\sim$38M parameters
+    \begin{itemize}
+        \item Pre-trained on ImageNet dataset for general object recognition
+        \item Two-step detection: first finds regions of interest, then classifies them
+    \end{itemize}
+    
+    \item \textbf{MobileNetV3-Large with FPN}: $\sim$20M parameters
+    \begin{itemize}
+        \item Pre-trained on ImageNet dataset for general object recognition
+        \item Originally optimised for mobile/edge devices with fewer parameters
+    \end{itemize}
+\end{itemize}
 
-Discussion on detection performance
+\subsubsection{Training Configuration}
 
-Analysis of false negatives/positives
-Critical factors affecting detection success
+Similarly to classification, the detection training pipeline included:
+
+\begin{itemize}
+  \item Adam optimizer with learning rate 1e-4
+  \item Early stopping based on IoU threshold 98\%
+  \item Best model checkpointing
+  \item Training progress monitoring
+  \item IoU and coordinate-wise metrics
+\end{itemize}
+
+The final model was trained with:
+
+\begin{itemize}
+  \item Batch size of 8 (GPU memory constrained)
+  \item 50 training epochs
+  \item Early stopping at 99.6\% IoU threshold
+  \item Separate evaluation on File4 and File5
+\end{itemize}
+
+\subsubsection{Method Implementation}
+
+The detection pipeline followed this algorithmic workflow:
+
+\begin{figure}[H]
+\begin{algorithm}[H]
+\caption{Detection Experiment Pipeline}
+\begin{algorithmic}[1]
+\STATE Load configuration for dataset, model, batch size
+\FOR{each combination in configurations}
+    \STATE Setup results directory
+    \STATE Initialize model and device
+    \STATE Create data loaders
+    \STATE Train and evaluate model
+    \STATE Plot training progress
+    \STATE Run evaluation on test set
+    \STATE Plot detection metrics
+    \STATE Save all results
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
+\caption{Detection experiment workflow}
+\end{figure}
+
+The model training loop is shown below:
+
+\begin{figure}[H]
+\begin{algorithm}[H]
+\caption{Detection Training and Validation Pipeline}
+\begin{algorithmic}[1]
+\STATE Initialize model, optimizer, and metrics history
+\FOR{each epoch in total epochs}
+    \STATE Set model to train mode
+    \FOR{each batch in train loader}
+        \STATE Move images and targets to device
+        \STATE Reset gradients
+        \STATE Forward pass and calculate loss
+        \STATE Backpropagate and update weights
+        \STATE Add loss to epoch total
+    \ENDFOR
+    \STATE Calculate average training loss
+    \STATE Set model to evaluation mode
+    \FOR{each batch in validation loader}
+        \STATE Forward pass through network
+        \STATE Get highest confidence prediction
+        \STATE Calculate IoU with ground truth
+        \STATE Add IoU to validation metrics
+    \ENDFOR
+    \STATE Calculate mean validation IoU
+    \STATE Save model if best IoU achieved
+    \STATE Check for early stopping criteria
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
+\caption{Detection training workflow}
+\end{figure}
+
+The final evaluation process:
+
+\begin{figure}[H]
+\begin{algorithm}[H]
+\caption{Detection Evaluation Pipeline}
+\begin{algorithmic}[1]
+\STATE Load best model weights
+\FOR{each test dataset (File4, File5)}
+    \STATE Create data loader for full dataset
+    \STATE Set model to evaluation mode
+    \FOR{each batch in test loader}
+        \STATE Get model predictions
+        \STATE Select highest confidence boxes
+        \STATE Calculate IoU with ground truth
+        \STATE Store predictions and metrics
+    \ENDFOR
+    \STATE Calculate mean IoU and MAE
+    \STATE Generate analysis plots
+    \STATE Save detailed predictions to CSV
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
+\caption{Detection evaluation workflow}
+\end{figure}
+
+\subsection{Detection Results}
+
+The detection experiments were conducted in two phases, similar to classification. First, multiple architectures
+and configurations were tested on File5 dataset to determine the optimal approach. Then, the best performing
+configuration was trained on a custom dataset and evaluated against both File4 and File5.
+
+\subsubsection{Initial Experiments}
+
+The experiments encompassed various architectures with batch size of 4 (due to GPU memory constraints). Each
+configuration was tested on 1000 samples from File5, with the following results:
+
+\begin{itemize}
+    \item \textbf{RetinaNet with ResNet50 backbone}:
+        \begin{itemize}
+            \item Mean IoU: 98.05\%
+            \item Mean MAE: 98.25\%
+            \item IoUs over 50\%: 100.00\%
+        \end{itemize}
+    
+    \item \textbf{Faster R-CNN with ResNet50 backbone}:
+        \begin{itemize}
+            \item Mean IoU: 97.80\%
+            \item Mean MAE: 97.60\%
+            \item IoUs over 50\%: 100.00\%
+        \end{itemize}
+    
+    \item \textbf{MobileNetV3-Large with FPN}:
+        \begin{itemize}
+            \item Mean IoU: 95.93\%
+            \item Mean MAE: 96.32\%
+            \item IoUs over 50\%: 100.00\%
+        \end{itemize}
+\end{itemize}
+
+\subsubsection{Final Model Performance}
+
+Based on the previous findings, RetinaNet with ResNet50 backbone was selected for the final model due to its superior performance
+across different metrics. The model was trained on FileCustom2, a synthetic dataset created to approximate the conditions
+in Files 4 and 5.
+
+The final evaluation yielded these results:
+
+\begin{itemize}
+    \item \textbf{Training Evaluation} (1,000 samples):
+        \begin{itemize}
+            \item Mean IoU: 99.70\%
+            \item Mean MAE: 99.76\%
+            \item IoUs over 50\%: 100.00\%
+        \end{itemize}
+    \item \textbf{File4 Evaluation} (100 samples):
+        \begin{itemize}
+            \item Mean IoU: 89.00\%
+            \item Mean MAE: 89.01\%
+            \item IoUs over 50\%: 100.00\%
+        \end{itemize}
+    \item \textbf{File5 Evaluation} (100 samples):
+        \begin{itemize}
+            \item Mean IoU: 85.64\%
+            \item Mean MAE: 88.94\%
+            \item IoUs over 50\%: 97.00\%
+        \end{itemize}
+\end{itemize}
+
+These results demonstrate the model's strong performance across different distortion conditions.
+The perfect detection rate (IoUs over 50\%) on File4 indicates excellent handling of weak distortions,
+while the very good performance on File5 (failing to detect only 3 out of 100 markers) shows good resilience
+to more challenging conditions.
 
 \section{Conclusion}
 
@@ -480,6 +743,23 @@ Suggestions for improvements and areas for future research
 Further dataset expansion (synthetic or real-world captures)
 Refinement of network architectures and training strategies
 Enhanced evaluation techniques and theoretical analysis
+
+%% KEEP:
+RESULTS OF THE MINIMAL CNN:
+Due to
+the lack of available GPU resources, and time, this was not attempted at the final experiment stage. During the initial development, this model was being
+tested regularly to validate the functionality, and when tested thoroughly (such as in the commit d9fd8ad), the model achieved 92.30\% validation accuracy after
+100 epochs of training. To solidify these results, this experiment would have to be repeated with the current codebase and for all of the combinations of models to
+ensure the same and unbiased results across the whole experiment.
+
+%%%
+THE USE OF ADDITIONAL TRANSFORMS WAS A MSITAKE!
+
+%%
+THE PIXEL DISTRIBUTION VIEWER WAS USELESS BUT TURNED OUT TO BE USEFUL FOR SHOWING THE RESULTS.
+
+%%%
+NOTICED LATE THAT THE DISTORTIONS ALSO INCLUDED A SLIGHT PERSPECTIVE SHIFT. NOTE THAT IT IS EASY TO IMPLEMENT IF NEEDED IN THE FUTURE
 
 \printbibsection
 
