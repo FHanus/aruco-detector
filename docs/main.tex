@@ -293,14 +293,14 @@ created for this purpose, and the model performance on these datasets was separa
 
 \subsection{Classification Results}
 
-The classification experiments were conducted in two phases. Initially, multiple architectures
-and configurations were tested on the File3 dataset to determine the optimal approach. Subsequently, the best
-performing configuration was trained on a custom dataset and evaluated against both File2 and File3.
+The classification experiments were conducted in two phases. Initially, multiple architectures and configurations were tested on the
+File3 dataset to determine the optimal approach. Subsequently, the best performing configuration was trained on a custom dataset and
+was evaluated against both File2 and File3.
 
 \subsubsection{Initial Experiments}
 
-The experiments encompassed various architectures with different batch sizes and data augmentation strategies. Each
-configuration was tested on 1000 samples from File3, with the following results:
+Various architectures with different batch sizes and data augmentation strategies were explored. Each configuration was tested on
+1000 samples from File3, with the following results:
 
 \begin{itemize}
     \item \textbf{MinimalCNN}:
@@ -365,22 +365,23 @@ The experiment results are shown in the figure \ref{fig:training_progress}.
     \label{fig:training_progress}
 \end{figure}
 
-All of the training progress plots show the training progress of the models with 32 batch size and no data augmentation for comparability.
-The results of the minimal CNN are as expected, although the model was indeed training and given many more epochs, it would likely achieve better results.  
+The progress of models trained with a batch size of 32 and no data augmentation for comparability is shown in all training plots. The
+minimal CNN was observed to behave as anticipated, although better performance would likely be achieved with additional epochs. 
 
-As expected, the AlexNet with no pre-trained weights performed very well, but converged much slower than it's pre-trained counterpart.
-ResNet18 and GoogLeNet preformed near perfectly, noticebly better without additional training transforms than with them. Only the ResNet's plot
-is shown as their are nearly the same. These two models triggered early stopping after reaching 99\% validation accuracy.
+AlexNet with no pre-trained weights was observed to perform very well, though it converged more slowly than its pre-trained counterpart.
+ResNet18 and GoogLeNet were found to have performed almost perfectly and were noticeably better without additional training transforms.
+Only the ResNet plot is shown, as the results were essentially identical. Early stopping was triggered for both models once 99\% 
+validation accuracy was reached.
 
-For further insights, training logs and detailed analysis, additional plots, results, and data can be found in the Appendices.
+For further insights, training logs and detailed analysis are provided in the Appendices, which also contain additional plots, results, and data.
 
 \subsubsection{Final Model Performance}
 
-Based on the previous findings, GoogLeNet was selected for the final model due to its consistent performance across different parameter settings.
-The model was trained on FileCustom1, a synthetic dataset created to approximate the conditions in Files 2 and 3. This means that the training
-data increased from 9,000 samples to 95,000 samples.
+Based on the previous findings, GoogLeNet was chosen as the final model because of its consistent performance across different parameter
+settings. Training was conducted on FileCustom1, a synthetic dataset created to approximate conditions in Files 2 and 3. The training set
+size was thereby increased from 9,000 to 95,000 samples.
 
-The final evaluation yielded these results:
+The following results were provided by the final evaluation:
 
 \begin{itemize}
     \item \textbf{Training Evaluation} (2,500 samples):
@@ -406,12 +407,11 @@ The final evaluation yielded these results:
         \end{itemize}
 \end{itemize}
 
-These results demonstrate the model's near-perfect performance (as shown in figure \ref{fig:final_analysis}) across different distortion conditions.
-The perfect scores on File2 indicate excellent handling of weak distortions, while the very good performance on File3
-(misclassifying only 252 out of 10,000 samples) shows good resilience to more challenging conditions. Based on the accuracy, precision, and recall
-plots per class, we can clearly see that the model fails to identify marker 33 the most as that's where it's precision is the lowest,
-whilst markers 14 and 39 are the most frequently missed ones due to the lowest recall. This can be better visualised in the confusion matrix (this can be seen in
-the appendices).
+Near-perfect performance (as shown in Figure \ref{fig:final_analysis}) under various distortion conditions is indicated by these results.
+Perfect scores were achieved on File2, suggesting that weak distortions were handled effectively, whereas a strong outcome on File3 (only
+252 misclassifications out of 10,000 samples) demonstrates good resilience in more challenging scenarios. Based on the per-class accuracy,
+precision, and recall plots, marker 33 was identified as the most difficult class, as its precision was lowest, while markers 14 and 39
+were missed most often because of the lowest recall. A clearer depiction of these findings is provided by the confusion matrix in the appendices.
 
 \begin{figure}[h]
     \centering
@@ -480,24 +480,23 @@ the appendices).
   \label{fig:detection_examples}
 \end{figure}
 
-The detection dataset examples are visible in figure \ref{fig:detection_examples}.
-There are 100 examples of the ArUco marker placement and a CSV file with the position of the marker in each one of them.
+Figure \ref{fig:detection_examples} shows detection dataset examples. One hundred ArUco placements are included, alongside 
+a CSV listing each marker's position.
 
-The detection problem was approached in a similar way to classification, with the following key steps:
+The detection problem was approached similarly to classification with these steps: 
 
 \begin{enumerate}
-  \item Adapt and prepare the data plotter for detection datasets and results
-  \item Develop data augmentation script for office images with ArUco markers
-  \item Prepare detection network architectures
-  \item Design experiment to compare detection architectures and settings
-  \item Train and test the final detection model
+  \item The data plotter was adapted for detection data and results.
+  \item A data augmentation script was created for office images with ArUco markers.
+  \item Detection network architectures were prepared.
+  \item An experiment was designed to compare detection architectures and settings.
+  \item The final detection model was trained and tested.
 \end{enumerate}
 
 \subsubsection{Data Preparation}
 
-Firstly, the dataset browser was asdapted to handle detection data viewing (and results).
-It shows the image, it's bounding box (ground truth and prediction if available), pixel distribution, and basic dataset statistics.
-This can be seen in Figure \ref{fig:data_browser_2}.
+Firstly, the dataset browser was adapted for detection data viewing and results. It displays the image, bounding box (ground
+truth and predictions), pixel distribution, and basic dataset statistics. This is visible in Figure \ref{fig:data_browser_2}.
 
 \begin{figure}[h]
   \centering
@@ -506,10 +505,10 @@ This can be seen in Figure \ref{fig:data_browser_2}.
   \label{fig:data_browser_2}
 \end{figure}
 
-After analysing the data, the data augmentation script was developed. It was used to create a larger dataset for training, as the provided one
-for this task was insufficient compared to the classification task. The data browser was used to identify the optimal way to approach this.
+After the data were analysed, a data augmentation script was developed to expand the training dataset, as the provided one was
+insufficient compared to classification. The data browser was used to identify an optimal approach.
 
-The methodology of the determined data augmentation pipeline is shown below:
+The data augmentation pipeline is outlined below:
 
 \begin{figure}[H]
 \begin{algorithm}[H]
@@ -536,10 +535,9 @@ The methodology of the determined data augmentation pipeline is shown below:
 
 \subsubsection{Network Architectures}
 
-Multiple pre-trained architectures were implemented from the PyTorch library. Many of these were quite simple to implement and
-worked out of the box, such as RetinaNet and MobileNet, and many (for example the ones from the lecture materials) proved troublesome to implement sucesfully.
-Final models were based on \textcite{pytorch_retinanet}, \textcite{pytorch_fasterrcnn}, and \textcite{pytorch_mobilenet_rcnn} and were
-chosen for their performance during development, and ease of implementation:
+Multiple pre-trained PyTorch architectures were implemented. RetinaNet and MobileNet worked out of the box, whereas others were
+problematic. Final models were based on \textcite{pytorch_retinanet}, \textcite{pytorch_fasterrcnn}, and \textcite{pytorch_mobilenet_rcnn},
+chosen for performance and easy implementation.
 
 \begin{itemize}
     \item \textbf{RetinaNet with ResNet50 backbone}: $\sim$40M parameters
@@ -571,21 +569,21 @@ Similarly to classification, the detection training pipeline included:
   \item \textbf{Additional Random Training Transformations}: None, this is not to distort the office images, since the tags are already distorted
 \end{itemize}
 
-These experiment parameters form only 3 different networks and sets of results. 
-With a single change in the configuration file, the entire experiment can be changed, the custom dataset can be used (raapidly increasing time per epoch), different
-batch sizes can be used (increasing memory usage beyond the used GPU's capability), and different models can be used.
+Only three distinct networks and result sets were produced. With one configuration file change, the entire experiment can be altered:
+the custom dataset can be included (increasing epoch time), different batch sizes can be used (potentially exceeding GPU memory), and
+varied models can be tested.
 
-Additional settings and parameters purely for the purpose of limiting the time to run the experiment were used:
+Additional settings and parameters were used solely to reduce experiment runtime:
 
 \begin{itemize}
     \item \textbf{Optimizer}: Adam with learning rate 3e-4
     \item \textbf{Training Duration}: 100 epochs with early stopping at 98\% training accuracy 
 \end{itemize}
 
-After the experiments were completed, the results were plotted and analysed. The results are shown in the following section, and full results are available in the results directory
-and the appendices.
+After the experiments, results were plotted and analysed. They are presented in the following section, with full results in the results
+directory and appendices.
 
-The final model was trained on the custom dataset, with the following parameters and settings derived based on the best performing combination of the initial experiments:
+The final model was trained on the custom dataset using parameters and settings derived from the best-performing initial experiments:
 
 \begin{itemize}
   \item Batch size of 8 (GPU memory constrained)
@@ -594,10 +592,9 @@ The final model was trained on the custom dataset, with the following parameters
   \item Separate evaluation on File4 and File5
 \end{itemize}
 
-The implementation does not differ from the classification one. To calculate the progress of the training, the Intersection over Union (IoU) metric was used. This 
-seemed to be the most appropriate metric for this task, as it measures the overlap between the predicted and true bounding boxes, which in the
-case of this project is only one box and only one class per image. The metrics tracked during evaluation are the mean IoU and mean Mean Absolute Error (MAE),
-which seem to be the most appropriate metrics for this task.
+The implementation is identical to the classification approach. The Intersection over Union (IoU) metric was used to track progress, as
+it measures bounding box overlap. Only one bounding box and one class exist per image; mean IoU and mean Mean Absolute Error (MAE) were
+used for evaluation.
 
 \subsection{Detection Results}
 
