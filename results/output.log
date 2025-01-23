@@ -921,353 +921,260 @@ Processing office images: 100%|██████████| 100/100 [00:51<00
 [2025-01-19 22:47:42] Loss: 4.6068 | Accuracy: 0.7000%
 [2025-01-19 22:47:42] Completed experiment: Dataset=./data/File3/arucoChallenging, Model=AlexNet-clean, Batch Size=64, Transformation=rotation_blur_noise
 [2025-01-19 22:47:42] 
-[2025-01-19 22:47:42] Starting experiment: Dataset=./data/File3/arucoChallenging, Model=AlexNet, Batch Size=32, Transformation=none
-[2025-01-19 22:47:43] Image tensor shape: torch.Size([32, 3, 224, 224])
-[2025-01-19 22:47:43] Image value range: [-2.118, 2.640]
-[2025-01-19 22:47:59] Epoch [1/50] Train Loss: 4.0567 | Train Acc: 7.7125% Val Loss: 3.1116 | Val Acc: 18.2000% Time: 14.93s
-[2025-01-19 22:48:14] Epoch [2/50] Train Loss: 2.9274 | Train Acc: 24.0750% Val Loss: 2.3172 | Val Acc: 36.4000% Time: 15.17s
-[2025-01-19 22:48:29] Epoch [3/50] Train Loss: 2.3186 | Train Acc: 37.3375% Val Loss: 2.0283 | Val Acc: 44.7000% Time: 14.77s
-[2025-01-19 22:48:45] Epoch [4/50] Train Loss: 1.8857 | Train Acc: 47.6500% Val Loss: 1.6238 | Val Acc: 53.4000% Time: 15.10s
-[2025-01-19 22:49:01] Epoch [5/50] Train Loss: 1.5793 | Train Acc: 55.5250% Val Loss: 1.4612 | Val Acc: 59.6000% Time: 15.34s
-[2025-01-19 22:49:16] Epoch [6/50] Train Loss: 1.3267 | Train Acc: 61.9625% Val Loss: 1.3023 | Val Acc: 65.6000% Time: 15.31s
-[2025-01-19 22:49:32] Epoch [7/50] Train Loss: 1.1403 | Train Acc: 66.2625% Val Loss: 1.2918 | Val Acc: 62.2000% Time: 15.63s
-[2025-01-19 22:49:48] Epoch [8/50] Train Loss: 1.0286 | Train Acc: 69.2875% Val Loss: 1.2087 | Val Acc: 65.7000% Time: 15.58s
-[2025-01-19 22:50:05] Epoch [9/50] Train Loss: 0.8870 | Train Acc: 73.7625% Val Loss: 1.1970 | Val Acc: 65.8000% Time: 15.98s
-[2025-01-19 22:50:21] Epoch [10/50] Train Loss: 0.7968 | Train Acc: 76.2250% Val Loss: 1.1355 | Val Acc: 67.6000% Time: 15.85s
-[2025-01-19 22:50:37] Epoch [11/50] Train Loss: 0.7145 | Train Acc: 77.7000% Val Loss: 1.1580 | Val Acc: 67.7000% Time: 16.04s
-[2025-01-19 22:50:54] Epoch [12/50] Train Loss: 0.6420 | Train Acc: 80.5125% Val Loss: 1.0872 | Val Acc: 69.3000% Time: 16.04s
-[2025-01-19 22:51:10] Epoch [13/50] Train Loss: 0.6262 | Train Acc: 80.4250% Val Loss: 1.1003 | Val Acc: 70.1000% Time: 15.66s
-[2025-01-19 22:51:26] Epoch [14/50] Train Loss: 0.5857 | Train Acc: 82.0125% Val Loss: 1.0859 | Val Acc: 69.4000% Time: 15.75s
-[2025-01-19 22:51:42] Epoch [15/50] Train Loss: 0.5316 | Train Acc: 83.3500% Val Loss: 1.0700 | Val Acc: 71.6000% Time: 15.94s
-[2025-01-19 22:51:58] Epoch [16/50] Train Loss: 0.4903 | Train Acc: 84.6250% Val Loss: 1.1249 | Val Acc: 70.7000% Time: 15.99s
-[2025-01-19 22:52:14] Epoch [17/50] Train Loss: 0.4149 | Train Acc: 86.9250% Val Loss: 1.2215 | Val Acc: 67.8000% Time: 16.16s
-[2025-01-19 22:52:30] Epoch [18/50] Train Loss: 0.4398 | Train Acc: 86.3000% Val Loss: 1.1474 | Val Acc: 69.3000% Time: 16.31s
-[2025-01-19 22:52:47] Epoch [19/50] Train Loss: 0.4252 | Train Acc: 86.9000% Val Loss: 1.1221 | Val Acc: 70.4000% Time: 16.22s
-[2025-01-19 22:53:03] Epoch [20/50] Train Loss: 0.4191 | Train Acc: 87.0000% Val Loss: 1.0851 | Val Acc: 70.9000% Time: 16.46s
-[2025-01-19 22:53:19] Epoch [21/50] Train Loss: 0.3924 | Train Acc: 87.7875% Val Loss: 1.1149 | Val Acc: 70.0000% Time: 16.13s
-[2025-01-19 22:53:36] Epoch [22/50] Train Loss: 0.3453 | Train Acc: 89.0375% Val Loss: 1.2794 | Val Acc: 68.0000% Time: 16.41s
-[2025-01-19 22:53:52] Epoch [23/50] Train Loss: 0.3831 | Train Acc: 88.0750% Val Loss: 1.1010 | Val Acc: 71.6000% Time: 16.40s
-[2025-01-19 22:54:08] Epoch [24/50] Train Loss: 0.3769 | Train Acc: 88.5000% Val Loss: 1.1883 | Val Acc: 70.3000% Time: 16.41s
-[2025-01-19 22:54:25] Epoch [25/50] Train Loss: 0.3379 | Train Acc: 89.4500% Val Loss: 1.2597 | Val Acc: 70.4000% Time: 16.49s
-[2025-01-19 22:54:41] Epoch [26/50] Train Loss: 0.3194 | Train Acc: 90.2000% Val Loss: 1.1324 | Val Acc: 72.2000% Time: 16.15s
-[2025-01-19 22:54:58] Epoch [27/50] Train Loss: 0.3406 | Train Acc: 89.6000% Val Loss: 1.1504 | Val Acc: 71.9000% Time: 16.25s
-[2025-01-19 22:55:14] Epoch [28/50] Train Loss: 0.2877 | Train Acc: 91.1125% Val Loss: 1.1932 | Val Acc: 71.2000% Time: 16.47s
-[2025-01-19 22:55:31] Epoch [29/50] Train Loss: 0.3063 | Train Acc: 90.7375% Val Loss: 1.1793 | Val Acc: 73.8000% Time: 16.53s
-[2025-01-19 22:55:48] Epoch [30/50] Train Loss: 0.3003 | Train Acc: 91.0875% Val Loss: 1.1896 | Val Acc: 72.5000% Time: 16.63s
-[2025-01-19 22:56:04] Epoch [31/50] Train Loss: 0.2871 | Train Acc: 91.2000% Val Loss: 1.2722 | Val Acc: 70.2000% Time: 16.00s
-[2025-01-19 22:56:20] Epoch [32/50] Train Loss: 0.2919 | Train Acc: 91.4000% Val Loss: 1.1805 | Val Acc: 71.2000% Time: 16.47s
-[2025-01-19 22:56:37] Epoch [33/50] Train Loss: 0.2852 | Train Acc: 91.6000% Val Loss: 1.1522 | Val Acc: 74.3000% Time: 16.71s
-[2025-01-19 22:56:54] Epoch [34/50] Train Loss: 0.2748 | Train Acc: 91.7500% Val Loss: 1.2287 | Val Acc: 72.1000% Time: 16.35s
-[2025-01-19 22:57:10] Epoch [35/50] Train Loss: 0.2866 | Train Acc: 91.5500% Val Loss: 1.1897 | Val Acc: 71.5000% Time: 16.24s
-[2025-01-19 22:57:26] Epoch [36/50] Train Loss: 0.2666 | Train Acc: 91.7375% Val Loss: 1.2054 | Val Acc: 72.6000% Time: 16.52s
-[2025-01-19 22:57:43] Epoch [37/50] Train Loss: 0.2675 | Train Acc: 91.9750% Val Loss: 1.2708 | Val Acc: 70.7000% Time: 16.37s
-[2025-01-19 22:57:59] Epoch [38/50] Train Loss: 0.2754 | Train Acc: 91.6125% Val Loss: 1.3026 | Val Acc: 70.4000% Time: 16.29s
-[2025-01-19 22:58:16] Epoch [39/50] Train Loss: 0.2514 | Train Acc: 92.5750% Val Loss: 1.3118 | Val Acc: 69.6000% Time: 16.78s
-[2025-01-19 22:58:32] Epoch [40/50] Train Loss: 0.2713 | Train Acc: 92.0125% Val Loss: 1.2646 | Val Acc: 70.5000% Time: 16.44s
-[2025-01-19 22:58:49] Epoch [41/50] Train Loss: 0.2956 | Train Acc: 91.2250% Val Loss: 1.2599 | Val Acc: 70.6000% Time: 16.90s
-[2025-01-19 22:59:06] Epoch [42/50] Train Loss: 0.2495 | Train Acc: 92.5750% Val Loss: 1.3404 | Val Acc: 71.7000% Time: 16.53s
-[2025-01-19 22:59:22] Epoch [43/50] Train Loss: 0.2311 | Train Acc: 93.2125% Val Loss: 1.3490 | Val Acc: 71.9000% Time: 16.20s
-[2025-01-19 22:59:38] Epoch [44/50] Train Loss: 0.2576 | Train Acc: 92.5750% Val Loss: 1.3867 | Val Acc: 70.5000% Time: 15.71s
-[2025-01-19 22:59:53] Epoch [45/50] Train Loss: 0.2523 | Train Acc: 92.3250% Val Loss: 1.3322 | Val Acc: 69.5000% Time: 15.54s
-[2025-01-19 23:00:08] Epoch [46/50] Train Loss: 0.2471 | Train Acc: 92.6625% Val Loss: 1.3016 | Val Acc: 71.0000% Time: 15.06s
-[2025-01-19 23:00:24] Epoch [47/50] Train Loss: 0.2750 | Train Acc: 92.0750% Val Loss: 1.3758 | Val Acc: 69.0000% Time: 15.42s
-[2025-01-19 23:00:38] Epoch [48/50] Train Loss: 0.2749 | Train Acc: 92.3125% Val Loss: 1.4559 | Val Acc: 70.6000% Time: 14.85s
-[2025-01-19 23:00:53] Epoch [49/50] Train Loss: 0.2563 | Train Acc: 92.6500% Val Loss: 1.5424 | Val Acc: 70.1000% Time: 14.83s
-[2025-01-19 23:01:09] Epoch [50/50] Train Loss: 0.2253 | Train Acc: 93.4875% Val Loss: 1.5088 | Val Acc: 70.3000% Time: 15.31s
-[2025-01-19 23:01:16] 
-[2025-01-19 23:01:16] Test Set Performance:
-[2025-01-19 23:01:16] Loss: 1.2431 | Accuracy: 71.7000%
-[2025-01-19 23:01:16] Completed experiment: Dataset=./data/File3/arucoChallenging, Model=AlexNet, Batch Size=32, Transformation=none
-[2025-01-19 23:01:16] 
-[2025-01-19 23:01:16] Starting experiment: Dataset=./data/File3/arucoChallenging, Model=AlexNet, Batch Size=32, Transformation=random_rotation
-[2025-01-19 23:01:18] Image tensor shape: torch.Size([32, 3, 224, 224])
-[2025-01-19 23:01:18] Image value range: [-2.118, 2.640]
-[2025-01-19 23:01:47] Epoch [1/50] Train Loss: 4.1897 | Train Acc: 6.1375% Val Loss: 3.5220 | Val Acc: 12.3000% Time: 28.74s
-[2025-01-19 23:02:17] Epoch [2/50] Train Loss: 3.3981 | Train Acc: 14.4250% Val Loss: 3.0306 | Val Acc: 20.8000% Time: 29.25s
-[2025-01-19 23:02:46] Epoch [3/50] Train Loss: 3.0673 | Train Acc: 19.9500% Val Loss: 2.6484 | Val Acc: 29.8000% Time: 29.19s
-[2025-01-19 23:03:16] Epoch [4/50] Train Loss: 2.8647 | Train Acc: 24.0375% Val Loss: 2.3953 | Val Acc: 35.0000% Time: 29.61s
-[2025-01-19 23:03:46] Epoch [5/50] Train Loss: 2.6935 | Train Acc: 28.0000% Val Loss: 2.2324 | Val Acc: 39.5000% Time: 29.66s
-[2025-01-19 23:04:16] Epoch [6/50] Train Loss: 2.5745 | Train Acc: 29.7000% Val Loss: 2.1358 | Val Acc: 40.2000% Time: 29.37s
-[2025-01-19 23:04:46] Epoch [7/50] Train Loss: 2.4766 | Train Acc: 32.0500% Val Loss: 2.0880 | Val Acc: 41.8000% Time: 29.78s
-[2025-01-19 23:05:16] Epoch [8/50] Train Loss: 2.4062 | Train Acc: 33.7000% Val Loss: 1.9565 | Val Acc: 47.2000% Time: 29.53s
-[2025-01-19 23:05:45] Epoch [9/50] Train Loss: 2.3371 | Train Acc: 35.0125% Val Loss: 1.9383 | Val Acc: 47.0000% Time: 29.31s
-[2025-01-19 23:06:15] Epoch [10/50] Train Loss: 2.2866 | Train Acc: 37.0125% Val Loss: 1.8631 | Val Acc: 49.2000% Time: 29.61s
-[2025-01-19 23:06:46] Epoch [11/50] Train Loss: 2.2364 | Train Acc: 37.4125% Val Loss: 1.7822 | Val Acc: 51.0000% Time: 29.85s
-[2025-01-19 23:07:16] Epoch [12/50] Train Loss: 2.2025 | Train Acc: 38.8625% Val Loss: 1.6912 | Val Acc: 55.1000% Time: 29.46s
-[2025-01-19 23:07:45] Epoch [13/50] Train Loss: 2.1486 | Train Acc: 39.8875% Val Loss: 1.7760 | Val Acc: 50.9000% Time: 29.69s
-[2025-01-19 23:08:15] Epoch [14/50] Train Loss: 2.0969 | Train Acc: 40.7000% Val Loss: 1.6536 | Val Acc: 54.4000% Time: 29.41s
-[2025-01-19 23:08:44] Epoch [15/50] Train Loss: 2.0918 | Train Acc: 41.7250% Val Loss: 1.6968 | Val Acc: 51.1000% Time: 29.71s
-[2025-01-19 23:09:14] Epoch [16/50] Train Loss: 2.0528 | Train Acc: 42.6250% Val Loss: 1.6520 | Val Acc: 54.0000% Time: 29.31s
-[2025-01-19 23:09:44] Epoch [17/50] Train Loss: 2.0252 | Train Acc: 43.5625% Val Loss: 1.5912 | Val Acc: 56.3000% Time: 29.90s
-[2025-01-19 23:10:14] Epoch [18/50] Train Loss: 2.0136 | Train Acc: 43.3875% Val Loss: 1.5362 | Val Acc: 57.3000% Time: 29.78s
-[2025-01-19 23:10:44] Epoch [19/50] Train Loss: 1.9732 | Train Acc: 44.7000% Val Loss: 1.5374 | Val Acc: 56.7000% Time: 29.66s
-[2025-01-19 23:11:14] Epoch [20/50] Train Loss: 1.9718 | Train Acc: 44.8375% Val Loss: 1.5025 | Val Acc: 60.1000% Time: 29.68s
-[2025-01-19 23:11:44] Epoch [21/50] Train Loss: 1.9209 | Train Acc: 45.9000% Val Loss: 1.5389 | Val Acc: 58.5000% Time: 29.66s
-[2025-01-19 23:12:13] Epoch [22/50] Train Loss: 1.8739 | Train Acc: 47.0250% Val Loss: 1.5092 | Val Acc: 57.9000% Time: 29.79s
-[2025-01-19 23:12:44] Epoch [23/50] Train Loss: 1.8827 | Train Acc: 46.6625% Val Loss: 1.4761 | Val Acc: 61.3000% Time: 29.75s
-[2025-01-19 23:13:13] Epoch [24/50] Train Loss: 1.8703 | Train Acc: 47.0500% Val Loss: 1.4860 | Val Acc: 58.2000% Time: 29.28s
-[2025-01-19 23:13:42] Epoch [25/50] Train Loss: 1.8859 | Train Acc: 47.0625% Val Loss: 1.4919 | Val Acc: 59.9000% Time: 29.50s
-[2025-01-19 23:14:12] Epoch [26/50] Train Loss: 1.8168 | Train Acc: 48.4500% Val Loss: 1.4268 | Val Acc: 60.7000% Time: 29.67s
-[2025-01-19 23:14:42] Epoch [27/50] Train Loss: 1.7948 | Train Acc: 48.8250% Val Loss: 1.4295 | Val Acc: 60.3000% Time: 30.04s
-[2025-01-19 23:15:12] Epoch [28/50] Train Loss: 1.8082 | Train Acc: 48.5625% Val Loss: 1.4174 | Val Acc: 63.8000% Time: 29.72s
-[2025-01-19 23:15:42] Epoch [29/50] Train Loss: 1.8009 | Train Acc: 49.5750% Val Loss: 1.4397 | Val Acc: 61.0000% Time: 29.75s
-[2025-01-19 23:16:12] Epoch [30/50] Train Loss: 1.7720 | Train Acc: 49.3375% Val Loss: 1.2911 | Val Acc: 65.4000% Time: 29.80s
-[2025-01-19 23:16:42] Epoch [31/50] Train Loss: 1.7720 | Train Acc: 49.8875% Val Loss: 1.3243 | Val Acc: 66.3000% Time: 29.84s
-[2025-01-19 23:17:12] Epoch [32/50] Train Loss: 1.7401 | Train Acc: 50.6375% Val Loss: 1.3656 | Val Acc: 63.0000% Time: 29.55s
-[2025-01-19 23:17:41] Epoch [33/50] Train Loss: 1.7628 | Train Acc: 49.7250% Val Loss: 1.3545 | Val Acc: 65.8000% Time: 29.38s
-[2025-01-19 23:18:11] Epoch [34/50] Train Loss: 1.7215 | Train Acc: 51.2625% Val Loss: 1.3243 | Val Acc: 66.1000% Time: 29.55s
-[2025-01-19 23:18:41] Epoch [35/50] Train Loss: 1.6858 | Train Acc: 52.4625% Val Loss: 1.2926 | Val Acc: 65.3000% Time: 29.94s
-[2025-01-19 23:19:11] Epoch [36/50] Train Loss: 1.6895 | Train Acc: 51.9250% Val Loss: 1.3988 | Val Acc: 61.3000% Time: 29.81s
-[2025-01-19 23:19:40] Epoch [37/50] Train Loss: 1.6994 | Train Acc: 51.1625% Val Loss: 1.3366 | Val Acc: 66.2000% Time: 29.78s
-[2025-01-19 23:20:10] Epoch [38/50] Train Loss: 1.7009 | Train Acc: 51.3625% Val Loss: 1.3665 | Val Acc: 65.4000% Time: 29.45s
-[2025-01-19 23:20:39] Epoch [39/50] Train Loss: 1.7049 | Train Acc: 51.4875% Val Loss: 1.3514 | Val Acc: 64.2000% Time: 29.16s
-[2025-01-19 23:21:08] Epoch [40/50] Train Loss: 1.6515 | Train Acc: 52.9750% Val Loss: 1.3417 | Val Acc: 65.1000% Time: 29.03s
-[2025-01-19 23:21:38] Epoch [41/50] Train Loss: 1.6439 | Train Acc: 52.9750% Val Loss: 1.3336 | Val Acc: 65.5000% Time: 29.66s
-[2025-01-19 23:22:07] Epoch [42/50] Train Loss: 1.6830 | Train Acc: 52.0500% Val Loss: 1.3136 | Val Acc: 65.6000% Time: 29.32s
-[2025-01-19 23:22:37] Epoch [43/50] Train Loss: 1.6352 | Train Acc: 53.7375% Val Loss: 1.2835 | Val Acc: 66.4000% Time: 29.72s
-[2025-01-19 23:23:07] Epoch [44/50] Train Loss: 1.6598 | Train Acc: 52.9000% Val Loss: 1.3099 | Val Acc: 66.0000% Time: 29.85s
-[2025-01-19 23:23:37] Epoch [45/50] Train Loss: 1.6099 | Train Acc: 53.9500% Val Loss: 1.3001 | Val Acc: 66.6000% Time: 29.66s
-[2025-01-19 23:24:07] Epoch [46/50] Train Loss: 1.5949 | Train Acc: 54.0875% Val Loss: 1.2781 | Val Acc: 66.7000% Time: 29.91s
-[2025-01-19 23:24:37] Epoch [47/50] Train Loss: 1.6295 | Train Acc: 53.6625% Val Loss: 1.2788 | Val Acc: 66.4000% Time: 29.81s
-[2025-01-19 23:25:07] Epoch [48/50] Train Loss: 1.6181 | Train Acc: 54.4625% Val Loss: 1.2591 | Val Acc: 66.9000% Time: 29.61s
-[2025-01-19 23:25:37] Epoch [49/50] Train Loss: 1.6052 | Train Acc: 54.4875% Val Loss: 1.3101 | Val Acc: 64.0000% Time: 29.83s
-[2025-01-19 23:26:08] Epoch [50/50] Train Loss: 1.5789 | Train Acc: 55.1875% Val Loss: 1.2702 | Val Acc: 67.7000% Time: 29.63s
-[2025-01-19 23:26:17] 
-[2025-01-19 23:26:17] Test Set Performance:
-[2025-01-19 23:26:17] Loss: 1.1926 | Accuracy: 68.1000%
-[2025-01-19 23:26:17] Completed experiment: Dataset=./data/File3/arucoChallenging, Model=AlexNet, Batch Size=32, Transformation=random_rotation
-[2025-01-19 23:26:17] 
-[2025-01-19 23:26:17] Starting experiment: Dataset=./data/File3/arucoChallenging, Model=AlexNet, Batch Size=32, Transformation=rotation_blur_noise
-[2025-01-19 23:26:19] Image tensor shape: torch.Size([32, 3, 224, 224])
-[2025-01-19 23:26:19] Image value range: [-2.118, 2.640]
-[2025-01-19 23:26:57] Epoch [1/50] Train Loss: 4.1596 | Train Acc: 5.8375% Val Loss: 3.3214 | Val Acc: 15.2000% Time: 38.17s
-[2025-01-19 23:27:36] Epoch [2/50] Train Loss: 3.3448 | Train Acc: 15.0500% Val Loss: 2.7745 | Val Acc: 25.9000% Time: 38.59s
-[2025-01-19 23:28:15] Epoch [3/50] Train Loss: 2.9837 | Train Acc: 20.8750% Val Loss: 2.4804 | Val Acc: 35.2000% Time: 38.66s
-[2025-01-19 23:28:54] Epoch [4/50] Train Loss: 2.7772 | Train Acc: 25.1875% Val Loss: 2.2670 | Val Acc: 40.9000% Time: 38.68s
-[2025-01-19 23:29:33] Epoch [5/50] Train Loss: 2.6258 | Train Acc: 28.6250% Val Loss: 2.1064 | Val Acc: 43.1000% Time: 38.56s
-[2025-01-19 23:30:12] Epoch [6/50] Train Loss: 2.5305 | Train Acc: 31.2875% Val Loss: 1.9975 | Val Acc: 45.7000% Time: 38.55s
-[2025-01-19 23:30:52] Epoch [7/50] Train Loss: 2.4547 | Train Acc: 32.4875% Val Loss: 1.9124 | Val Acc: 48.3000% Time: 39.08s
-[2025-01-19 23:31:30] Epoch [8/50] Train Loss: 2.3482 | Train Acc: 35.2625% Val Loss: 1.7720 | Val Acc: 50.8000% Time: 38.21s
-[2025-01-19 23:32:09] Epoch [9/50] Train Loss: 2.2921 | Train Acc: 36.3125% Val Loss: 1.8199 | Val Acc: 51.5000% Time: 38.63s
-[2025-01-19 23:32:48] Epoch [10/50] Train Loss: 2.2140 | Train Acc: 38.8750% Val Loss: 1.8302 | Val Acc: 49.4000% Time: 38.59s
-[2025-01-19 23:33:27] Epoch [11/50] Train Loss: 2.1985 | Train Acc: 38.6500% Val Loss: 1.6779 | Val Acc: 52.6000% Time: 38.76s
-[2025-01-19 23:34:06] Epoch [12/50] Train Loss: 2.1426 | Train Acc: 40.2750% Val Loss: 1.6346 | Val Acc: 54.5000% Time: 38.64s
-[2025-01-19 23:34:44] Epoch [13/50] Train Loss: 2.1206 | Train Acc: 40.5250% Val Loss: 1.5333 | Val Acc: 57.9000% Time: 38.10s
-[2025-01-19 23:35:23] Epoch [14/50] Train Loss: 2.0498 | Train Acc: 42.7375% Val Loss: 1.5946 | Val Acc: 56.0000% Time: 38.39s
-[2025-01-19 23:36:02] Epoch [15/50] Train Loss: 2.0127 | Train Acc: 43.9625% Val Loss: 1.4897 | Val Acc: 58.4000% Time: 38.56s
-[2025-01-19 23:36:41] Epoch [16/50] Train Loss: 2.0299 | Train Acc: 42.7500% Val Loss: 1.4789 | Val Acc: 59.5000% Time: 38.53s
-[2025-01-19 23:37:19] Epoch [17/50] Train Loss: 2.0051 | Train Acc: 43.7375% Val Loss: 1.4101 | Val Acc: 63.7000% Time: 38.23s
-[2025-01-19 23:37:58] Epoch [18/50] Train Loss: 1.9462 | Train Acc: 45.2875% Val Loss: 1.4906 | Val Acc: 59.2000% Time: 38.44s
-[2025-01-19 23:38:36] Epoch [19/50] Train Loss: 1.9450 | Train Acc: 44.9125% Val Loss: 1.3662 | Val Acc: 62.4000% Time: 38.28s
-[2025-01-19 23:39:15] Epoch [20/50] Train Loss: 1.9086 | Train Acc: 45.8500% Val Loss: 1.3853 | Val Acc: 60.6000% Time: 38.43s
-[2025-01-19 23:39:53] Epoch [21/50] Train Loss: 1.8794 | Train Acc: 46.7875% Val Loss: 1.4078 | Val Acc: 63.1000% Time: 38.13s
-[2025-01-19 23:40:31] Epoch [22/50] Train Loss: 1.8671 | Train Acc: 46.9375% Val Loss: 1.4275 | Val Acc: 60.9000% Time: 38.01s
-[2025-01-19 23:41:09] Epoch [23/50] Train Loss: 1.8588 | Train Acc: 47.5875% Val Loss: 1.3549 | Val Acc: 64.3000% Time: 38.39s
-[2025-01-19 23:41:48] Epoch [24/50] Train Loss: 1.8361 | Train Acc: 47.8000% Val Loss: 1.3481 | Val Acc: 61.6000% Time: 38.79s
-[2025-01-19 23:42:27] Epoch [25/50] Train Loss: 1.8120 | Train Acc: 48.5625% Val Loss: 1.3782 | Val Acc: 61.0000% Time: 38.58s
-[2025-01-19 23:43:06] Epoch [26/50] Train Loss: 1.8267 | Train Acc: 49.2125% Val Loss: 1.3298 | Val Acc: 63.9000% Time: 39.03s
-[2025-01-19 23:43:44] Epoch [27/50] Train Loss: 1.7657 | Train Acc: 49.9125% Val Loss: 1.2591 | Val Acc: 65.6000% Time: 38.07s
-[2025-01-19 23:44:22] Epoch [28/50] Train Loss: 1.7652 | Train Acc: 49.4250% Val Loss: 1.2520 | Val Acc: 65.3000% Time: 37.67s
-[2025-01-19 23:45:00] Epoch [29/50] Train Loss: 1.7660 | Train Acc: 49.6250% Val Loss: 1.3166 | Val Acc: 63.6000% Time: 38.11s
-[2025-01-19 23:45:39] Epoch [30/50] Train Loss: 1.7352 | Train Acc: 50.0875% Val Loss: 1.2297 | Val Acc: 67.7000% Time: 38.55s
-[2025-01-19 23:46:17] Epoch [31/50] Train Loss: 1.7043 | Train Acc: 51.2125% Val Loss: 1.2211 | Val Acc: 65.7000% Time: 38.07s
-[2025-01-19 23:46:55] Epoch [32/50] Train Loss: 1.7057 | Train Acc: 51.4250% Val Loss: 1.2143 | Val Acc: 65.4000% Time: 38.07s
-[2025-01-19 23:47:34] Epoch [33/50] Train Loss: 1.6730 | Train Acc: 51.4750% Val Loss: 1.1751 | Val Acc: 68.9000% Time: 38.89s
-[2025-01-19 23:48:13] Epoch [34/50] Train Loss: 1.7063 | Train Acc: 52.0875% Val Loss: 1.1769 | Val Acc: 67.8000% Time: 38.11s
-[2025-01-19 23:48:51] Epoch [35/50] Train Loss: 1.6642 | Train Acc: 52.5250% Val Loss: 1.1790 | Val Acc: 67.2000% Time: 38.19s
-[2025-01-19 23:49:29] Epoch [36/50] Train Loss: 1.6729 | Train Acc: 51.7500% Val Loss: 1.1288 | Val Acc: 67.4000% Time: 38.33s
-[2025-01-19 23:50:08] Epoch [37/50] Train Loss: 1.6285 | Train Acc: 52.9750% Val Loss: 1.1840 | Val Acc: 68.2000% Time: 38.51s
-[2025-01-19 23:50:47] Epoch [38/50] Train Loss: 1.6361 | Train Acc: 53.2875% Val Loss: 1.1569 | Val Acc: 69.6000% Time: 38.60s
-[2025-01-19 23:51:25] Epoch [39/50] Train Loss: 1.6066 | Train Acc: 54.0625% Val Loss: 1.1447 | Val Acc: 68.8000% Time: 38.00s
-[2025-01-19 23:52:03] Epoch [40/50] Train Loss: 1.6397 | Train Acc: 53.8000% Val Loss: 1.1476 | Val Acc: 69.5000% Time: 38.23s
-[2025-01-19 23:52:41] Epoch [41/50] Train Loss: 1.5957 | Train Acc: 54.8875% Val Loss: 1.1291 | Val Acc: 68.7000% Time: 38.54s
-[2025-01-19 23:53:20] Epoch [42/50] Train Loss: 1.5986 | Train Acc: 54.5000% Val Loss: 1.1597 | Val Acc: 67.8000% Time: 38.32s
-[2025-01-19 23:53:58] Epoch [43/50] Train Loss: 1.5962 | Train Acc: 54.3375% Val Loss: 1.1606 | Val Acc: 68.9000% Time: 38.28s
-[2025-01-19 23:54:36] Epoch [44/50] Train Loss: 1.5871 | Train Acc: 54.9875% Val Loss: 1.1218 | Val Acc: 69.4000% Time: 38.06s
-[2025-01-19 23:55:16] Epoch [45/50] Train Loss: 1.6073 | Train Acc: 54.1500% Val Loss: 1.1083 | Val Acc: 72.0000% Time: 39.12s
-[2025-01-19 23:55:54] Epoch [46/50] Train Loss: 1.5768 | Train Acc: 55.1625% Val Loss: 1.1043 | Val Acc: 69.3000% Time: 38.50s
-[2025-01-19 23:56:33] Epoch [47/50] Train Loss: 1.5627 | Train Acc: 55.3250% Val Loss: 1.0908 | Val Acc: 72.2000% Time: 38.16s
-[2025-01-19 23:57:11] Epoch [48/50] Train Loss: 1.5586 | Train Acc: 55.4750% Val Loss: 1.0874 | Val Acc: 70.5000% Time: 38.92s
-[2025-01-19 23:57:51] Epoch [49/50] Train Loss: 1.5203 | Train Acc: 56.2875% Val Loss: 1.0984 | Val Acc: 70.2000% Time: 39.12s
-[2025-01-19 23:58:30] Epoch [50/50] Train Loss: 1.5387 | Train Acc: 55.7250% Val Loss: 1.1364 | Val Acc: 69.0000% Time: 38.29s
-[2025-01-19 23:58:40] 
-[2025-01-19 23:58:40] Test Set Performance:
-[2025-01-19 23:58:40] Loss: 1.1060 | Accuracy: 70.7000%
-[2025-01-19 23:58:40] Completed experiment: Dataset=./data/File3/arucoChallenging, Model=AlexNet, Batch Size=32, Transformation=rotation_blur_noise
-[2025-01-19 23:58:40] 
-[2025-01-19 23:58:40] Starting experiment: Dataset=./data/File3/arucoChallenging, Model=AlexNet, Batch Size=64, Transformation=none
-[2025-01-19 23:58:41] Image tensor shape: torch.Size([64, 3, 224, 224])
-[2025-01-19 23:58:41] Image value range: [-2.118, 2.640]
-[2025-01-19 23:58:55] Epoch [1/50] Train Loss: 4.1112 | Train Acc: 7.5625% Val Loss: 3.2740 | Val Acc: 18.8000% Time: 13.72s
-[2025-01-19 23:59:10] Epoch [2/50] Train Loss: 2.8822 | Train Acc: 25.6375% Val Loss: 2.3265 | Val Acc: 38.3000% Time: 14.05s
-[2025-01-19 23:59:25] Epoch [3/50] Train Loss: 2.2039 | Train Acc: 39.8000% Val Loss: 1.8825 | Val Acc: 46.5000% Time: 14.81s
-[2025-01-19 23:59:41] Epoch [4/50] Train Loss: 1.7396 | Train Acc: 51.8125% Val Loss: 1.6172 | Val Acc: 54.8000% Time: 15.16s
-[2025-01-19 23:59:56] Epoch [5/50] Train Loss: 1.4381 | Train Acc: 59.1250% Val Loss: 1.4875 | Val Acc: 57.3000% Time: 14.91s
-[2025-01-20 00:00:12] Epoch [6/50] Train Loss: 1.2051 | Train Acc: 64.5125% Val Loss: 1.3279 | Val Acc: 62.2000% Time: 15.19s
-[2025-01-20 00:00:27] Epoch [7/50] Train Loss: 1.0208 | Train Acc: 69.8875% Val Loss: 1.2649 | Val Acc: 64.3000% Time: 15.39s
-[2025-01-20 00:00:43] Epoch [8/50] Train Loss: 0.8778 | Train Acc: 74.3375% Val Loss: 1.1833 | Val Acc: 65.7000% Time: 15.24s
-[2025-01-20 00:00:59] Epoch [9/50] Train Loss: 0.7798 | Train Acc: 76.7375% Val Loss: 1.1872 | Val Acc: 66.8000% Time: 15.46s
-[2025-01-20 00:01:15] Epoch [10/50] Train Loss: 0.6749 | Train Acc: 79.3000% Val Loss: 1.1417 | Val Acc: 68.0000% Time: 15.42s
-[2025-01-20 00:01:31] Epoch [11/50] Train Loss: 0.5957 | Train Acc: 81.5875% Val Loss: 1.1133 | Val Acc: 68.9000% Time: 15.58s
-[2025-01-20 00:01:46] Epoch [12/50] Train Loss: 0.5811 | Train Acc: 82.1500% Val Loss: 1.1841 | Val Acc: 67.3000% Time: 15.50s
-[2025-01-20 00:02:01] Epoch [13/50] Train Loss: 0.5125 | Train Acc: 84.2750% Val Loss: 1.1783 | Val Acc: 67.3000% Time: 15.18s
-[2025-01-20 00:02:17] Epoch [14/50] Train Loss: 0.4624 | Train Acc: 85.6500% Val Loss: 1.0726 | Val Acc: 70.3000% Time: 15.63s
-[2025-01-20 00:02:33] Epoch [15/50] Train Loss: 0.4400 | Train Acc: 86.5000% Val Loss: 1.0561 | Val Acc: 71.9000% Time: 15.24s
-[2025-01-20 00:02:49] Epoch [16/50] Train Loss: 0.3929 | Train Acc: 87.4625% Val Loss: 1.1191 | Val Acc: 70.0000% Time: 15.70s
-[2025-01-20 00:03:04] Epoch [17/50] Train Loss: 0.3646 | Train Acc: 88.7000% Val Loss: 1.1272 | Val Acc: 70.0000% Time: 15.41s
-[2025-01-20 00:03:20] Epoch [18/50] Train Loss: 0.3368 | Train Acc: 89.2875% Val Loss: 1.1049 | Val Acc: 72.5000% Time: 15.49s
-[2025-01-20 00:03:36] Epoch [19/50] Train Loss: 0.3235 | Train Acc: 89.7375% Val Loss: 1.1512 | Val Acc: 69.7000% Time: 15.64s
-[2025-01-20 00:03:51] Epoch [20/50] Train Loss: 0.3349 | Train Acc: 89.7125% Val Loss: 1.0987 | Val Acc: 71.1000% Time: 15.39s
-[2025-01-20 00:04:07] Epoch [21/50] Train Loss: 0.2981 | Train Acc: 90.8250% Val Loss: 1.2080 | Val Acc: 69.1000% Time: 15.83s
-[2025-01-20 00:04:23] Epoch [22/50] Train Loss: 0.2735 | Train Acc: 91.7500% Val Loss: 1.1358 | Val Acc: 71.8000% Time: 15.97s
-[2025-01-20 00:04:39] Epoch [23/50] Train Loss: 0.2675 | Train Acc: 91.5625% Val Loss: 1.1253 | Val Acc: 70.9000% Time: 15.73s
-[2025-01-20 00:04:55] Epoch [24/50] Train Loss: 0.2664 | Train Acc: 91.6750% Val Loss: 1.1466 | Val Acc: 70.4000% Time: 15.92s
-[2025-01-20 00:05:11] Epoch [25/50] Train Loss: 0.2382 | Train Acc: 92.4625% Val Loss: 1.1446 | Val Acc: 71.6000% Time: 16.14s
-[2025-01-20 00:05:27] Epoch [26/50] Train Loss: 0.2439 | Train Acc: 92.4375% Val Loss: 1.2366 | Val Acc: 68.7000% Time: 16.13s
-[2025-01-20 00:05:43] Epoch [27/50] Train Loss: 0.2370 | Train Acc: 92.4625% Val Loss: 1.1627 | Val Acc: 71.9000% Time: 15.68s
-[2025-01-20 00:05:58] Epoch [28/50] Train Loss: 0.2479 | Train Acc: 92.2500% Val Loss: 1.1895 | Val Acc: 68.8000% Time: 15.85s
-[2025-01-20 00:06:14] Epoch [29/50] Train Loss: 0.2218 | Train Acc: 92.9375% Val Loss: 1.2909 | Val Acc: 68.7000% Time: 15.73s
-[2025-01-20 00:06:30] Epoch [30/50] Train Loss: 0.2186 | Train Acc: 93.3500% Val Loss: 1.2846 | Val Acc: 69.1000% Time: 15.91s
-[2025-01-20 00:06:46] Epoch [31/50] Train Loss: 0.2157 | Train Acc: 93.2500% Val Loss: 1.2835 | Val Acc: 69.0000% Time: 15.97s
-[2025-01-20 00:07:02] Epoch [32/50] Train Loss: 0.2308 | Train Acc: 92.8000% Val Loss: 1.1870 | Val Acc: 71.0000% Time: 15.71s
-[2025-01-20 00:07:18] Epoch [33/50] Train Loss: 0.2343 | Train Acc: 92.8250% Val Loss: 1.2337 | Val Acc: 70.5000% Time: 16.36s
-[2025-01-20 00:07:34] Epoch [34/50] Train Loss: 0.2021 | Train Acc: 93.3125% Val Loss: 1.2964 | Val Acc: 71.6000% Time: 16.19s
-[2025-01-20 00:07:51] Epoch [35/50] Train Loss: 0.2049 | Train Acc: 93.2625% Val Loss: 1.3315 | Val Acc: 69.3000% Time: 16.32s
-[2025-01-20 00:08:07] Epoch [36/50] Train Loss: 0.1860 | Train Acc: 94.1125% Val Loss: 1.2690 | Val Acc: 71.6000% Time: 15.91s
-[2025-01-20 00:08:23] Epoch [37/50] Train Loss: 0.1965 | Train Acc: 93.6250% Val Loss: 1.3349 | Val Acc: 69.9000% Time: 16.56s
-[2025-01-20 00:08:39] Epoch [38/50] Train Loss: 0.1914 | Train Acc: 93.8375% Val Loss: 1.3877 | Val Acc: 69.2000% Time: 16.29s
-[2025-01-20 00:08:55] Epoch [39/50] Train Loss: 0.1903 | Train Acc: 93.9375% Val Loss: 1.3208 | Val Acc: 71.7000% Time: 15.94s
-[2025-01-20 00:09:11] Epoch [40/50] Train Loss: 0.1838 | Train Acc: 94.4875% Val Loss: 1.2805 | Val Acc: 71.8000% Time: 15.86s
-[2025-01-20 00:09:28] Epoch [41/50] Train Loss: 0.1972 | Train Acc: 93.7750% Val Loss: 1.3386 | Val Acc: 72.7000% Time: 16.18s
-[2025-01-20 00:09:44] Epoch [42/50] Train Loss: 0.1899 | Train Acc: 94.1250% Val Loss: 1.3073 | Val Acc: 72.1000% Time: 16.20s
-[2025-01-20 00:10:00] Epoch [43/50] Train Loss: 0.1864 | Train Acc: 94.0375% Val Loss: 1.3984 | Val Acc: 70.1000% Time: 15.82s
-[2025-01-20 00:10:16] Epoch [44/50] Train Loss: 0.1809 | Train Acc: 94.4375% Val Loss: 1.3918 | Val Acc: 69.7000% Time: 16.25s
-[2025-01-20 00:10:32] Epoch [45/50] Train Loss: 0.1841 | Train Acc: 94.0500% Val Loss: 1.3870 | Val Acc: 69.7000% Time: 16.09s
-[2025-01-20 00:10:48] Epoch [46/50] Train Loss: 0.1772 | Train Acc: 94.2125% Val Loss: 1.3788 | Val Acc: 71.1000% Time: 16.06s
-[2025-01-20 00:11:04] Epoch [47/50] Train Loss: 0.1823 | Train Acc: 94.5125% Val Loss: 1.3663 | Val Acc: 70.9000% Time: 15.74s
-[2025-01-20 00:11:20] Epoch [48/50] Train Loss: 0.1574 | Train Acc: 94.9125% Val Loss: 1.4190 | Val Acc: 69.1000% Time: 15.95s
-[2025-01-20 00:11:36] Epoch [49/50] Train Loss: 0.1740 | Train Acc: 94.9500% Val Loss: 1.4171 | Val Acc: 71.4000% Time: 15.77s
-[2025-01-20 00:11:52] Epoch [50/50] Train Loss: 0.1774 | Train Acc: 94.8375% Val Loss: 1.4006 | Val Acc: 69.6000% Time: 15.97s
-[2025-01-20 00:12:00] 
-[2025-01-20 00:12:00] Test Set Performance:
-[2025-01-20 00:12:00] Loss: 1.1958 | Accuracy: 72.6000%
-[2025-01-20 00:12:00] Completed experiment: Dataset=./data/File3/arucoChallenging, Model=AlexNet, Batch Size=64, Transformation=none
-[2025-01-20 00:12:00] 
-[2025-01-20 00:12:00] Starting experiment: Dataset=./data/File3/arucoChallenging, Model=AlexNet, Batch Size=64, Transformation=random_rotation
-[2025-01-20 00:12:03] Image tensor shape: torch.Size([64, 3, 224, 224])
-[2025-01-20 00:12:03] Image value range: [-2.118, 2.640]
-[2025-01-20 00:12:33] Epoch [1/50] Train Loss: 4.1988 | Train Acc: 6.1625% Val Loss: 3.4069 | Val Acc: 15.7000% Time: 29.98s
-[2025-01-20 00:13:03] Epoch [2/50] Train Loss: 3.3528 | Train Acc: 16.0875% Val Loss: 2.7986 | Val Acc: 26.7000% Time: 30.02s
-[2025-01-20 00:13:34] Epoch [3/50] Train Loss: 2.9861 | Train Acc: 21.6125% Val Loss: 2.5844 | Val Acc: 29.9000% Time: 29.83s
-[2025-01-20 00:14:04] Epoch [4/50] Train Loss: 2.7728 | Train Acc: 25.9500% Val Loss: 2.3775 | Val Acc: 34.1000% Time: 30.25s
-[2025-01-20 00:14:35] Epoch [5/50] Train Loss: 2.6330 | Train Acc: 28.4375% Val Loss: 2.1736 | Val Acc: 40.1000% Time: 29.83s
-[2025-01-20 00:15:04] Epoch [6/50] Train Loss: 2.4903 | Train Acc: 32.0500% Val Loss: 2.0283 | Val Acc: 46.9000% Time: 29.34s
-[2025-01-20 00:15:34] Epoch [7/50] Train Loss: 2.4240 | Train Acc: 33.6875% Val Loss: 1.9696 | Val Acc: 47.7000% Time: 29.40s
-[2025-01-20 00:16:04] Epoch [8/50] Train Loss: 2.3172 | Train Acc: 36.0375% Val Loss: 1.9188 | Val Acc: 47.5000% Time: 29.40s
-[2025-01-20 00:16:34] Epoch [9/50] Train Loss: 2.2340 | Train Acc: 37.4000% Val Loss: 1.8072 | Val Acc: 50.7000% Time: 29.71s
-[2025-01-20 00:17:04] Epoch [10/50] Train Loss: 2.1736 | Train Acc: 39.0875% Val Loss: 1.7721 | Val Acc: 51.3000% Time: 29.63s
-[2025-01-20 00:17:34] Epoch [11/50] Train Loss: 2.1273 | Train Acc: 40.7375% Val Loss: 1.7338 | Val Acc: 52.1000% Time: 29.81s
-[2025-01-20 00:18:04] Epoch [12/50] Train Loss: 2.0777 | Train Acc: 41.0250% Val Loss: 1.5996 | Val Acc: 58.3000% Time: 29.51s
-[2025-01-20 00:18:33] Epoch [13/50] Train Loss: 2.0542 | Train Acc: 41.8875% Val Loss: 1.5665 | Val Acc: 58.0000% Time: 29.11s
-[2025-01-20 00:19:02] Epoch [14/50] Train Loss: 2.0110 | Train Acc: 43.7125% Val Loss: 1.5710 | Val Acc: 57.0000% Time: 29.21s
-[2025-01-20 00:19:32] Epoch [15/50] Train Loss: 1.9652 | Train Acc: 44.6625% Val Loss: 1.4821 | Val Acc: 58.4000% Time: 29.79s
-[2025-01-20 00:20:02] Epoch [16/50] Train Loss: 1.9254 | Train Acc: 45.9125% Val Loss: 1.4805 | Val Acc: 60.7000% Time: 29.00s
-[2025-01-20 00:20:31] Epoch [17/50] Train Loss: 1.8994 | Train Acc: 45.5375% Val Loss: 1.5609 | Val Acc: 57.5000% Time: 28.88s
-[2025-01-20 00:20:59] Epoch [18/50] Train Loss: 1.8656 | Train Acc: 47.1750% Val Loss: 1.5184 | Val Acc: 57.5000% Time: 28.76s
-[2025-01-20 00:21:29] Epoch [19/50] Train Loss: 1.8331 | Train Acc: 48.0625% Val Loss: 1.4197 | Val Acc: 59.4000% Time: 29.12s
-[2025-01-20 00:21:58] Epoch [20/50] Train Loss: 1.8257 | Train Acc: 48.8625% Val Loss: 1.4414 | Val Acc: 61.4000% Time: 29.38s
-[2025-01-20 00:22:28] Epoch [21/50] Train Loss: 1.7896 | Train Acc: 48.5500% Val Loss: 1.4133 | Val Acc: 61.5000% Time: 29.19s
-[2025-01-20 00:22:57] Epoch [22/50] Train Loss: 1.7952 | Train Acc: 49.2500% Val Loss: 1.3878 | Val Acc: 61.3000% Time: 28.91s
-[2025-01-20 00:23:26] Epoch [23/50] Train Loss: 1.7537 | Train Acc: 50.4500% Val Loss: 1.3764 | Val Acc: 61.5000% Time: 28.91s
-[2025-01-20 00:23:55] Epoch [24/50] Train Loss: 1.7278 | Train Acc: 49.6250% Val Loss: 1.3359 | Val Acc: 64.6000% Time: 28.85s
-[2025-01-20 00:24:24] Epoch [25/50] Train Loss: 1.7234 | Train Acc: 50.8375% Val Loss: 1.3997 | Val Acc: 63.2000% Time: 28.96s
-[2025-01-20 00:24:53] Epoch [26/50] Train Loss: 1.7158 | Train Acc: 51.0875% Val Loss: 1.3511 | Val Acc: 63.6000% Time: 29.22s
-[2025-01-20 00:25:22] Epoch [27/50] Train Loss: 1.6557 | Train Acc: 52.8500% Val Loss: 1.3006 | Val Acc: 64.0000% Time: 28.87s
-[2025-01-20 00:25:51] Epoch [28/50] Train Loss: 1.6446 | Train Acc: 53.1125% Val Loss: 1.3052 | Val Acc: 63.9000% Time: 28.81s
-[2025-01-20 00:26:20] Epoch [29/50] Train Loss: 1.6313 | Train Acc: 53.4500% Val Loss: 1.2884 | Val Acc: 64.4000% Time: 28.97s
-[2025-01-20 00:26:49] Epoch [30/50] Train Loss: 1.5969 | Train Acc: 54.0000% Val Loss: 1.3083 | Val Acc: 64.0000% Time: 28.79s
-[2025-01-20 00:27:18] Epoch [31/50] Train Loss: 1.6152 | Train Acc: 53.9000% Val Loss: 1.2501 | Val Acc: 67.9000% Time: 28.84s
-[2025-01-20 00:27:47] Epoch [32/50] Train Loss: 1.5646 | Train Acc: 54.9125% Val Loss: 1.2772 | Val Acc: 65.6000% Time: 29.08s
-[2025-01-20 00:28:16] Epoch [33/50] Train Loss: 1.5619 | Train Acc: 55.0250% Val Loss: 1.2849 | Val Acc: 65.8000% Time: 29.05s
-[2025-01-20 00:28:45] Epoch [34/50] Train Loss: 1.5504 | Train Acc: 55.1500% Val Loss: 1.2798 | Val Acc: 63.4000% Time: 29.17s
-[2025-01-20 00:29:14] Epoch [35/50] Train Loss: 1.5704 | Train Acc: 55.1750% Val Loss: 1.2577 | Val Acc: 66.5000% Time: 28.82s
-[2025-01-20 00:29:44] Epoch [36/50] Train Loss: 1.5505 | Train Acc: 55.7250% Val Loss: 1.2238 | Val Acc: 68.3000% Time: 29.18s
-[2025-01-20 00:30:13] Epoch [37/50] Train Loss: 1.5512 | Train Acc: 55.5875% Val Loss: 1.2037 | Val Acc: 68.4000% Time: 29.11s
-[2025-01-20 00:30:42] Epoch [38/50] Train Loss: 1.5186 | Train Acc: 56.2875% Val Loss: 1.2247 | Val Acc: 66.2000% Time: 29.21s
-[2025-01-20 00:31:11] Epoch [39/50] Train Loss: 1.5016 | Train Acc: 56.5000% Val Loss: 1.2219 | Val Acc: 66.2000% Time: 28.95s
-[2025-01-20 00:31:40] Epoch [40/50] Train Loss: 1.4931 | Train Acc: 56.7125% Val Loss: 1.1990 | Val Acc: 66.8000% Time: 28.97s
-[2025-01-20 00:32:10] Epoch [41/50] Train Loss: 1.4854 | Train Acc: 56.6375% Val Loss: 1.1484 | Val Acc: 70.4000% Time: 29.10s
-[2025-01-20 00:32:39] Epoch [42/50] Train Loss: 1.4528 | Train Acc: 58.4125% Val Loss: 1.1819 | Val Acc: 67.6000% Time: 29.34s
-[2025-01-20 00:33:08] Epoch [43/50] Train Loss: 1.4787 | Train Acc: 57.5500% Val Loss: 1.2091 | Val Acc: 67.9000% Time: 29.16s
-[2025-01-20 00:33:37] Epoch [44/50] Train Loss: 1.4528 | Train Acc: 58.4750% Val Loss: 1.1512 | Val Acc: 68.9000% Time: 29.09s
-[2025-01-20 00:34:06] Epoch [45/50] Train Loss: 1.4182 | Train Acc: 58.7125% Val Loss: 1.1945 | Val Acc: 69.0000% Time: 28.82s
-[2025-01-20 00:34:36] Epoch [46/50] Train Loss: 1.4439 | Train Acc: 58.7500% Val Loss: 1.1493 | Val Acc: 68.3000% Time: 29.60s
-[2025-01-20 00:35:05] Epoch [47/50] Train Loss: 1.4135 | Train Acc: 58.7500% Val Loss: 1.1103 | Val Acc: 70.4000% Time: 28.80s
-[2025-01-20 00:35:33] Epoch [48/50] Train Loss: 1.4263 | Train Acc: 58.2500% Val Loss: 1.1372 | Val Acc: 70.0000% Time: 28.87s
-[2025-01-20 00:36:03] Epoch [49/50] Train Loss: 1.3744 | Train Acc: 60.5750% Val Loss: 1.1320 | Val Acc: 71.3000% Time: 28.78s
-[2025-01-20 00:36:32] Epoch [50/50] Train Loss: 1.4016 | Train Acc: 59.6500% Val Loss: 1.1562 | Val Acc: 70.0000% Time: 28.71s
-[2025-01-20 00:36:41] 
-[2025-01-20 00:36:41] Test Set Performance:
-[2025-01-20 00:36:41] Loss: 1.1229 | Accuracy: 69.3000%
-[2025-01-20 00:36:41] Completed experiment: Dataset=./data/File3/arucoChallenging, Model=AlexNet, Batch Size=64, Transformation=random_rotation
-[2025-01-20 00:36:41] 
-[2025-01-20 00:36:41] Starting experiment: Dataset=./data/File3/arucoChallenging, Model=AlexNet, Batch Size=64, Transformation=rotation_blur_noise
-[2025-01-20 00:36:44] Image tensor shape: torch.Size([64, 3, 224, 224])
-[2025-01-20 00:36:44] Image value range: [-2.118, 2.640]
-[2025-01-20 00:37:22] Epoch [1/50] Train Loss: 4.2234 | Train Acc: 6.1375% Val Loss: 3.5010 | Val Acc: 12.2000% Time: 37.49s
-[2025-01-20 00:38:00] Epoch [2/50] Train Loss: 3.3231 | Train Acc: 16.0625% Val Loss: 2.8412 | Val Acc: 25.4000% Time: 37.57s
-[2025-01-20 00:38:37] Epoch [3/50] Train Loss: 2.9883 | Train Acc: 21.6125% Val Loss: 2.6089 | Val Acc: 31.2000% Time: 37.30s
-[2025-01-20 00:39:15] Epoch [4/50] Train Loss: 2.7178 | Train Acc: 27.5250% Val Loss: 2.2636 | Val Acc: 37.3000% Time: 37.21s
-[2025-01-20 00:39:53] Epoch [5/50] Train Loss: 2.5941 | Train Acc: 29.7500% Val Loss: 2.2143 | Val Acc: 39.2000% Time: 37.64s
-[2025-01-20 00:40:31] Epoch [6/50] Train Loss: 2.4588 | Train Acc: 32.8875% Val Loss: 2.0148 | Val Acc: 46.0000% Time: 37.39s
-[2025-01-20 00:41:07] Epoch [7/50] Train Loss: 2.3714 | Train Acc: 33.8625% Val Loss: 1.9711 | Val Acc: 45.4000% Time: 36.64s
-[2025-01-20 00:41:45] Epoch [8/50] Train Loss: 2.2618 | Train Acc: 37.1750% Val Loss: 1.8493 | Val Acc: 51.3000% Time: 37.11s
-[2025-01-20 00:42:22] Epoch [9/50] Train Loss: 2.1970 | Train Acc: 38.1625% Val Loss: 1.8058 | Val Acc: 48.7000% Time: 37.28s
-[2025-01-20 00:42:59] Epoch [10/50] Train Loss: 2.1512 | Train Acc: 39.5750% Val Loss: 1.7975 | Val Acc: 50.5000% Time: 37.11s
-[2025-01-20 00:43:37] Epoch [11/50] Train Loss: 2.1112 | Train Acc: 41.4500% Val Loss: 1.6825 | Val Acc: 53.7000% Time: 37.27s
-[2025-01-20 00:44:14] Epoch [12/50] Train Loss: 2.0699 | Train Acc: 41.7500% Val Loss: 1.6459 | Val Acc: 55.0000% Time: 36.80s
-[2025-01-20 00:44:51] Epoch [13/50] Train Loss: 1.9864 | Train Acc: 43.8875% Val Loss: 1.5576 | Val Acc: 56.1000% Time: 37.00s
-[2025-01-20 00:45:29] Epoch [14/50] Train Loss: 1.9573 | Train Acc: 44.1000% Val Loss: 1.5316 | Val Acc: 57.9000% Time: 36.97s
-[2025-01-20 00:46:07] Epoch [15/50] Train Loss: 1.9224 | Train Acc: 45.1875% Val Loss: 1.4123 | Val Acc: 63.8000% Time: 37.50s
-[2025-01-20 00:46:44] Epoch [16/50] Train Loss: 1.9069 | Train Acc: 45.6250% Val Loss: 1.4393 | Val Acc: 62.5000% Time: 37.45s
-[2025-01-20 00:47:21] Epoch [17/50] Train Loss: 1.8594 | Train Acc: 46.2750% Val Loss: 1.4568 | Val Acc: 60.6000% Time: 37.18s
-[2025-01-20 00:47:58] Epoch [18/50] Train Loss: 1.8947 | Train Acc: 46.1125% Val Loss: 1.3974 | Val Acc: 63.0000% Time: 36.95s
-[2025-01-20 00:48:36] Epoch [19/50] Train Loss: 1.8031 | Train Acc: 48.6000% Val Loss: 1.3358 | Val Acc: 65.6000% Time: 37.80s
-[2025-01-20 00:49:14] Epoch [20/50] Train Loss: 1.7841 | Train Acc: 48.7750% Val Loss: 1.3670 | Val Acc: 63.4000% Time: 37.28s
-[2025-01-20 00:49:51] Epoch [21/50] Train Loss: 1.7541 | Train Acc: 50.1125% Val Loss: 1.3493 | Val Acc: 62.8000% Time: 36.89s
-[2025-01-20 00:50:28] Epoch [22/50] Train Loss: 1.7689 | Train Acc: 49.6000% Val Loss: 1.4074 | Val Acc: 61.9000% Time: 37.19s
-[2025-01-20 00:51:05] Epoch [23/50] Train Loss: 1.6899 | Train Acc: 51.5875% Val Loss: 1.3060 | Val Acc: 65.0000% Time: 37.16s
-[2025-01-20 00:51:42] Epoch [24/50] Train Loss: 1.6804 | Train Acc: 51.2375% Val Loss: 1.3001 | Val Acc: 64.0000% Time: 37.36s
-[2025-01-20 00:52:20] Epoch [25/50] Train Loss: 1.7060 | Train Acc: 51.3250% Val Loss: 1.2703 | Val Acc: 66.4000% Time: 37.20s
-[2025-01-20 00:52:57] Epoch [26/50] Train Loss: 1.6418 | Train Acc: 52.3875% Val Loss: 1.2299 | Val Acc: 65.3000% Time: 36.91s
-[2025-01-20 00:53:34] Epoch [27/50] Train Loss: 1.6476 | Train Acc: 53.0500% Val Loss: 1.2661 | Val Acc: 65.6000% Time: 37.05s
-[2025-01-20 00:54:11] Epoch [28/50] Train Loss: 1.6309 | Train Acc: 53.3500% Val Loss: 1.2500 | Val Acc: 65.6000% Time: 37.14s
-[2025-01-20 00:54:49] Epoch [29/50] Train Loss: 1.6171 | Train Acc: 53.7500% Val Loss: 1.2023 | Val Acc: 67.6000% Time: 37.61s
-[2025-01-20 00:55:26] Epoch [30/50] Train Loss: 1.5931 | Train Acc: 54.7125% Val Loss: 1.1957 | Val Acc: 66.4000% Time: 37.08s
-[2025-01-20 00:56:03] Epoch [31/50] Train Loss: 1.5832 | Train Acc: 53.6875% Val Loss: 1.2312 | Val Acc: 67.4000% Time: 36.94s
-[2025-01-20 00:56:40] Epoch [32/50] Train Loss: 1.5820 | Train Acc: 54.3000% Val Loss: 1.1993 | Val Acc: 68.4000% Time: 36.97s
-[2025-01-20 00:57:18] Epoch [33/50] Train Loss: 1.5639 | Train Acc: 55.0000% Val Loss: 1.1903 | Val Acc: 67.1000% Time: 37.30s
-[2025-01-20 00:57:55] Epoch [34/50] Train Loss: 1.5386 | Train Acc: 55.3125% Val Loss: 1.1410 | Val Acc: 69.8000% Time: 36.75s
-[2025-01-20 00:58:32] Epoch [35/50] Train Loss: 1.5290 | Train Acc: 56.0875% Val Loss: 1.1090 | Val Acc: 69.6000% Time: 37.18s
-[2025-01-20 00:59:10] Epoch [36/50] Train Loss: 1.5058 | Train Acc: 56.3000% Val Loss: 1.1510 | Val Acc: 68.7000% Time: 37.49s
-[2025-01-20 00:59:46] Epoch [37/50] Train Loss: 1.5210 | Train Acc: 56.3000% Val Loss: 1.1550 | Val Acc: 69.0000% Time: 36.93s
-[2025-01-20 01:00:24] Epoch [38/50] Train Loss: 1.5307 | Train Acc: 56.1750% Val Loss: 1.1554 | Val Acc: 69.7000% Time: 37.12s
-[2025-01-20 01:01:01] Epoch [39/50] Train Loss: 1.5021 | Train Acc: 56.4375% Val Loss: 1.1272 | Val Acc: 69.3000% Time: 37.55s
-[2025-01-20 01:01:39] Epoch [40/50] Train Loss: 1.4497 | Train Acc: 57.8375% Val Loss: 1.0525 | Val Acc: 71.4000% Time: 37.37s
-[2025-01-20 01:02:16] Epoch [41/50] Train Loss: 1.4563 | Train Acc: 58.1125% Val Loss: 1.0838 | Val Acc: 70.7000% Time: 37.30s
-[2025-01-20 01:02:53] Epoch [42/50] Train Loss: 1.4435 | Train Acc: 58.3375% Val Loss: 1.1561 | Val Acc: 67.2000% Time: 37.03s
-[2025-01-20 01:03:30] Epoch [43/50] Train Loss: 1.4337 | Train Acc: 58.4875% Val Loss: 1.1092 | Val Acc: 69.2000% Time: 37.14s
-[2025-01-20 01:04:07] Epoch [44/50] Train Loss: 1.4396 | Train Acc: 57.9500% Val Loss: 1.0580 | Val Acc: 72.5000% Time: 36.56s
-[2025-01-20 01:04:45] Epoch [45/50] Train Loss: 1.4042 | Train Acc: 59.4250% Val Loss: 1.0948 | Val Acc: 70.9000% Time: 37.23s
-[2025-01-20 01:05:22] Epoch [46/50] Train Loss: 1.3980 | Train Acc: 58.9000% Val Loss: 1.0443 | Val Acc: 71.0000% Time: 37.25s
-[2025-01-20 01:05:59] Epoch [47/50] Train Loss: 1.3864 | Train Acc: 59.8375% Val Loss: 1.0614 | Val Acc: 71.4000% Time: 37.20s
-[2025-01-20 01:06:37] Epoch [48/50] Train Loss: 1.3945 | Train Acc: 59.8875% Val Loss: 1.0127 | Val Acc: 73.5000% Time: 37.70s
-[2025-01-20 01:07:15] Epoch [49/50] Train Loss: 1.3738 | Train Acc: 60.3250% Val Loss: 1.0858 | Val Acc: 70.1000% Time: 37.57s
-[2025-01-20 01:07:52] Epoch [50/50] Train Loss: 1.3975 | Train Acc: 59.6250% Val Loss: 1.0603 | Val Acc: 70.7000% Time: 36.97s
-[2025-01-20 01:08:02] 
-[2025-01-20 01:08:02] Test Set Performance:
-[2025-01-20 01:08:02] Loss: 0.9775 | Accuracy: 73.7000%
-[2025-01-20 01:08:02] Completed experiment: Dataset=./data/File3/arucoChallenging, Model=AlexNet, Batch Size=64, Transformation=rotation_blur_noise
+[2025-01-23 13:14:28] Starting experiment: Dataset=./data/File3/arucoChallenging, Model=AlexNet, Batch Size=32, Transformation=none
+[2025-01-23 13:14:29] Image tensor shape: torch.Size([32, 3, 224, 224])
+[2025-01-23 13:14:29] Image value range: [-2.118, 2.640]
+[2025-01-23 13:14:43] Epoch [1/50] Train Loss: 4.1301 | Train Acc: 4.6000% Val Loss: 3.2552 | Val Acc: 15.3000% Time: 14.21s
+[2025-01-23 13:14:57] Epoch [2/50] Train Loss: 2.5415 | Train Acc: 29.1875% Val Loss: 2.0140 | Val Acc: 41.1000% Time: 12.69s
+[2025-01-23 13:15:10] Epoch [3/50] Train Loss: 1.0918 | Train Acc: 67.1500% Val Loss: 0.6287 | Val Acc: 80.6000% Time: 12.73s
+[2025-01-23 13:15:23] Epoch [4/50] Train Loss: 0.5527 | Train Acc: 83.2500% Val Loss: 0.3412 | Val Acc: 89.2000% Time: 12.82s
+[2025-01-23 13:15:37] Epoch [5/50] Train Loss: 0.3348 | Train Acc: 90.0750% Val Loss: 0.1700 | Val Acc: 94.9000% Time: 12.88s
+[2025-01-23 13:15:50] Epoch [6/50] Train Loss: 0.2636 | Train Acc: 92.2875% Val Loss: 0.1953 | Val Acc: 93.6000% Time: 12.93s
+[2025-01-23 13:16:03] Epoch [7/50] Train Loss: 0.2403 | Train Acc: 92.8875% Val Loss: 0.2184 | Val Acc: 92.4000% Time: 13.07s
+[2025-01-23 13:16:16] Epoch [8/50] Train Loss: 0.2087 | Train Acc: 94.0000% Val Loss: 0.1863 | Val Acc: 95.2000% Time: 13.12s
+[2025-01-23 13:16:30] Epoch [9/50] Train Loss: 0.1175 | Train Acc: 96.4500% Val Loss: 0.1010 | Val Acc: 96.7000% Time: 13.23s
+[2025-01-23 13:16:43] Epoch [10/50] Train Loss: 0.1935 | Train Acc: 94.8000% Val Loss: 0.3166 | Val Acc: 91.5000% Time: 13.29s
+[2025-01-23 13:16:57] Epoch [11/50] Train Loss: 0.1656 | Train Acc: 95.6250% Val Loss: 0.1486 | Val Acc: 95.5000% Time: 13.71s
+[2025-01-23 13:17:11] Epoch [12/50] Train Loss: 0.1115 | Train Acc: 96.9500% Val Loss: 0.2103 | Val Acc: 94.2000% Time: 13.90s
+[2025-01-23 13:17:25] Epoch [13/50] Train Loss: 0.1655 | Train Acc: 95.5375% Val Loss: 0.1902 | Val Acc: 94.8000% Time: 13.88s
+[2025-01-23 13:17:39] Epoch [14/50] Train Loss: 0.1172 | Train Acc: 96.7625% Val Loss: 0.2003 | Val Acc: 94.1000% Time: 14.21s
+[2025-01-23 13:17:53] Epoch [15/50] Train Loss: 0.1202 | Train Acc: 96.6250% Val Loss: 0.1749 | Val Acc: 94.2000% Time: 13.99s
+[2025-01-23 13:18:07] Epoch [16/50] Train Loss: 0.1678 | Train Acc: 95.4250% Val Loss: 0.1960 | Val Acc: 93.8000% Time: 14.15s
+[2025-01-23 13:18:21] Epoch [17/50] Train Loss: 0.0812 | Train Acc: 97.6625% Val Loss: 0.1649 | Val Acc: 96.1000% Time: 13.87s
+[2025-01-23 13:18:35] Epoch [18/50] Train Loss: 0.0902 | Train Acc: 97.7125% Val Loss: 0.0993 | Val Acc: 97.3000% Time: 13.75s
+[2025-01-23 13:18:49] Epoch [19/50] Train Loss: 0.1048 | Train Acc: 97.3750% Val Loss: 0.2127 | Val Acc: 95.6000% Time: 13.71s
+[2025-01-23 13:19:03] Epoch [20/50] Train Loss: 0.0666 | Train Acc: 98.1500% Val Loss: 0.1243 | Val Acc: 96.8000% Time: 14.19s
+[2025-01-23 13:19:18] Epoch [21/50] Train Loss: 0.1326 | Train Acc: 96.8375% Val Loss: 0.1381 | Val Acc: 96.5000% Time: 14.24s
+[2025-01-23 13:19:32] Epoch [22/50] Train Loss: 0.1180 | Train Acc: 97.1625% Val Loss: 0.0720 | Val Acc: 97.7000% Time: 14.25s
+[2025-01-23 13:19:46] Epoch [23/50] Train Loss: 0.1031 | Train Acc: 97.4375% Val Loss: 0.1172 | Val Acc: 97.1000% Time: 14.11s
+[2025-01-23 13:20:01] Epoch [24/50] Train Loss: 0.1155 | Train Acc: 97.3250% Val Loss: 0.1301 | Val Acc: 96.3000% Time: 14.20s
+[2025-01-23 13:20:15] Epoch [25/50] Train Loss: 0.1063 | Train Acc: 97.4625% Val Loss: 0.1751 | Val Acc: 95.7000% Time: 14.37s
+[2025-01-23 13:20:29] Epoch [26/50] Train Loss: 0.0986 | Train Acc: 97.5625% Val Loss: 0.1266 | Val Acc: 97.7000% Time: 14.32s
+[2025-01-23 13:20:44] Epoch [27/50] Train Loss: 0.1032 | Train Acc: 97.7625% Val Loss: 0.1594 | Val Acc: 97.0000% Time: 14.41s
+[2025-01-23 13:20:58] Epoch [28/50] Train Loss: 0.1221 | Train Acc: 97.3000% Val Loss: 0.1048 | Val Acc: 97.5000% Time: 14.52s
+[2025-01-23 13:21:13] Epoch [29/50] Train Loss: 0.0849 | Train Acc: 98.1625% Val Loss: 0.1885 | Val Acc: 95.9000% Time: 14.61s
+[2025-01-23 13:21:27] Epoch [30/50] Train Loss: 0.1219 | Train Acc: 97.4750% Val Loss: 0.2080 | Val Acc: 95.2000% Time: 14.35s
+[2025-01-23 13:21:42] Epoch [31/50] Train Loss: 0.0633 | Train Acc: 98.5375% Val Loss: 0.1178 | Val Acc: 97.0000% Time: 14.64s
+[2025-01-23 13:21:57] Epoch [32/50] Train Loss: 0.0568 | Train Acc: 98.8625% Val Loss: 0.1403 | Val Acc: 97.0000% Time: 14.63s
+[2025-01-23 13:22:11] Epoch [33/50] Train Loss: 0.1165 | Train Acc: 97.3875% Val Loss: 0.1660 | Val Acc: 95.7000% Time: 14.71s
+[2025-01-23 13:22:26] Epoch [34/50] Train Loss: 0.0816 | Train Acc: 98.2125% Val Loss: 0.0966 | Val Acc: 97.4000% Time: 14.76s
+[2025-01-23 13:22:41] Epoch [35/50] Train Loss: 0.0469 | Train Acc: 98.8250% Val Loss: 0.2227 | Val Acc: 95.7000% Time: 15.08s
+[2025-01-23 13:22:57] Epoch [36/50] Train Loss: 0.0995 | Train Acc: 97.9125% Val Loss: 0.1082 | Val Acc: 98.1000% Time: 15.54s
+[2025-01-23 13:23:13] Epoch [37/50] Train Loss: 0.0901 | Train Acc: 97.9750% Val Loss: 0.0901 | Val Acc: 97.5000% Time: 15.60s
+[2025-01-23 13:23:28] Epoch [38/50] Train Loss: 0.0895 | Train Acc: 98.3875% Val Loss: 0.1217 | Val Acc: 97.1000% Time: 15.30s
+[2025-01-23 13:23:43] Epoch [39/50] Train Loss: 0.1022 | Train Acc: 97.8375% Val Loss: 0.1088 | Val Acc: 97.2000% Time: 15.03s
+[2025-01-23 13:23:58] Epoch [40/50] Train Loss: 0.0848 | Train Acc: 98.3250% Val Loss: 0.1312 | Val Acc: 97.5000% Time: 14.88s
+[2025-01-23 13:24:13] Epoch [41/50] Train Loss: 0.0475 | Train Acc: 98.9750% Val Loss: 0.1067 | Val Acc: 96.9000% Time: 14.80s
+[2025-01-23 13:24:29] Epoch [42/50] Train Loss: 0.0517 | Train Acc: 98.8250% Val Loss: 0.0892 | Val Acc: 98.4000% Time: 15.28s
+[2025-01-23 13:24:44] Epoch [43/50] Train Loss: 0.1713 | Train Acc: 96.9750% Val Loss: 0.0959 | Val Acc: 97.7000% Time: 15.27s
+[2025-01-23 13:25:00] Epoch [44/50] Train Loss: 0.0758 | Train Acc: 98.4250% Val Loss: 0.0925 | Val Acc: 97.8000% Time: 15.50s
+[2025-01-23 13:25:15] Epoch [45/50] Train Loss: 0.0680 | Train Acc: 98.5875% Val Loss: 0.0953 | Val Acc: 98.1000% Time: 15.90s
+[2025-01-23 13:25:31] Epoch [46/50] Train Loss: 0.1059 | Train Acc: 98.2375% Val Loss: 0.2209 | Val Acc: 97.0000% Time: 15.60s
+[2025-01-23 13:25:47] Epoch [47/50] Train Loss: 0.0816 | Train Acc: 98.5750% Val Loss: 0.0832 | Val Acc: 98.3000% Time: 15.86s
+[2025-01-23 13:26:03] Epoch [48/50] Train Loss: 0.0849 | Train Acc: 98.5125% Val Loss: 0.1358 | Val Acc: 97.0000% Time: 16.43s
+[2025-01-23 13:26:20] Epoch [49/50] Train Loss: 0.0787 | Train Acc: 98.5250% Val Loss: 0.0656 | Val Acc: 98.5000% Time: 15.91s
+[2025-01-23 13:26:36] Epoch [50/50] Train Loss: 0.0796 | Train Acc: 98.5625% Val Loss: 0.1918 | Val Acc: 96.4000% Time: 15.24s
+[2025-01-23 13:26:43] 
+[2025-01-23 13:26:43] Test Set Performance:
+[2025-01-23 13:26:43] Loss: 0.0580 | Accuracy: 98.8000%
+[2025-01-23 13:26:43] Completed experiment: Dataset=./data/File3/arucoChallenging, Model=AlexNet, Batch Size=32, Transformation=none
+[2025-01-23 13:26:43] 
+[2025-01-23 13:26:43] Starting experiment: Dataset=./data/File3/arucoChallenging, Model=AlexNet, Batch Size=32, Transformation=random_rotation
+[2025-01-23 13:26:45] Image tensor shape: torch.Size([32, 3, 224, 224])
+[2025-01-23 13:26:45] Image value range: [-2.118, 2.640]
+[2025-01-23 13:27:16] Epoch [1/50] Train Loss: 4.4535 | Train Acc: 1.9625% Val Loss: 4.1810 | Val Acc: 3.1000% Time: 30.32s
+[2025-01-23 13:27:47] Epoch [2/50] Train Loss: 3.7174 | Train Acc: 7.5250% Val Loss: 3.0233 | Val Acc: 14.4000% Time: 30.70s
+[2025-01-23 13:28:18] Epoch [3/50] Train Loss: 2.4789 | Train Acc: 26.2625% Val Loss: 1.6918 | Val Acc: 46.1000% Time: 30.31s
+[2025-01-23 13:28:49] Epoch [4/50] Train Loss: 1.5339 | Train Acc: 51.6250% Val Loss: 0.8243 | Val Acc: 75.0000% Time: 30.67s
+[2025-01-23 13:29:21] Epoch [5/50] Train Loss: 1.0053 | Train Acc: 67.0125% Val Loss: 0.5531 | Val Acc: 82.2000% Time: 31.41s
+[2025-01-23 13:29:50] Epoch [6/50] Train Loss: 0.7560 | Train Acc: 75.7750% Val Loss: 0.6236 | Val Acc: 80.3000% Time: 28.99s
+[2025-01-23 13:30:21] Epoch [7/50] Train Loss: 0.5399 | Train Acc: 82.2875% Val Loss: 0.2550 | Val Acc: 91.7000% Time: 30.00s
+[2025-01-23 13:30:50] Epoch [8/50] Train Loss: 0.4706 | Train Acc: 84.9875% Val Loss: 0.2637 | Val Acc: 91.7000% Time: 29.16s
+[2025-01-23 13:31:20] Epoch [9/50] Train Loss: 0.3888 | Train Acc: 87.5125% Val Loss: 0.2641 | Val Acc: 90.7000% Time: 29.73s
+[2025-01-23 13:31:52] Epoch [10/50] Train Loss: 0.3260 | Train Acc: 89.6250% Val Loss: 0.2305 | Val Acc: 93.1000% Time: 31.72s
+[2025-01-23 13:32:24] Epoch [11/50] Train Loss: 0.2959 | Train Acc: 90.6250% Val Loss: 0.1686 | Val Acc: 94.4000% Time: 30.67s
+[2025-01-23 13:32:55] Epoch [12/50] Train Loss: 0.2815 | Train Acc: 91.4000% Val Loss: 0.2884 | Val Acc: 90.7000% Time: 31.45s
+[2025-01-23 13:33:28] Epoch [13/50] Train Loss: 0.2613 | Train Acc: 91.6500% Val Loss: 0.1036 | Val Acc: 97.0000% Time: 31.93s
+[2025-01-23 13:33:58] Epoch [14/50] Train Loss: 0.2394 | Train Acc: 92.9000% Val Loss: 0.1129 | Val Acc: 96.4000% Time: 30.34s
+[2025-01-23 13:34:29] Epoch [15/50] Train Loss: 0.2137 | Train Acc: 93.3500% Val Loss: 0.1198 | Val Acc: 96.3000% Time: 31.14s
+[2025-01-23 13:34:59] Epoch [16/50] Train Loss: 0.2400 | Train Acc: 92.5125% Val Loss: 0.0933 | Val Acc: 96.9000% Time: 30.08s
+[2025-01-23 13:35:31] Epoch [17/50] Train Loss: 0.2239 | Train Acc: 93.5125% Val Loss: 0.0760 | Val Acc: 97.6000% Time: 30.62s
+[2025-01-23 13:36:01] Epoch [18/50] Train Loss: 0.2059 | Train Acc: 93.5250% Val Loss: 0.0926 | Val Acc: 97.0000% Time: 30.40s
+[2025-01-23 13:36:32] Epoch [19/50] Train Loss: 0.1921 | Train Acc: 94.4125% Val Loss: 0.1665 | Val Acc: 94.0000% Time: 30.71s
+[2025-01-23 13:37:03] Epoch [20/50] Train Loss: 0.2444 | Train Acc: 92.9625% Val Loss: 0.1126 | Val Acc: 96.4000% Time: 30.92s
+[2025-01-23 13:37:34] Epoch [21/50] Train Loss: 0.1516 | Train Acc: 95.2875% Val Loss: 0.1229 | Val Acc: 95.9000% Time: 31.57s
+[2025-01-23 13:38:05] Epoch [22/50] Train Loss: 0.1755 | Train Acc: 94.9375% Val Loss: 0.0967 | Val Acc: 97.4000% Time: 31.16s
+[2025-01-23 13:38:37] Epoch [23/50] Train Loss: 0.1433 | Train Acc: 95.6875% Val Loss: 0.1253 | Val Acc: 95.8000% Time: 31.36s
+[2025-01-23 13:39:08] Epoch [24/50] Train Loss: 0.1711 | Train Acc: 95.0375% Val Loss: 0.0860 | Val Acc: 97.3000% Time: 31.74s
+[2025-01-23 13:39:41] Epoch [25/50] Train Loss: 0.1672 | Train Acc: 95.0625% Val Loss: 0.0935 | Val Acc: 97.3000% Time: 32.95s
+[2025-01-23 13:40:12] Epoch [26/50] Train Loss: 0.1828 | Train Acc: 94.6750% Val Loss: 0.1594 | Val Acc: 95.1000% Time: 30.21s
+[2025-01-23 13:40:44] Epoch [27/50] Train Loss: 0.1900 | Train Acc: 94.6625% Val Loss: 0.0581 | Val Acc: 98.4000% Time: 31.56s
+[2025-01-23 13:41:15] Epoch [28/50] Train Loss: 0.1442 | Train Acc: 95.8375% Val Loss: 0.1048 | Val Acc: 97.0000% Time: 31.61s
+[2025-01-23 13:41:47] Epoch [29/50] Train Loss: 0.1228 | Train Acc: 96.2250% Val Loss: 0.0406 | Val Acc: 98.2000% Time: 31.99s
+[2025-01-23 13:42:18] Epoch [30/50] Train Loss: 0.1468 | Train Acc: 95.7250% Val Loss: 0.0744 | Val Acc: 97.9000% Time: 31.02s
+[2025-01-23 13:42:50] Epoch [31/50] Train Loss: 0.1403 | Train Acc: 96.0875% Val Loss: 0.1403 | Val Acc: 95.1000% Time: 31.28s
+[2025-01-23 13:43:20] Epoch [32/50] Train Loss: 0.1498 | Train Acc: 96.0000% Val Loss: 0.0568 | Val Acc: 98.2000% Time: 29.80s
+[2025-01-23 13:43:50] Epoch [33/50] Train Loss: 0.1493 | Train Acc: 95.8625% Val Loss: 0.0591 | Val Acc: 97.6000% Time: 30.17s
+[2025-01-23 13:44:22] Epoch [34/50] Train Loss: 0.1348 | Train Acc: 96.3250% Val Loss: 0.0267 | Val Acc: 99.1000% Time: 30.54s
+[2025-01-23 13:44:22] 
+[2025-01-23 13:44:22] Reached validation accuracy threshold of 96.0% at epoch 34 (9.9e+01%).
+[2025-01-23 13:44:22] Early stopping triggered.
+[2025-01-23 13:44:31] 
+[2025-01-23 13:44:31] Test Set Performance:
+[2025-01-23 13:44:31] Loss: 0.0319 | Accuracy: 98.9000%
+[2025-01-23 13:44:31] Completed experiment: Dataset=./data/File3/arucoChallenging, Model=AlexNet, Batch Size=32, Transformation=random_rotation
+[2025-01-23 13:44:31] 
+[2025-01-23 13:44:31] Starting experiment: Dataset=./data/File3/arucoChallenging, Model=AlexNet, Batch Size=32, Transformation=rotation_blur_noise
+[2025-01-23 13:44:33] Image tensor shape: torch.Size([32, 3, 224, 224])
+[2025-01-23 13:44:33] Image value range: [-2.118, 2.640]
+[2025-01-23 13:45:14] Epoch [1/50] Train Loss: 4.3616 | Train Acc: 2.4250% Val Loss: 3.8880 | Val Acc: 5.1000% Time: 40.94s
+[2025-01-23 13:45:55] Epoch [2/50] Train Loss: 3.3517 | Train Acc: 10.5875% Val Loss: 2.9041 | Val Acc: 18.6000% Time: 40.22s
+[2025-01-23 13:46:35] Epoch [3/50] Train Loss: 2.3013 | Train Acc: 29.8875% Val Loss: 1.5220 | Val Acc: 50.9000% Time: 39.21s
+[2025-01-23 13:47:16] Epoch [4/50] Train Loss: 1.5731 | Train Acc: 49.8875% Val Loss: 1.0683 | Val Acc: 64.6000% Time: 40.09s
+[2025-01-23 13:47:57] Epoch [5/50] Train Loss: 1.0576 | Train Acc: 65.5875% Val Loss: 0.5696 | Val Acc: 80.3000% Time: 41.20s
+[2025-01-23 13:48:40] Epoch [6/50] Train Loss: 0.7574 | Train Acc: 75.1750% Val Loss: 0.4827 | Val Acc: 84.8000% Time: 42.17s
+[2025-01-23 13:49:23] Epoch [7/50] Train Loss: 0.5994 | Train Acc: 80.3375% Val Loss: 0.2517 | Val Acc: 91.9000% Time: 41.84s
+[2025-01-23 13:50:05] Epoch [8/50] Train Loss: 0.4859 | Train Acc: 84.1000% Val Loss: 0.2479 | Val Acc: 92.1000% Time: 41.78s
+[2025-01-23 13:50:49] Epoch [9/50] Train Loss: 0.4183 | Train Acc: 86.5125% Val Loss: 0.1742 | Val Acc: 94.2000% Time: 43.36s
+[2025-01-23 13:51:30] Epoch [10/50] Train Loss: 0.3416 | Train Acc: 89.1125% Val Loss: 0.2364 | Val Acc: 92.5000% Time: 40.60s
+[2025-01-23 13:52:10] Epoch [11/50] Train Loss: 0.2908 | Train Acc: 90.8250% Val Loss: 0.1717 | Val Acc: 93.9000% Time: 40.52s
+[2025-01-23 13:52:52] Epoch [12/50] Train Loss: 0.2996 | Train Acc: 90.7250% Val Loss: 0.1220 | Val Acc: 95.4000% Time: 40.68s
+[2025-01-23 13:53:35] Epoch [13/50] Train Loss: 0.2801 | Train Acc: 91.2000% Val Loss: 0.1436 | Val Acc: 95.7000% Time: 42.64s
+[2025-01-23 13:54:15] Epoch [14/50] Train Loss: 0.2368 | Train Acc: 92.7875% Val Loss: 0.0721 | Val Acc: 98.0000% Time: 39.60s
+[2025-01-23 13:54:55] Epoch [15/50] Train Loss: 0.2201 | Train Acc: 92.8375% Val Loss: 0.2815 | Val Acc: 91.8000% Time: 39.69s
+[2025-01-23 13:55:35] Epoch [16/50] Train Loss: 0.2254 | Train Acc: 93.1000% Val Loss: 0.0909 | Val Acc: 97.1000% Time: 40.09s
+[2025-01-23 13:56:15] Epoch [17/50] Train Loss: 0.2093 | Train Acc: 93.6750% Val Loss: 0.1012 | Val Acc: 96.4000% Time: 39.90s
+[2025-01-23 13:56:56] Epoch [18/50] Train Loss: 0.2150 | Train Acc: 93.5750% Val Loss: 0.0829 | Val Acc: 97.2000% Time: 41.11s
+[2025-01-23 13:57:37] Epoch [19/50] Train Loss: 0.1751 | Train Acc: 94.9125% Val Loss: 0.0635 | Val Acc: 98.1000% Time: 40.86s
+[2025-01-23 13:58:18] Epoch [20/50] Train Loss: 0.2028 | Train Acc: 94.0000% Val Loss: 0.0922 | Val Acc: 96.6000% Time: 40.85s
+[2025-01-23 13:58:59] Epoch [21/50] Train Loss: 0.1799 | Train Acc: 94.6250% Val Loss: 0.0803 | Val Acc: 97.4000% Time: 40.50s
+[2025-01-23 13:59:40] Epoch [22/50] Train Loss: 0.1809 | Train Acc: 94.5000% Val Loss: 0.1761 | Val Acc: 94.0000% Time: 41.42s
+[2025-01-23 14:00:23] Epoch [23/50] Train Loss: 0.1806 | Train Acc: 94.4000% Val Loss: 0.0849 | Val Acc: 96.7000% Time: 42.80s
+[2025-01-23 14:01:04] Epoch [24/50] Train Loss: 0.1638 | Train Acc: 95.2375% Val Loss: 0.0621 | Val Acc: 98.3000% Time: 40.19s
+[2025-01-23 14:01:45] Epoch [25/50] Train Loss: 0.1587 | Train Acc: 95.1125% Val Loss: 0.1013 | Val Acc: 96.7000% Time: 41.31s
+[2025-01-23 14:02:28] Epoch [26/50] Train Loss: 0.2016 | Train Acc: 94.2750% Val Loss: 0.0746 | Val Acc: 97.5000% Time: 42.99s
+[2025-01-23 14:03:11] Epoch [27/50] Train Loss: 0.1661 | Train Acc: 95.3500% Val Loss: 0.0405 | Val Acc: 98.8000% Time: 42.11s
+[2025-01-23 14:03:53] Epoch [28/50] Train Loss: 0.1603 | Train Acc: 95.3625% Val Loss: 0.0470 | Val Acc: 98.6000% Time: 42.23s
+[2025-01-23 14:04:36] Epoch [29/50] Train Loss: 0.1228 | Train Acc: 96.5375% Val Loss: 0.0550 | Val Acc: 98.1000% Time: 42.80s
+[2025-01-23 14:05:14] Epoch [30/50] Train Loss: 0.1645 | Train Acc: 95.3500% Val Loss: 0.0811 | Val Acc: 97.3000% Time: 38.34s
+[2025-01-23 14:05:56] Epoch [31/50] Train Loss: 0.1128 | Train Acc: 96.5875% Val Loss: 0.0483 | Val Acc: 98.3000% Time: 42.15s
+[2025-01-23 14:06:36] Epoch [32/50] Train Loss: 0.1827 | Train Acc: 94.9000% Val Loss: 0.2505 | Val Acc: 95.1000% Time: 39.68s
+[2025-01-23 14:07:14] Epoch [33/50] Train Loss: 0.1384 | Train Acc: 96.4500% Val Loss: 0.0499 | Val Acc: 98.4000% Time: 38.17s
+[2025-01-23 14:07:53] Epoch [34/50] Train Loss: 0.1391 | Train Acc: 96.1500% Val Loss: 0.0496 | Val Acc: 98.8000% Time: 38.90s
+[2025-01-23 14:08:32] Epoch [35/50] Train Loss: 0.1387 | Train Acc: 96.1500% Val Loss: 0.0627 | Val Acc: 98.1000% Time: 39.06s
+[2025-01-23 14:09:11] Epoch [36/50] Train Loss: 0.1370 | Train Acc: 96.6250% Val Loss: 0.1045 | Val Acc: 96.6000% Time: 39.25s
+[2025-01-23 14:09:53] Epoch [37/50] Train Loss: 0.1325 | Train Acc: 96.2625% Val Loss: 0.1137 | Val Acc: 97.2000% Time: 41.36s
+[2025-01-23 14:10:36] Epoch [38/50] Train Loss: 0.1346 | Train Acc: 96.1750% Val Loss: 0.0198 | Val Acc: 99.4000% Time: 41.48s
+[2025-01-23 14:10:36] 
+[2025-01-23 14:10:36] Reached validation accuracy threshold of 96.0% at epoch 38 (9.9e+01%).
+[2025-01-23 14:10:36] Early stopping triggered.
+[2025-01-23 14:10:46] 
+[2025-01-23 14:10:46] Test Set Performance:
+[2025-01-23 14:10:46] Loss: 0.0433 | Accuracy: 98.5000%
+[2025-01-23 14:10:46] Completed experiment: Dataset=./data/File3/arucoChallenging, Model=AlexNet, Batch Size=32, Transformation=rotation_blur_noise
+[2025-01-23 14:10:46] 
+[2025-01-23 14:10:46] Starting experiment: Dataset=./data/File3/arucoChallenging, Model=AlexNet, Batch Size=64, Transformation=none
+[2025-01-23 14:10:47] Image tensor shape: torch.Size([64, 3, 224, 224])
+[2025-01-23 14:10:47] Image value range: [-2.118, 2.640]
+[2025-01-23 14:11:04] Epoch [1/50] Train Loss: 3.9954 | Train Acc: 8.7250% Val Loss: 2.4963 | Val Acc: 32.1000% Time: 16.73s
+[2025-01-23 14:11:20] Epoch [2/50] Train Loss: 1.4049 | Train Acc: 59.1250% Val Loss: 0.6681 | Val Acc: 80.5000% Time: 14.81s
+[2025-01-23 14:11:35] Epoch [3/50] Train Loss: 0.4908 | Train Acc: 85.1000% Val Loss: 0.2508 | Val Acc: 92.1000% Time: 15.10s
+[2025-01-23 14:11:51] Epoch [4/50] Train Loss: 0.2765 | Train Acc: 91.4000% Val Loss: 0.2258 | Val Acc: 93.2000% Time: 15.41s
+[2025-01-23 14:12:07] Epoch [5/50] Train Loss: 0.1776 | Train Acc: 94.4250% Val Loss: 0.1585 | Val Acc: 95.3000% Time: 14.85s
+[2025-01-23 14:12:23] Epoch [6/50] Train Loss: 0.1435 | Train Acc: 95.5375% Val Loss: 0.1277 | Val Acc: 95.7000% Time: 15.36s
+[2025-01-23 14:12:39] Epoch [7/50] Train Loss: 0.1334 | Train Acc: 96.0750% Val Loss: 0.0518 | Val Acc: 98.2000% Time: 15.94s
+[2025-01-23 14:12:55] Epoch [8/50] Train Loss: 0.1271 | Train Acc: 96.2250% Val Loss: 0.1176 | Val Acc: 95.9000% Time: 15.39s
+[2025-01-23 14:13:11] Epoch [9/50] Train Loss: 0.1175 | Train Acc: 96.4750% Val Loss: 0.1020 | Val Acc: 96.8000% Time: 15.72s
+[2025-01-23 14:13:26] Epoch [10/50] Train Loss: 0.0677 | Train Acc: 98.0000% Val Loss: 0.0784 | Val Acc: 97.5000% Time: 15.90s
+[2025-01-23 14:13:42] Epoch [11/50] Train Loss: 0.0825 | Train Acc: 97.6250% Val Loss: 0.1859 | Val Acc: 95.5000% Time: 15.32s
+[2025-01-23 14:13:57] Epoch [12/50] Train Loss: 0.1032 | Train Acc: 96.9875% Val Loss: 0.1549 | Val Acc: 96.5000% Time: 15.49s
+[2025-01-23 14:14:12] Epoch [13/50] Train Loss: 0.1134 | Train Acc: 96.9250% Val Loss: 0.0895 | Val Acc: 97.1000% Time: 15.14s
+[2025-01-23 14:14:28] Epoch [14/50] Train Loss: 0.0797 | Train Acc: 97.6875% Val Loss: 0.1267 | Val Acc: 96.8000% Time: 16.03s
+[2025-01-23 14:14:44] Epoch [15/50] Train Loss: 0.0751 | Train Acc: 98.0625% Val Loss: 0.1003 | Val Acc: 96.9000% Time: 15.36s
+[2025-01-23 14:14:59] Epoch [16/50] Train Loss: 0.0719 | Train Acc: 98.0375% Val Loss: 0.1138 | Val Acc: 97.0000% Time: 15.45s
+[2025-01-23 14:15:16] Epoch [17/50] Train Loss: 0.0624 | Train Acc: 98.3875% Val Loss: 0.0786 | Val Acc: 97.7000% Time: 16.34s
+[2025-01-23 14:15:32] Epoch [18/50] Train Loss: 0.0795 | Train Acc: 97.8750% Val Loss: 0.0771 | Val Acc: 97.3000% Time: 16.80s
+[2025-01-23 14:15:49] Epoch [19/50] Train Loss: 0.0750 | Train Acc: 97.8000% Val Loss: 0.0535 | Val Acc: 98.5000% Time: 15.68s
+[2025-01-23 14:16:04] Epoch [20/50] Train Loss: 0.0602 | Train Acc: 98.5625% Val Loss: 0.0479 | Val Acc: 98.7000% Time: 14.68s
+[2025-01-23 14:16:19] Epoch [21/50] Train Loss: 0.0980 | Train Acc: 97.5875% Val Loss: 0.1149 | Val Acc: 96.4000% Time: 14.83s
+[2025-01-23 14:16:35] Epoch [22/50] Train Loss: 0.0920 | Train Acc: 97.7875% Val Loss: 0.1626 | Val Acc: 95.7000% Time: 15.86s
+[2025-01-23 14:16:50] Epoch [23/50] Train Loss: 0.0758 | Train Acc: 98.1125% Val Loss: 0.0927 | Val Acc: 97.3000% Time: 15.20s
+[2025-01-23 14:17:07] Epoch [24/50] Train Loss: 0.0679 | Train Acc: 98.2500% Val Loss: 0.0277 | Val Acc: 99.2000% Time: 15.36s
+[2025-01-23 14:17:07] 
+[2025-01-23 14:17:07] Reached validation accuracy threshold of 96.0% at epoch 24 (9.9e+01%).
+[2025-01-23 14:17:07] Early stopping triggered.
+[2025-01-23 14:17:15] 
+[2025-01-23 14:17:15] Test Set Performance:
+[2025-01-23 14:17:15] Loss: 0.0446 | Accuracy: 98.6000%
+[2025-01-23 14:17:15] Completed experiment: Dataset=./data/File3/arucoChallenging, Model=AlexNet, Batch Size=64, Transformation=none
+[2025-01-23 14:17:15] 
+[2025-01-23 14:17:15] Starting experiment: Dataset=./data/File3/arucoChallenging, Model=AlexNet, Batch Size=64, Transformation=random_rotation
+[2025-01-23 14:17:19] Image tensor shape: torch.Size([64, 3, 224, 224])
+[2025-01-23 14:17:19] Image value range: [-2.118, 2.640]
+[2025-01-23 14:17:49] Epoch [1/50] Train Loss: 4.1870 | Train Acc: 4.6875% Val Loss: 2.7548 | Val Acc: 22.4000% Time: 30.41s
+[2025-01-23 14:18:22] Epoch [2/50] Train Loss: 1.9434 | Train Acc: 42.2750% Val Loss: 0.7487 | Val Acc: 76.4000% Time: 31.69s
+[2025-01-23 14:18:55] Epoch [3/50] Train Loss: 0.8160 | Train Acc: 74.3500% Val Loss: 0.4079 | Val Acc: 86.9000% Time: 32.24s
+[2025-01-23 14:19:28] Epoch [4/50] Train Loss: 0.4383 | Train Acc: 86.2250% Val Loss: 0.2397 | Val Acc: 91.9000% Time: 32.82s
+[2025-01-23 14:19:59] Epoch [5/50] Train Loss: 0.3323 | Train Acc: 89.6875% Val Loss: 0.1662 | Val Acc: 94.7000% Time: 30.47s
+[2025-01-23 14:20:29] Epoch [6/50] Train Loss: 0.2418 | Train Acc: 92.5375% Val Loss: 0.1187 | Val Acc: 96.1000% Time: 28.93s
+[2025-01-23 14:20:58] Epoch [7/50] Train Loss: 0.2063 | Train Acc: 93.5625% Val Loss: 0.1150 | Val Acc: 96.6000% Time: 28.48s
+[2025-01-23 14:21:27] Epoch [8/50] Train Loss: 0.2306 | Train Acc: 93.1125% Val Loss: 0.0685 | Val Acc: 98.0000% Time: 28.77s
+[2025-01-23 14:21:56] Epoch [9/50] Train Loss: 0.1602 | Train Acc: 94.9625% Val Loss: 0.1052 | Val Acc: 97.0000% Time: 28.41s
+[2025-01-23 14:22:24] Epoch [10/50] Train Loss: 0.1441 | Train Acc: 95.5000% Val Loss: 0.0633 | Val Acc: 97.7000% Time: 28.45s
+[2025-01-23 14:22:53] Epoch [11/50] Train Loss: 0.1493 | Train Acc: 95.7750% Val Loss: 0.0728 | Val Acc: 97.5000% Time: 28.50s
+[2025-01-23 14:23:21] Epoch [12/50] Train Loss: 0.1360 | Train Acc: 95.7500% Val Loss: 0.0869 | Val Acc: 96.2000% Time: 28.71s
+[2025-01-23 14:23:50] Epoch [13/50] Train Loss: 0.1150 | Train Acc: 96.8625% Val Loss: 0.0599 | Val Acc: 98.6000% Time: 28.26s
+[2025-01-23 14:24:19] Epoch [14/50] Train Loss: 0.1014 | Train Acc: 96.9125% Val Loss: 0.0665 | Val Acc: 97.6000% Time: 28.36s
+[2025-01-23 14:24:47] Epoch [15/50] Train Loss: 0.1053 | Train Acc: 96.8750% Val Loss: 0.1050 | Val Acc: 96.7000% Time: 28.55s
+[2025-01-23 14:25:17] Epoch [16/50] Train Loss: 0.1532 | Train Acc: 95.4000% Val Loss: 0.0848 | Val Acc: 97.4000% Time: 29.73s
+[2025-01-23 14:25:46] Epoch [17/50] Train Loss: 0.1182 | Train Acc: 96.6250% Val Loss: 0.0581 | Val Acc: 98.7000% Time: 28.27s
+[2025-01-23 14:26:14] Epoch [18/50] Train Loss: 0.1008 | Train Acc: 97.2250% Val Loss: 0.0811 | Val Acc: 97.0000% Time: 27.97s
+[2025-01-23 14:26:44] Epoch [19/50] Train Loss: 0.0933 | Train Acc: 97.3375% Val Loss: 0.0343 | Val Acc: 99.2000% Time: 28.52s
+[2025-01-23 14:26:44] 
+[2025-01-23 14:26:44] Reached validation accuracy threshold of 96.0% at epoch 19 (9.9e+01%).
+[2025-01-23 14:26:44] Early stopping triggered.
+[2025-01-23 14:26:54] 
+[2025-01-23 14:26:54] Test Set Performance:
+[2025-01-23 14:26:54] Loss: 0.0258 | Accuracy: 99.5000%
+[2025-01-23 14:26:54] Completed experiment: Dataset=./data/File3/arucoChallenging, Model=AlexNet, Batch Size=64, Transformation=random_rotation
+[2025-01-23 14:26:54] 
+[2025-01-23 14:26:54] Starting experiment: Dataset=./data/File3/arucoChallenging, Model=AlexNet, Batch Size=64, Transformation=rotation_blur_noise
+[2025-01-23 14:26:57] Image tensor shape: torch.Size([64, 3, 224, 224])
+[2025-01-23 14:26:57] Image value range: [-2.118, 2.640]
+[2025-01-23 14:27:36] Epoch [1/50] Train Loss: 4.3489 | Train Acc: 2.3250% Val Loss: 3.8276 | Val Acc: 5.8000% Time: 38.02s
+[2025-01-23 14:28:15] Epoch [2/50] Train Loss: 3.1997 | Train Acc: 14.0875% Val Loss: 2.3040 | Val Acc: 29.7000% Time: 38.79s
+[2025-01-23 14:28:56] Epoch [3/50] Train Loss: 1.8236 | Train Acc: 44.8125% Val Loss: 1.0586 | Val Acc: 66.4000% Time: 40.65s
+[2025-01-23 14:29:37] Epoch [4/50] Train Loss: 1.0037 | Train Acc: 68.4375% Val Loss: 0.6235 | Val Acc: 80.9000% Time: 39.85s
+[2025-01-23 14:30:19] Epoch [5/50] Train Loss: 0.6837 | Train Acc: 77.9750% Val Loss: 0.4667 | Val Acc: 84.8000% Time: 41.55s
+[2025-01-23 14:31:01] Epoch [6/50] Train Loss: 0.4452 | Train Acc: 85.5500% Val Loss: 0.3503 | Val Acc: 88.8000% Time: 41.30s
+[2025-01-23 14:31:39] Epoch [7/50] Train Loss: 0.3733 | Train Acc: 88.1375% Val Loss: 0.3828 | Val Acc: 89.0000% Time: 37.10s
+[2025-01-23 14:32:16] Epoch [8/50] Train Loss: 0.3038 | Train Acc: 90.3500% Val Loss: 0.2390 | Val Acc: 91.8000% Time: 37.25s
+[2025-01-23 14:32:54] Epoch [9/50] Train Loss: 0.2597 | Train Acc: 91.6250% Val Loss: 0.1565 | Val Acc: 94.4000% Time: 37.02s
+[2025-01-23 14:33:32] Epoch [10/50] Train Loss: 0.1973 | Train Acc: 93.9250% Val Loss: 0.1150 | Val Acc: 96.7000% Time: 37.33s
+[2025-01-23 14:34:10] Epoch [11/50] Train Loss: 0.2232 | Train Acc: 93.1250% Val Loss: 0.1757 | Val Acc: 94.0000% Time: 38.09s
+[2025-01-23 14:34:47] Epoch [12/50] Train Loss: 0.1998 | Train Acc: 93.9875% Val Loss: 0.0704 | Val Acc: 97.6000% Time: 36.61s
+[2025-01-23 14:35:24] Epoch [13/50] Train Loss: 0.1668 | Train Acc: 94.8625% Val Loss: 0.1231 | Val Acc: 96.5000% Time: 36.62s
+[2025-01-23 14:36:01] Epoch [14/50] Train Loss: 0.1813 | Train Acc: 94.6125% Val Loss: 0.0974 | Val Acc: 96.5000% Time: 36.71s
+[2025-01-23 14:36:37] Epoch [15/50] Train Loss: 0.1605 | Train Acc: 95.0125% Val Loss: 0.0998 | Val Acc: 97.4000% Time: 36.86s
+[2025-01-23 14:37:15] Epoch [16/50] Train Loss: 0.1350 | Train Acc: 95.8625% Val Loss: 0.0675 | Val Acc: 98.0000% Time: 36.60s
+[2025-01-23 14:37:52] Epoch [17/50] Train Loss: 0.1467 | Train Acc: 95.4875% Val Loss: 0.0594 | Val Acc: 98.2000% Time: 36.82s
+[2025-01-23 14:38:29] Epoch [18/50] Train Loss: 0.1841 | Train Acc: 94.6375% Val Loss: 0.0890 | Val Acc: 97.3000% Time: 36.74s
+[2025-01-23 14:39:05] Epoch [19/50] Train Loss: 0.1161 | Train Acc: 96.4625% Val Loss: 0.0873 | Val Acc: 97.5000% Time: 36.71s
+[2025-01-23 14:39:42] Epoch [20/50] Train Loss: 0.1678 | Train Acc: 95.0875% Val Loss: 0.1626 | Val Acc: 95.7000% Time: 36.84s
+[2025-01-23 14:40:21] Epoch [21/50] Train Loss: 0.1200 | Train Acc: 96.3750% Val Loss: 0.0916 | Val Acc: 97.0000% Time: 38.79s
+[2025-01-23 14:40:59] Epoch [22/50] Train Loss: 0.1460 | Train Acc: 95.6250% Val Loss: 0.2023 | Val Acc: 94.3000% Time: 38.31s
+[2025-01-23 14:41:38] Epoch [23/50] Train Loss: 0.1458 | Train Acc: 95.8500% Val Loss: 0.0645 | Val Acc: 98.2000% Time: 38.76s
+[2025-01-23 14:42:20] Epoch [24/50] Train Loss: 0.1281 | Train Acc: 96.6250% Val Loss: 0.0509 | Val Acc: 98.4000% Time: 41.28s
+[2025-01-23 14:43:03] Epoch [25/50] Train Loss: 0.1414 | Train Acc: 96.0500% Val Loss: 0.0653 | Val Acc: 98.3000% Time: 42.83s
+[2025-01-23 14:43:44] Epoch [26/50] Train Loss: 0.1076 | Train Acc: 96.7000% Val Loss: 0.0571 | Val Acc: 98.7000% Time: 40.79s
+[2025-01-23 14:44:29] Epoch [27/50] Train Loss: 0.0724 | Train Acc: 97.8500% Val Loss: 0.0305 | Val Acc: 99.2000% Time: 43.01s
+[2025-01-23 14:44:29] 
+[2025-01-23 14:44:29] Reached validation accuracy threshold of 96.0% at epoch 27 (9.9e+01%).
+[2025-01-23 14:44:29] Early stopping triggered.
+[2025-01-23 14:44:38] 
+[2025-01-23 14:44:38] Test Set Performance:
+[2025-01-23 14:44:38] Loss: 0.0226 | Accuracy: 99.1000%
+[2025-01-23 14:44:38] Completed experiment: Dataset=./data/File3/arucoChallenging, Model=AlexNet, Batch Size=64, Transformation=rotation_blur_noise
 [2025-01-20 01:08:02] 
 [2025-01-20 01:08:02] Starting experiment: Dataset=./data/File3/arucoChallenging, Model=ResNet18, Batch Size=32, Transformation=none
 [2025-01-20 01:08:03] Image tensor shape: torch.Size([32, 3, 224, 224])

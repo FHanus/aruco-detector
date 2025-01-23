@@ -8,7 +8,7 @@ run_classification_experiments:
     EXPERIMENT_DIR: "./results/classification/STP1_classification_tests"
   experiments:
     datasets: ["./data/File3/arucoChallenging"]
-    models: ["AlexNet"] #["MinimalCNN", "AlexNet-clean", "AlexNet", "ResNet18", "GoogLeNet"]
+    models: ["MinimalCNN", "AlexNet-clean", "AlexNet", "ResNet18", "GoogLeNet"]
     batch_sizes: [32, 64]
     transformations: ["none", "random_rotation", "rotation_blur_noise"]
     num_workers: 8
