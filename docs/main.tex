@@ -117,22 +117,22 @@ learning approaches to address these limitations. The key objectives are:
   \label{fig:classification_examples}
 \end{figure}
 
-The classification dataset examples are visible in figure \ref{fig:classification_examples}.
-There are 100 variations/classes of the ArUco marker, and the development of a suitable classification model was broken down into the following steps:
+The classification dataset examples are visible in Figure \ref{fig:classification_examples}. The dataset contains
+100 variations/classes of the ArUco marker. Developing a classification model was divided into the following steps:
 
 \begin{enumerate}
-  \item Create a data plotter for datasets and results
-  \item Develop data augmentation script for prepation of a larger dataset  
-  \item Prepare classification network architectures
-  \item Design experiment to compare classification architectures and parameters
-  \item Train and test the final selected classification model
+  \item Create a data visualisation tool for datasets and results.
+  \item Develop a data augmentation pipeline to expand the dataset.
+  \item Prepare and implement suitable classification architectures.
+  \item Design an experiment to evaluate architectures and parameters.
+  \item Train and test the chosen classification model.
 \end{enumerate}
 
 \subsubsection{Data Preparation}
 
-Firstly, the dataset browser was developed. It was initially used to browse the dataset and understand the data. It shows the image,
-pixel distribution, and basic dataset statistics.
-The idea was that this same tool would later be used to plot the data and results. This can be seen in Figure \ref{fig:data_browser_1}.
+Firstly, a dataset browser was created to understand the data. This tool provided insight into image characteristics,
+pixel distribution, and basic dataset statistics. It was also designed to visualise both datasets and results, as
+demonstrated in Figure \ref{fig:data_browser_1}.
 
 \begin{figure}[h]
   \centering
@@ -141,13 +141,11 @@ The idea was that this same tool would later be used to plot the data and result
   \label{fig:data_browser_1}
 \end{figure}
 
-After analysing the data, the data augmentation script was developed. It was used to create a larger dataset for training.
-Trial and error was used to find the optimal parameters for the data augmentation that would approximate the augmentations performed
-on the data in the dataset provided in File3. With this, the dataset could easily be expanded to include any number of images. The selected
-dataset size was 1000 images per class, each image being 512x512 pixels. The data augmentation pipeline uses the raw, unprocessed images in File1, in this file, 
-there is a total of 100 images, each is a different variation of the ArUco marker. All of the parameters can be changed in the central configuration file.
-
-The methodology of the data augmentation pipeline is shown below:
+A data augmentation pipeline was developed to generate a larger, more robust dataset. Through trial and error, augmentation
+parameters were optimised to mimic the distortions observed in File3. The pipeline expanded the original dataset (100 images
+in File1, each representing a different ArUco marker) to 1,000 images per class at a resolution of 512x512 pixels. Augmentations, 
+including rotation, blurring, and noise, were configured via a central configuration file, allowing for flexibility without 
+needing to modify the codebase. The pipeline workflow is summarised below:
 
 \begin{figure}[H]
   \begin{algorithm}[H]
@@ -176,11 +174,12 @@ The methodology of the data augmentation pipeline is shown below:
 
 \subsubsection{Network Architectures}
 
-Multiple architectures were implemented from the PyTorch library, and tested. To begin with, based on \textcite{pytorch_cifar10}, a simple CNN was implemented to test
-how a simple model would perform. Then AlexNet with and without pre-training was implemented to compare the difference. ResNet18 and GoogLeNet were also implemented
-from the guidance within the documentation \textcite{pytorch_models}. The modularity of the code allows further model adoption quickly.
+Several classification architectures were implemented using PyTorch, starting with a basic convolutional neural network (CNN)
+to establish baseline performance. Following this, pre-trained and non-pre-trained variants of AlexNet were tested. ResNet18
+and GoogLeNet were also evaluated, leveraging PyTorch documentation and guidelines \textcite{pytorch_models}. The codebase was
+modular, allowing seamless integration of new models into experiments.
 
-Out of many more trialed architectures, the following ones functioned straight out of the box and were used in the initial experiment:
+The following architectures were selected for initial experimentation:
 
 \begin{itemize}
     \item \textbf{MinimalCNN}: A lightweight custom architecture with:
@@ -202,20 +201,18 @@ Out of many more trialed architectures, the following ones functioned straight o
 
 \subsubsection{Training Configuration}
 
-Combinations of all of the selected networks, and all of the following additional parameters were trained:
+The experiments tested combinations of the above architectures with varied parameters:
 
 \begin{itemize}
-  \item \textbf{Datasets}: File3 (provided dataset with 100 images in all of the 100 provided classes, strong distortions)
-  \item \textbf{Models}: MinimalCNN, AlexNet-clean, AlexNet, ResNet18, GoogLeNet
-  \item \textbf{Batch Sizes}: 32, 64
-  \item \textbf{Additional Random Training Transformations}: None, random rotations, random rotation blur and noise
+  \item \textbf{Datasets}: File3 (100 images per class, significant distortions).
+  \item \textbf{Models}: MinimalCNN, AlexNet (clean), AlexNet, ResNet18, GoogLeNet.
+  \item \textbf{Batch Sizes}: 32, 64.
+  \item \textbf{Training Transformations}: None, random rotations, and combinations of rotations, blur, and noise.
 \end{itemize}
 
-These experiment parameters form 30 different combinations, thus 30 different networks and sets of results, with training time on a single GPU for total of nearly 8 hours. 
-With a single change in the configuration file, the entire experiment can be changed, the custom dataset (or more datasets) can be used (increasing time per epoch), different
-batch sizes can be used (increasing memory usage beyond the used GPU's capability), different transformations can be used, and different models can be used.
-
-Additional settings and parameters were used:
+This resulted in 30 parameter/model combinations, trained over nearly 8 hours on a single GPU. Customisation required
+minimal effort, achieved via a central configuration file. Adjustments could be made to datasets, batch sizes,
+transformations, and models, although larger batch sizes increased memory demands.
 
 \begin{itemize}
     \item \textbf{Loss Function}: Cross-entropy
@@ -223,10 +220,8 @@ Additional settings and parameters were used:
     \item \textbf{Training Duration}: 50 epochs with early stopping at 96\% training accuracy 
 \end{itemize}
 
-After the experiments were completed, the results were plotted and analysed. The results are shown in the following section, and full results are available in the results directory
-and the appendices.
-
-The final model was trained on the custom dataset, with the following parameters and settings derived based on the best performing combination of the initial experiments:
+Once training was complete, results were plotted and analysed. Full results are detailed in the appendices and results directory.
+The final classification model was trained on the custom dataset with the following optimised parameters:
 
 \begin{itemize}
   \item \textbf{Datasets}: Custom dataset (1000 images per class)
@@ -292,9 +287,9 @@ The model training loop is shown below:
 \caption{Classification training workflow}
 \end{figure}
 
-The final training loop reused most of the code from the above. The only change was that
-after successful training on the custom dataset, the model was loaded again, and the two original
-datasets were used to create test only dataloaders and the model was tested on them individually.
+After training, the model was tested using the original datasets (File2 and File3) to evaluate its
+generalisation capabilities without seeing the originally provided data. Test-only data loaders were
+created for this purpose, and the model performance on these datasets was separately recorded.
 
 \subsection{Classification Results}
 
