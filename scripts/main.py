@@ -38,32 +38,32 @@ def run_script(script_name):
 
 def main():
     # 1. Ensure required folders exist
-    print("Step 1: Checking required folders...")
-    ensure_folders_exist()
+    #print("Step 1: Checking required folders...")
+    #ensure_folders_exist()
 
     # 2. Run dataset augmentation
-    print("\nStep 2: Running dataset augmentation...")
-    run_script('dataset_augmentation.py')
+    #print("\nStep 2: Running dataset augmentation...")
+    #run_script('dataset_augmentation.py')
 
     # 3. Run combine office tags
-    print("\nStep 3: Running combine office tags...")
-    run_script('combine_office_tags.py')
+    #print("\nStep 3: Running combine office tags...")
+    #run_script('combine_office_tags.py')
 
     # 4. Run classification experiments
-    print("\nStep 4: Running classification experiments...")
+    #print("\nStep 4: Running classification experiments...")
     run_script('run_classification_experiments.py')
 
     # 5. Run train classifier
-    print("\nStep 5: Running train classifier...")
-    run_script('train_classifier.py')
+    #print("\nStep 5: Running train classifier...")
+    #run_script('train_classifier.py')
 
     # 6. Run detection experiments
-    print("\nStep 6: Running detection experiments...")
-    run_script('run_detection_experiments.py')
+    #print("\nStep 6: Running detection experiments...")
+    #run_script('run_detection_experiments.py')
 
     # 7. Run train detector
-    print("\nStep 7: Running train detector...")
-    run_script('train_detector.py')
+    #print("\nStep 7: Running train detector...")
+    #run_script('train_detector.py')
 
     print("\nAll steps completed successfully!")
 

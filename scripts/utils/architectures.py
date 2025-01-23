@@ -77,9 +77,8 @@ def get_model(model_name, num_classes=100):
     elif model_name == "AlexNet":
         model = models.alexnet(weights=models.AlexNet_Weights.IMAGENET1K_V1)
         #model.features.requires_grad_ = True  # Freeze feature extraction
-        for param in model.features.parameters():
-            param.requires_grad = False
-
+        # for param in model.features.parameters():
+        #     param.requires_grad = False
         model.classifier[6] = torch.nn.Linear(model.classifier[6].in_features, num_classes)
         return model
     elif model_name == "ResNet18":
