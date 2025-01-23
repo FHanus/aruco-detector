@@ -105,3 +105,4 @@ combine_office_tags:
     crop_size: 1000
     final_size: [224, 224]
     tag_size: [34, 34]
+    num_output_images: 10000

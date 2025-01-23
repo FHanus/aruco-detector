@@ -228,7 +228,7 @@ def save_detection_predictions(file_paths, pred_boxes, true_boxes, metrics, save
         f.write(f"Detection Analysis: {save_path}\n")
         f.write(f"Total samples: {len(results_df)}\n")
         f.write(f"Mean IoU: {metrics['mean_iou']:.4f}\n")
-        f.write(f"Mean MAE: {metrics['median_iou']:.4f}\n")
+        f.write(f"MAE: {metrics['mean_mae']:.4f}\n")
         f.write(f"Accuracy: {metrics['average_precision']:.4f}\n")
     
     results_df.to_csv(save_path, mode='a', index=False)

@@ -51,43 +51,50 @@ def combine_images():
     office_images = [f for f in os.listdir(OFFICE_DIR) if f.endswith(('.png', '.jpg', '.jpeg'))]
     aruco_classes = [d for d in os.listdir(ARUCO_DIR) if os.path.isdir(os.path.join(ARUCO_DIR, d))]
     
+    num_images = config['image_processing']['num_output_images']
+    images_per_office = num_images // len(office_images) + 1
+    
     # Process each office image with fancy progress bar
-    for office_idx, office_file in enumerate(tqdm(office_images, desc="Processing office images")):
+    for office_idx, office_file in enumerate(tqdm(office_images, desc="Processing office images")):            
         office_path = os.path.join(OFFICE_DIR, office_file)
         office_img = cv2.imread(office_path)
         
         office_img = process_office_image(office_img)
-        
-        for class_name in aruco_classes:
-            class_dir = os.path.join(ARUCO_DIR, class_name)
-            tag_files = [f for f in os.listdir(class_dir) if f.endswith(('.png', '.jpg', '.jpeg'))]
-            
-            # If dataset_augmentation wasn't run yet
-            if not tag_files:
-                continue
+           
+        for i in range(images_per_office):              
+            for class_name in aruco_classes:
+                if len(csv_data) >= num_images:
+                    break
                 
-            # Random tag
-            tag_file = np.random.choice(tag_files)
-            tag_path = os.path.join(class_dir, tag_file)
-            tag_img = cv2.imread(tag_path)
-            
-            # Just like Files 4 and 5
-            tag_img = cv2.resize(tag_img, tuple(config['image_processing']['tag_size']))
-            
-            x, y = get_valid_position(office_img.shape)
-            output_img = office_img.copy()
-            tag_size = config['image_processing']['tag_size']
-            output_img[y:y+tag_size[1], x:x+tag_size[0]] = tag_img
-            
-            output_filename = f"office{office_idx:04d}_class{class_name}_{tag_file}"
-            output_path = os.path.join(OUTPUT_DIR, output_filename)
-            cv2.imwrite(output_path, output_img)
-            
-            csv_data.append({
-                'fileNames': os.path.join("combinedAugmented",output_filename),
-                'bBox': [x, y, tag_size[0], tag_size[1]],  # [x, y, width, height]
-                'class': class_name
-            })
+                class_dir = os.path.join(ARUCO_DIR, class_name)
+                tag_files = [f for f in os.listdir(class_dir) if f.endswith(('.png', '.jpg', '.jpeg'))]
+                
+                # If dataset_augmentation wasn't run yet
+                if not tag_files:
+                    continue
+                    
+                # Random tag
+                tag_file = np.random.choice(tag_files)
+                tag_path = os.path.join(class_dir, tag_file)
+                tag_img = cv2.imread(tag_path)
+                
+                # Just like Files 4 and 5
+                tag_img = cv2.resize(tag_img, tuple(config['image_processing']['tag_size']))
+                
+                x, y = get_valid_position(office_img.shape)
+                output_img = office_img.copy()
+                tag_size = config['image_processing']['tag_size']
+                output_img[y:y+tag_size[1], x:x+tag_size[0]] = tag_img
+                
+                output_filename = f"office{office_idx:04d}_class{class_name}_{tag_file}"
+                output_path = os.path.join(OUTPUT_DIR, output_filename)
+                cv2.imwrite(output_path, output_img)
+                
+                csv_data.append({
+                    'fileNames': os.path.join("combinedAugmented",output_filename),
+                    'bBox': [x, y, tag_size[0], tag_size[1]],  # [x, y, width, height]
+                    'class': class_name
+                })
     
     df = pd.DataFrame(csv_data)
     df.to_csv(os.path.join(OUTPUT_DIR, 'BBData.csv'), index=False)
