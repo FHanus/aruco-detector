@@ -598,14 +598,13 @@ used for evaluation.
 
 \subsection{Detection Results}
 
-The detection experiments were conducted in two phases, similar to classification. First, multiple architectures were tested on File5
-dataset to determine the optimal approach. Then, the best performing configuration was trained on a custom dataset and
-evaluated against both File4 and File5.
+Detection experiments were conducted in two phases, mirroring the classification procedure. Multiple architectures were tested on File5
+to determine the optimal approach. The best-performing configuration was then trained on a custom dataset and evaluated against both File4 and File5.
 
 \subsubsection{Initial Experiments}
 
-The experiments encompassed the selected architectures with batch size of 4 (due to GPU memory constraints). Each
-configuration was tested on 1000 samples from File5, with the following results:
+The selected architectures were used with a batch size of four due to GPU memory constraints. Each configuration was tested on 1000 samples
+from File5, yielding the following results:
 
 \begin{itemize}
   \item \textbf{FasterRCNN-ResNet50}:
@@ -624,7 +623,7 @@ configuration was tested on 1000 samples from File5, with the following results:
     \end{itemize}
 \end{itemize}
 
-The experiment results are shown in the figure \ref{fig:training_progress_detection}.
+The results are shown in Figure \ref{fig:training_progress_detection}.
 
 \begin{figure}[h]
     \centering
@@ -652,17 +651,15 @@ The experiment results are shown in the figure \ref{fig:training_progress_detect
     \label{fig:training_progress_detection}
 \end{figure}
 
-It can be seen that the RetinaNet model performed the best, converged the fastest, with the highest IoU and lowest loss.
+The RetinaNet model was observed to perform the best and converge the fastest, exhibiting the highest IoU and lowest loss.
 
 \subsubsection{Final Model Performance}
 
-Based on the previous findings, RetinaNet with ResNet50 backbone was selected for the final model due to its superior performance
-across different metrics. The model was trained on FileCustom2, a synthetic dataset created to approximate the conditions
-in Files 4 and 5. The training dataset was selected to consist of 10,000 images, but it can be changed with a single change in the configuration file.
-This was done to save time and resources, as the training dataset was already large enough to train the model
-and both the augmentation and each epoch of training took a long time to complete.
+RetinaNet with a ResNet50 backbone was selected as the final model due to its superior performance. It was trained on FileCustom2, a 
+synthetic dataset approximating conditions in Files 4 and 5. A set of 10,000 images was used, but this is adjustable in the configuration 
+file. This was done to conserve time and resources, as the dataset was large enough, and augmentation plus each epoch were lengthy.
 
-The final evaluation yielded these results:
+The final evaluation produced these results:
 
 \begin{itemize}
     \item \textbf{Training Evaluation} (1,000 testing samples):
@@ -679,11 +676,9 @@ The final evaluation yielded these results:
         \end{itemize}
 \end{itemize}
 
-These results demonstrate the model's strong performance across different distortion conditions.
-The perfect detection rate (IoUs over 50\%) on File4 indicates excellent handling of weak distortions,
-while the very good performance on File5 (failing to detect only 3 out of 100 markers) shows good resilience
-to more challenging conditions. As seen in figure \ref{fig:final_detection_examples}, some of the markers were not detected, which is a problem that
-needs to be addressed in the future.
+Strong performance was demonstrated across various distortion conditions. A perfect detection rate on File4 (IoUs over 50\%) indicated 
+effective handling of weak distortions. On File5, only three out of 100 markers were missed, showing resilience to more demanding conditions. 
+As seen in Figure \ref{fig:final_detection_examples}, some markers were still undetected, requiring future improvements.
 
 \begin{figure}[h]
   \centering
@@ -720,34 +715,37 @@ needs to be addressed in the future.
 
 \section{Conclusion}
 
-This work explored deep learning approaches for ArUco marker detection and classification under challenging conditions.
-The investigation yielded several key findings:
+Deep learning approaches for ArUco marker detection and classification under challenging conditions were explored. Several key findings emerged:
 
 \begin{itemize}
-    \item \textbf{Classification Performance}: GoogLeNet achieved near-perfect accuracy (100\%) on weakly distorted markers
-    and maintained robust performance (97.48\%) even under severe distortions, demonstrating the effectiveness of transfer learning for this task.
-    The custom model performed better during longer training, this was proved in the commit d9fd8ad.
+    \item \textbf{Classification Performance}: GoogLeNet was observed to achieve near-perfect accuracy (100\%) on weakly distorted markers
+    and to maintain robust performance (97.48\%) even under severe distortions, thereby confirming that transfer learning is effective.
+    The custom model was found to perform better after extended training, as verified individually in the GitHub commit d9fd8ad.
     
-    \item \textbf{Detection Robustness}: RetinaNet with ResNet50 backbone showed excellent performance in locating markers,
-    achieving 89.00\% IoU on basic office scenarios and maintaining 85.64\% IoU under challenging conditions,
-    with occasional (0,0) position predictions pointing to the need for longer training.
+    \item \textbf{Detection Performance}: Excellent performance in localising markers was shown by RetinaNet with ResNet50 backbone, achieving
+    89.00\% IoU in basic office scenarios and 85.64\% IoU under challenging conditions. Occasional (0,0) predictions highlighted the need 
+    for longer training.
     
     \item \textbf{Architecture Insights}: Pre-trained models consistently outperformed custom architectures.
     
-    \item \textbf{Technical Limitations}: GPU memory constraints limited batch sizes and training duration, with detection model epochs
-    taking 20 minutes each. With more compute, the batch size should be increased and the dataset size expanded using the configuration file
-    in order to yield better detection results.
+    \item \textbf{Technical Limitations}: GPU memory constraints restricted batch sizes and training duration, with each detection-model
+    epoch requiring 20 minutes. With greater compute, the batch size should be increased and the dataset expanded through the configuration
+    file to improve detection outcomes.
 
-    \item \textbf{Augmentation Mistake}: Additional data augmentation during training on already pre-augmented images proved counterproductive.
+    \item \textbf{Augmentation Mistake}: Additional data augmentation on pre-augmented images proved counterproductive.
 \end{itemize}
 
-Future improvements that could generate very interesting results could include:
+Future improvements that could yield interesting results include: 
+
 \begin{itemize}
-    \item Expanding synthetic dataset generation to include perspective transformations, partial occlusion, and other distortions
+    \item Expanding synthetic dataset generation with perspective transformations, partial occlusion, and other distortions
     \item Implementing larger batch sizes and extended training
-    \item Exploring real-world data collection to validate synthetic training results
-    \item Testing more pre-trained detection models with sufficient computational resources
+    \item Collecting real-world data to validate synthetic training results
+    \item Testing more pre-trained detection models given sufficient computational resources
 \end{itemize}
+
+These outcomes illustrate the viability of deep learning for marker detection, although systematic improvements, resource expansion,
+and thorough validation remain highly essential.
 
 \printbibsection
 
@@ -759,44 +757,46 @@ Future improvements that could generate very interesting results could include:
 
 The GitHub repository for this project can be found at the following link: \url{https://github.com/FHanus/aruco-detector}.
 
-The repository contains the following key components:
+The repository contains the following key components that should be viewed in order to more thoroughly understand the project:
 
 \begin{enumerate}
-    \item \textbf{Classification, per trained model:}
+    \item \textbf{Results, classification, per trained model:}
     \begin{itemize}
-        \item Per class accuracy plot
-        \item Per class confusion matrix
-        \item Per class precision plot
-        \item Per class recall plot
-        \item Training progress plot
-        \item CSV with evaluation predictions and data
+        \item Per class accuracy plots
+        \item Per class confusion matrices
+        \item Per class precision plots
+        \item Per class recall plots
+        \item Training progress plots
+        \item CSVs with evaluation predictions and data
     \end{itemize}
 
-    \item \textbf{Classification, per trained model:}
+    \item \textbf{Results, detection, per trained model:}
     \begin{itemize}
-        \item IoU distribution plot
-        \item Training progress plot
-        \item CSV with evaluation predictions and data
+        \item IoU distribution plots
+        \item Training progress plots
+        \item CSVs with evaluation predictions and data
     \end{itemize}
 
-    \item \textbf{Datasets:}
+    \item \textbf{Data:}
     \begin{itemize}
         \item Original datasets (File1-File5)
         \item Custom synthetic datasets (Custom1-Custom2)
     \end{itemize}
 
-    \item \textbf{Documentation:}
+    \item \textbf{Docs:}
     \begin{itemize}
         \item This LaTeX paper
-        \item README.md
+        \item README explaining the repository more thoroughly
+        \item Training log file
     \end{itemize}
 
-    \item \textbf{Infrastructure:}
+    \item \textbf{Scripts:}
     \begin{itemize}
         \item All of the code
     \end{itemize}
 \end{enumerate}
 
-This repository represents a complete research project on ArUco marker detection and classification, including code implementation, experimental results, and detailed documentation.
+This repository represents a complete research project on ArUco marker detection and classification, including code
+implementation, experimental results, and detailed documentation.
 
 \end{document}
