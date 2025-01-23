@@ -84,7 +84,7 @@ class ArucoDetectionDataset(Dataset):
         if self.annotations_file is None:
             raise FileNotFoundError(f"No CSV file found: {root_dir}")
         
-        # Parse image paths and bounding boxes (ugly but tested)
+        # Parse image paths and bounding boxes (hard to read but it works)
         self.samples = [
             (
                 os.path.join(root_dir, row['fileNames']),

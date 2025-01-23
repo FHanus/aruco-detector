@@ -47,7 +47,7 @@ def main():
 
     # 3. Run combine office tags
     print("\nStep 3: Running combine office tags...")
-    #run_script('combine_office_tags.py')
+    run_script('combine_office_tags.py')
 
     # 4. Run classification experiments
     print("\nStep 4: Running classification experiments...")

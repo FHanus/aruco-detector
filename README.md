@@ -304,6 +304,12 @@ The final test was performed on a 1000 samples:
 
 | Model Config | Details | Metrics |
 |-------------|---------|---------|
+| Minimal CNN<br>batch size: 32<br>no transforms | Incorrect predictions: 952 | - Accuracy: 4.80%<br>- Mean precision: 2.60%<br>- Mean recall: 6.07%<br>- Mean F1-score: 2.71% |
+| Minimal CNN<br>batch size: 32<br>random rotations | Incorrect predictions: 950 | - Accuracy: 5.00%<br>- Mean precision: 4.11%<br>- Mean recall: 5.53%<br>- Mean F1-score: 3.11% |
+| Minimal CNN<br>batch size: 32<br>random rotations, blur and noise | Incorrect predictions: 948 | - Accuracy: 5.20%<br>- Mean precision: 6.92%<br>- Mean recall: 6.85%<br>- Mean F1-score: 3.62% |
+| Minimal CNN<br>batch size: 64<br>no transforms | Incorrect predictions: 957 | - Accuracy: 4.30%<br>- Mean precision: 1.86%<br>- Mean recall: 4.33%<br>- Mean F1-score: 2.05% |
+| Minimal CNN<br>batch size: 64<br>random rotations | Incorrect predictions: 954 | - Accuracy: 4.60%<br>- Mean precision: 3.00%<br>- Mean recall: 5.63%<br>- Mean F1-score: 3.17% |
+| Minimal CNN<br>batch size: 64<br>random rotations, blur and noise | Incorrect predictions: 961 | - Accuracy: 3.90%<br>- Mean precision: 2.32%<br>- Mean recall: 4.61%<br>- Mean F1-score: 2.30% |
 | AlexNet (clean)<br>batch size: 32<br>no transforms | Incorrect predictions: 40 | - Accuracy: 96.00%<br>- Mean precision: 95.70%<br>- Mean recall: 96.36%<br>- Mean F1-score: 95.74% |
 | AlexNet (clean)<br>batch size: 32<br>random rotations | Incorrect predictions: 29 | - Accuracy: 97.10%<br>- Mean precision: 97.24%<br>- Mean recall: 97.11%<br>- Mean F1-score: 96.99% |
 | AlexNet (clean)<br>batch size: 32<br>random rotations, blur and noise | Incorrect predictions: 29 | - Accuracy: 97.10%<br>- Mean precision: 97.24%<br>- Mean recall: 97.11%<br>- Mean F1-score: 96.99% |

@@ -114,7 +114,7 @@ def plot_detection_metrics(pred_boxes, true_boxes, save_path):
     mean_iou = ious.mean().item()
     median_iou = ious.median().item()
     
-    # Calculate detection accuracy (IoU threshold 0.5)
+    # Calculate detection accuracy (IoU threshold 50% to know we are in the correct spot)
     accuracy = (ious > 0.5).float().mean().item()
     
     # Plot IoU distribution

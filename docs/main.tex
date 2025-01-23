@@ -13,10 +13,10 @@
 
 \author{
 \IEEEauthorblockN{
-    Filip Hanuš\IEEEauthorrefmark{1},
+    Filip Hanuš,
 }
 \IEEEauthorblockA{
-    \IEEEauthorrefmark{1}School of Engineering, College of Art, Technology and Environment,\\
+    School of Engineering, College of Art, Technology and Environment,\\
     University of the West of England, Bristol, UK\\
     Email: filip2.hanus@uwe.ac.uk}
 }
@@ -68,20 +68,54 @@ they need to be tracked and/or recognised, which creates the need for robust det
 
 As \textcite{FiducialMarkerNoisy}, \textcite{ROMERORAMIREZ2021104094}, and others point out, traditional detection methods perform well under controlled 
 conditions, but less reliably with real-world challenges, such as rotations, blur and noise. Building on that, this work explores deep learning 
-approaches to enhance both detection and classification of ArUco markers under varying conditions. 
-
-This project solves the following challenges:
+approaches to solve the following challenges:
 
 \begin{enumerate}
-  \item Classification of slightly and strongly blurred, noisy and/or rotated ArUco markers,
-  \item Detection of slightly and strongly blurred, noisy or rotated ArUco markers in office photos
+  \item Recognising which variation of the marker is present: Classifying ArUco markers under varying blur, noise, and rotation conditions. 
+  \item Tracking marker's position in the image: Detecting ArUco markers under varying blur, noise, and rotation conditions. 
 \end{enumerate}
 
 \section{Classification}
 
 \subsection{Classification Method}
 
-The classification problem was broken down into the following steps:
+\begin{figure}[h]
+  \centering
+  \begin{subfigure}[b]{0.2\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{images/aruco-file3-classification-1.png}
+      \caption{Class 0 (out of 100) marker example 1}
+      \label{fig:class_ex1}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.2\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{images/aruco-file3-classification-2.png}
+      \caption{Class 0 (out of 100) marker example 2}
+      \label{fig:class_ex2}
+  \end{subfigure}
+  
+  \vspace{0.5cm}
+  
+  \begin{subfigure}[b]{0.2\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{images/aruco-file3-classification-3.png}
+      \caption{Class 1 (out of 100) marker example 1}
+      \label{fig:class_ex3}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.2\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{images/aruco-file3-classification-4.png}
+      \caption{Class 1 (out of 100) marker example 2}
+      \label{fig:class_ex4}
+  \end{subfigure}
+  \caption{Examples of ArUco marker classification under different conditions (from the provided dataset)}
+  \label{fig:classification_examples}
+\end{figure}
+
+The classification dataset examples are visible in figure \ref{fig:classification_examples}.
+There are 100 variations/classes of the ArUco marker, and the development of a suitable classification model was broken down into the following steps:
 
 \begin{enumerate}
   \item Create a data plotter for datasets and results
@@ -93,110 +127,256 @@ The classification problem was broken down into the following steps:
 
 \subsubsection{Data Preparation}
 
-Firstly, the dataset browser was developed. It allows for easy browsing. It was initially used to browse the dataset and to get an idea of the data. 
+Firstly, the dataset browser was developed. It was initially used to browse the dataset and understand the data. It shows the image, pixel distribution, and basic dataset statistics.
 The idea was that this same tool would later be used to plot the data and results. This can be seen in Figure \ref{fig:data_browser_1}.
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.5\textwidth]{images/aruco-dataset-browser-1.png}
+  \includegraphics[width=0.45\textwidth]{images/aruco-dataset-browser-1.png}
   \caption{Dataset browser used with the File2 dataset}
   \label{fig:data_browser_1}
 \end{figure}
 
-The training pipeline incorporated several data augmentation techniques:
+After analysing the data, the data augmentation script was developed. It was used to create a larger dataset for training.
+Trial and error was used to find the optimal parameters for the data augmentation that would approximate the augmentations performed
+on the data in the dataset provided in File3. With this, the dataset could easily be expanded to include any number of images. The selected
+dataset size was 1000 images per class, each image being 512x512 pixels. The data augmentation pipeline uses the raw, unprocessed images in File1, in this file, 
+there is a total of 100 images, each is a different variation of the ArUco marker. All of the parameters can be changed in the central configuration file.
 
-\begin{itemize}
-    \item \textbf{Geometric Transformations}:
-    \begin{itemize}
-        \item Rotations: 0-360° range
-        \item Scale variations: 50-100\% of original size
-    \end{itemize}
-    
-    \item \textbf{Image Quality Variations}:
-    \begin{itemize}
-        \item Gaussian blur ($\sigma$ = 0-14)
-        \item Random noise (up to 10\% of pixels)
-    \end{itemize}
-\end{itemize}
+The methodology of the data augmentation pipeline is shown below:
 
-
-The methodology can be broken down into several key components:
+\begin{figure}[H]
+  \begin{algorithm}[H]
+  \caption{Data Augmentation Pipeline}
+  \begin{algorithmic}[1]
+  \STATE List all of the images in the File1 dataset
+  \WHILE{size of augmentations list $<$ target dataset size}
+      \STATE Select random rotation, between 0 and 360 degrees
+      \STATE Select random scaling, between 50\% and 100\% of original size
+      \STATE Select random blur, between 0 and 14 sigma
+      \STATE Select random noise, between 0\% and 10\% of pixels
+      \STATE Append the set of augmentations to the list
+    \ENDWHILE
+  \FOR{each image in File1}
+      \STATE Create folder named after the image's number (0-99)
+      \STATE Read the raw image
+      \FOR{each set in the list of augmentations}
+        \STATE Apply the augmentations to the image
+        \STATE Save the augmented image to the new folder
+      \ENDFOR
+    \ENDFOR
+  \end{algorithmic}
+  \end{algorithm}
+  \caption{Classification training workflow}
+  \end{figure}
 
 \subsubsection{Network Architectures}
 
-Multiple architectures were evaluated to find the optimal balance between performance and computational efficiency:
+Multiple architectures were implemented from the PyTorch library, and tested. To begin with, based on \textcite{pytorch_cifar10}, a simple CNN was implemented to test
+how a simple model would perform. Then AlexNet with and without pre-training was implemented to compare the difference. ResNet18 and GoogLeNet were also implemented
+from the guidance within the documentation \textcite{pytorch_models}. The modularity of the code allows further model adoption quickly.
+
+Out of many more trialed architectures, the following ones functioned straight out of the box and were used in the initial experiment:
 
 \begin{itemize}
     \item \textbf{MinimalCNN}: A lightweight custom architecture with:
     \begin{itemize}
         \item Three convolutional blocks (32$\rightarrow$64$\rightarrow$128 features)
-        \item Batch normalization and dropout for regularization
+        \item Batch normalisation and dropout for regularisation
         \item Global average pooling for dimension reduction
     \end{itemize}
     
     \item \textbf{AlexNet Variants}:
     \begin{itemize}
         \item Clean implementation without pre-training
-        \item Version with frozen ImageNet pre-trained features
+        \item Version with pre-trained features
     \end{itemize}
     
-    \item \textbf{ResNet18}: Pre-trained on ImageNet with skip connections
-    \item \textbf{GoogLeNet}: Pre-trained implementation with inception modules
+    \item \textbf{ResNet18}: Pre-trained implementation
+    \item \textbf{GoogLeNet}: Pre-trained implementation
 \end{itemize}
 
 \subsubsection{Training Configuration}
 
-The final training setup was optimized based on experimental results:
+Combinations of all of the selected networks, and all of the following additional parameters were trained:
 
 \begin{itemize}
-    \item \textbf{Optimizer}: Adam with learning rate 3e-4
-    \item \textbf{Loss Function}: Cross-entropy
-    \item \textbf{Batch Size}: 32 (optimal for memory/performance trade-off)
-    \item \textbf{Training Duration}: 50 epochs with early stopping
-    \item \textbf{Data Split}: 95\% training, 2.5\% validation, 2.5\% test
+  \item \textbf{Datasets}: File3 (provided dataset with 100 images in all of the 100 provided classes, strong distortions)
+  \item \textbf{Models}: MinimalCNN, AlexNet-clean, AlexNet, ResNet18, GoogLeNet
+  \item \textbf{Batch Sizes}: 32, 64
+  \item \textbf{Additional Random Training Transformations}: None, random rotations, random rotation blur and noise
 \end{itemize}
 
-\subsubsection{Key Design Decisions}
+These experiment parameters form 30 different combinations, thus 30 different networks and sets of results, with training time on a single GPU for total of nearly 8 hours. 
+With a single change in the configuration file, the entire experiment can be changed, the custom dataset (or more datasets) can be used (increasing time per epoch), different
+batch sizes can be used (increasing memory usage beyond the used GPU's capability), different transformations can be used, and different models can be used.
 
-The implementation followed this algorithmic workflow:
+Additional settings and parameters purely for the purpose of limiting the time to run the experiment were used:
+
+\begin{itemize}
+    \item \textbf{Loss Function}: Cross-entropy
+    \item \textbf{Optimizer}: Adam with learning rate 3e-4
+    \item \textbf{Training Duration}: 50 epochs with early stopping at 96\% training accuracy
+\end{itemize}
+
+After the experiments were completed, the results were plotted and analysed. The results are shown in the following section, and full results are available in the results directory
+and the appendices.
+
+The final model was trained on the custom dataset, with the following parameters and settings derived based on the best performing combination of the initial experiments:
+
+\begin{itemize}
+  \item \textbf{Datasets}: Custom dataset (1000 images per class)
+  \item \textbf{Model}: GoogLeNet
+  \item \textbf{Batch Sizes}: 32
+  \item \textbf{Additional Random Training Transformations}: None
+\end{itemize}
+
+\subsubsection{Method Implementation}
+
+The experiment implementation followed this algorithmic workflow:
 
 \begin{figure}[H]
 \begin{algorithm}[H]
-\caption{ArUco Classification Training Pipeline}
+\caption{Classification Experiment Pipeline}
 \begin{algorithmic}[1]
-\STATE Load pre-trained model (GoogLeNet)
-\STATE Apply data augmentation transforms
-\FOR{each epoch in training}
-    \STATE Forward pass through network
-    \STATE Calculate cross-entropy loss
-    \STATE Backpropagate and update weights
-    \IF{validation accuracy > 99.9\%}
-        \STATE Early stopping
-    \ENDIF
+\STATE Load configuration for dataset, model, batch size, and transformations
+\FOR{each combination in configurations}
+    \STATE Load dataset
+    \STATE Setup results directory
+    \STATE Initialise model and transforms
+    \STATE Create data loaders
+    \STATE Initialise loss function, optimiser
+    \STATE Train and validate model for number of epochs
+    \STATE Plot the training progress
+    \STATE Run evaluation on test set
+    \STATE Plot classification metrics
+    \STATE Save all results
 \ENDFOR
-\STATE Evaluate on File2 (basic) and File3 (challenging)
+\end{algorithmic}
+\end{algorithm}
+\caption{Classification experiment workflow}
+\end{figure}
+
+The model training loop is shown below:
+
+\begin{figure}[H]
+\begin{algorithm}[H]
+\caption{Classification Training and Validation Pipeline}
+\begin{algorithmic}[1]
+\FOR{each epoch in total number of epochs}
+    \STATE Set model to train mode
+    \FOR{each batch in train loader}
+        \STATE Reset gradients
+        \STATE Forward pass through network
+        \STATE Calculate cross-entropy loss
+        \STATE Backpropagate and update weights
+        \STATE Add loss and accuracy to totals
+    \ENDFOR
+    \STATE Calculate average training loss and accuracy
+    \STATE Set model to evaluation mode
+    \FOR{each batch in validation loader}
+        \STATE Forward pass through network
+        \STATE Calculate cross-entropy loss
+        \STATE Add loss and accuracy to totals
+    \ENDFOR
+    \STATE Calculate average validation loss and accuracy
+    \STATE Save model if the best validation accuracy was achieved
+    \STATE Check for early stopping criteria
+\ENDFOR
 \end{algorithmic}
 \end{algorithm}
 \caption{Classification training workflow}
 \end{figure}
 
-\subsection{Results: Classification}
+The final training loop reused most of the code from the above. The only change was that
+after successful training on the custom dataset, the model was loaded again, and the two original
+datasets were used to create test only dataloaders and the model was tested on them individually.
 
-Presentation of experimental setup
+\subsection{Classification Results}
 
-Datasets used (Files 2, 3, and custom datasets)
-Evaluation metrics (accuracy, precision, recall, F1-score)
+The classification experiments were conducted in two phases. Initially, multiple architectures
+and configurations were tested on the File3 dataset to determine the optimal approach. Subsequently, the best
+performing configuration was trained on a custom dataset and evaluated against both File2 and File3.
 
-Numerical results and analysis
+\subsubsection{Initial Experiments}
 
-Comparison across different network architectures
-Effect of parameters (learning rate, batch size, number of training images)
-Graphs illustrating training accuracy, confusion matrices
+The experiments encompassed various architectures with different batch sizes and data augmentation strategies. Each
+configuration was tested on 1000 samples from File3, with the following results:
 
-Discussion of performance trends
+\begin{itemize}
+    \item \textbf{AlexNet (Clean Implementation)}:
+        \begin{itemize}
+            \item Batch size 64, rotation (training time) augmentation: 98.60\% accuracy (F1: 98.51\%)
+        \end{itemize}
 
-Strengths and weaknesses observed
-Cases of misclassification and potential causes
+    \item \textbf{AlexNet (Clean Implementation)}:
+        \begin{itemize}
+            \item Batch size 64, rotation (training time) augmentation: 98.60\% accuracy (F1: 98.51\%)
+        \end{itemize}
+    
+    \item \textbf{AlexNet (Pre-trained)}:
+        \begin{itemize}
+            \item Batch size 64, full (training time) augmentation: 73.70\% accuracy (F1: 72.15\%)
+        \end{itemize}
+    
+    \item \textbf{ResNet18}:
+        \begin{itemize}
+            \item Batch size 32, no (training time) augmentation: 100.00\% accuracy (F1: 100.00\%)
+        \end{itemize}
+    
+    \item \textbf{GoogLeNet}:
+        \begin{itemize}
+            \item Batch size 32, no (training time) augmentation: 99.90\% accuracy (F1: 99.87\%)
+        \end{itemize}
+\end{itemize}
+
+Several key trends emerged from these results. The clean AlexNet implementation surprisingly outperformed
+its pre-trained counterpart, suggesting that the ImageNet pre-training might not transfer well to ArUco marker classification. This could be
+due to the fact that the pre-trained model was trained on a different dataset, and the ArUco markers are not very similar to the ImageNet dataset. Alternatively,
+the implementation of the AlexNet model with the weights from PyTorch was not done aproproately, and the model was not able to train effectively.
+ResNet18 achieved perfect accuracy without augmentation, though its performance slightly decreased with additional augmentations.
+GoogLeNet maintained consistently high performance across all configurations, never dropping below 99.50\% accuracy.
+Retrospectively, the ResNet18 model was the best performing model, achieving perfect accuracy on the File2 dataset, and 97.48\% accuracy on the File3 dataset.
+
+The results of the minimal CNN are as expected, although the model was indeed training and given many more epochs, it would likely achieve better results. Due to
+the lack of available GPU resources, and time, this was not attempted. During the initial development, this model was being tested on regularly 
+to validate the functionality, and when tested thoroughly (such as in the commit d9fd8ad), the model has achieved 92.30\% validationaccuracy after
+100 epochs of training. To solidify these results, this experiment would have to be repeated with the current codebase and for all of the combinations to
+ensure the same and unbiased results. 
+
+\subsubsection{Final Model Performance}
+
+Based on the previous findings, GoogLeNet was selected for the final model due to its consistent performance and efficient training
+characteristics. While ResNet18 achieved marginally better results in some configurations, GoogLeNet showed more stable performance
+across different parameters and required less computational resources. The model was trained on FileCustom1, a synthetic dataset created
+to approximate the conditions in Files 2 and 3.
+
+The final evaluation yielded these results:
+\begin{itemize}
+    \item \textbf{Training Evaluation} (2,500 samples):
+        \begin{itemize}
+            \item Accuracy: 100.00\%
+            \item Precision: 100.00\%
+            \item Recall: 100.00\%
+            \item F1-score: 100.00\%
+        \end{itemize}
+    \item \textbf{File2 Evaluation} (10,000 samples):
+        \begin{itemize}
+            \item Accuracy: 100.00\%
+            \item Precision: 100.00\%
+            \item Recall: 100.00\%
+            \item F1-score: 100.00\%
+        \end{itemize}
+    \item \textbf{File3 Evaluation} (10,000 samples):
+        \begin{itemize}
+            \item Accuracy: 97.48\%
+            \item Precision: 97.68\%
+            \item Recall: 97.48\%
+            \item F1-score: 97.51\%
+        \end{itemize}
+\end{itemize}
+
+These results demonstrate the model's robust performance across different distortion conditions. The perfect scores on File2 indicate excellent handling of weak distortions, while the strong performance on File3 (misclassifying only 252 out of 10,000 samples) shows good resilience to more challenging conditions.
 
 \section{Detection}
 
@@ -218,6 +398,40 @@ The detection problem was broken down into the following steps:
   \label{fig:data_browser_2}
 \end{figure}
 
+\begin{figure}[h]
+  \centering
+  \begin{subfigure}[b]{0.2\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{images/aruco-file3-detection-1.png}
+      \caption{Detection example 1}
+      \label{fig:det_ex1}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.2\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{images/aruco-file3-detection-2.png}
+      \caption{Detection example 2}
+      \label{fig:det_ex2}
+  \end{subfigure}
+  
+  \vspace{0.5cm}
+  
+  \begin{subfigure}[b]{0.2\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{images/aruco-file3-detection-3.png}
+      \caption{Detection example 3}
+      \label{fig:det_ex3}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.2\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{images/aruco-file3-detection-4.png}
+      \caption{Detection example 4}
+      \label{fig:det_ex4}
+  \end{subfigure}
+  \caption{Examples of ArUco marker detection under different conditions (from the provided dataset)}
+  \label{fig:detection_examples}
+\end{figure}
 
 \subsection{Method: Detection}
 

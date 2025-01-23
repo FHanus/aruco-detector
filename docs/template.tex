@@ -43,6 +43,27 @@
 % Make journal titles italic
 \DeclareFieldFormat{journaltitle}{\emph{#1}}
 
+% Format online resources according to Harvard style
+\DeclareFieldFormat[online]{title}{\emph{#1}}
+\DeclareFieldFormat{url}{Available from: \url{#1}}
+\DeclareFieldFormat{urldate}{[Accessed #1]}
+
+% Custom driver for online entries
+\DeclareBibliographyDriver{online}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/editor}%
+  \setunit{\labelnamepunct}\newblock
+  \usebibmacro{date}%
+  \setunit{\addspace}\newblock
+  \usebibmacro{title}%
+  \newunit\newblock
+  \printfield{url}%
+  \setunit{\addspace}\newblock
+  \printurldate
+  \usebibmacro{finentry}%
+}
+
 % ==== Journal Entry Format Customization ====
 % Customize how journal entries are formatted:
 % - Includes journal name
