@@ -26,10 +26,9 @@
 
 This project investigates deep learning methodologies for detecting and classifying ArUco markers in the presence of severe distortions such as blur,
 noise, and rotations. The project addresses two primary challenges: marker classification under varying distortion levels and accurate localisation in
-affected images. For classification, several architectures were evaluated, with GoogLeNet achieving 100\% accuracy on weakly distorted markers and
-97.48\% under severe distortions. For detection, RetinaNet-ResNet50 showed impressive performance at 89.00\% IoU in standard conditions and 85.64\%
-under severe distortions. Using synthetic datasets and transfer learning, the results confirm that pre-trained models outperform custom architectures.
-While effective in real-world conditions, further improvements are feasible with enhanced computational resources.
+images. For classification, several architectures were evaluated, with GoogLeNet achieving 100\% accuracy on weakly distorted markers and
+97.48\% under severe distortions. For detection, RetinaNet-ResNet50 showed performance at 89.00\% IoU in standard conditions and 85.64\%
+under severe distortions.
 
 \end{abstract}
 
@@ -211,8 +210,10 @@ The experiments tested combinations of the above architectures with varied param
 \end{itemize}
 
 This resulted in 30 parameter/model combinations, trained over nearly 8 hours on a single GPU. Customisation required
-minimal effort, achieved via a central configuration file. Adjustments could be made to datasets, batch sizes,
-transformations, and models, although larger batch sizes increased memory demands.
+minimal effort, achieved via a central configuration file. Adjustments could be made to also trial and compare other combinations with
+datasets, batch sizes, learning rates, transformations, and models, although most of these were not tested due to GPU memory constraints.
+The selected learning rate and training duration were chosen during the initial experiments throught the development, this can be seen 
+in some of the past GitHub commits.
 
 \begin{itemize}
     \item \textbf{Loss Function}: Cross-entropy
@@ -295,12 +296,12 @@ created for this purpose, and the model performance on these datasets was separa
 
 The classification experiments were conducted in two phases. Initially, multiple architectures and configurations were tested on the
 File3 dataset to determine the optimal approach. Subsequently, the best performing configuration was trained on a custom dataset and
-was evaluated against both File2 and File3.
+was evaluated against separately File2 and File3 datasets.
 
 \subsubsection{Initial Experiments}
 
 Various architectures with different batch sizes and data augmentation strategies were explored. Each configuration was tested on
-1000 samples from File3, with the following results:
+1000 samples from File3, with the following (best of) results. The full results of each combination can be seen in the repository.
 
 \begin{itemize}
     \item \textbf{MinimalCNN}:
@@ -370,10 +371,10 @@ minimal CNN was observed to behave as anticipated, although better performance w
 
 AlexNet with no pre-trained weights was observed to perform very well, though it converged more slowly than its pre-trained counterpart.
 ResNet18 and GoogLeNet were found to have performed almost perfectly and were noticeably better without additional training transforms.
-Only the ResNet plot is shown, as the results were essentially identical. Early stopping was triggered for both models once 99\% 
+Out of GoogLeNet and ResNet18, the ResNet plot is shown, as the results were essentially identical. Early stopping was triggered for both models once 99\% 
 validation accuracy was reached.
 
-For further insights, training logs and detailed analysis are provided in the Appendices, which also contain additional plots, results, and data.
+For further insights, training logs and detailed analysis are provided in the appendices, which also contain additional plots, results, and data.
 
 \subsubsection{Final Model Performance}
 
@@ -495,8 +496,8 @@ The detection problem was approached similarly to classification with these step
 
 \subsubsection{Data Preparation}
 
-Firstly, the dataset browser was adapted for detection data viewing and results. It displays the image, bounding box (ground
-truth and predictions), pixel distribution, and basic dataset statistics. This is visible in Figure \ref{fig:data_browser_2}.
+Firstly, the dataset browser was adapted for detection data viewing and results. It displays the image, bounding box, pixel
+distribution, and basic dataset statistics. This is visible in Figure \ref{fig:data_browser_2}.
 
 \begin{figure}[h]
   \centering
@@ -536,8 +537,8 @@ The data augmentation pipeline is outlined below:
 \subsubsection{Network Architectures}
 
 Multiple pre-trained PyTorch architectures were implemented. RetinaNet and MobileNet worked out of the box, whereas others were
-problematic. Final models were based on \textcite{pytorch_retinanet}, \textcite{pytorch_fasterrcnn}, and \textcite{pytorch_mobilenet_rcnn},
-chosen for performance and easy implementation.
+problematic (YOLOv3) and later abandoned. Final models were based on \textcite{pytorch_retinanet}, \textcite{pytorch_fasterrcnn},
+and \textcite{pytorch_mobilenet_rcnn}, chosen for performance and easy implementation.
 
 \begin{itemize}
     \item \textbf{RetinaNet with ResNet50 backbone}: $\sim$40M parameters
@@ -604,7 +605,7 @@ to determine the optimal approach. The best-performing configuration was then tr
 \subsubsection{Initial Experiments}
 
 The selected architectures were used with a batch size of four due to GPU memory constraints. Each configuration was tested on 1000 samples
-from File5, yielding the following results:
+from File5, outputting the following results:
 
 \begin{itemize}
   \item \textbf{FasterRCNN-ResNet50}:
@@ -655,7 +656,7 @@ The RetinaNet model was observed to perform the best and converge the fastest, e
 
 \subsubsection{Final Model Performance}
 
-RetinaNet with a ResNet50 backbone was selected as the final model due to its superior performance. It was trained on FileCustom2, a 
+RetinaNet with a ResNet50 backbone was selected as the final model due to its performance. It was trained on FileCustom2, a 
 synthetic dataset approximating conditions in Files 4 and 5. A set of 10,000 images was used, but this is adjustable in the configuration 
 file. This was done to conserve time and resources, as the dataset was large enough, and augmentation plus each epoch were lengthy.
 
@@ -678,7 +679,7 @@ The final evaluation produced these results:
 
 Strong performance was demonstrated across various distortion conditions. A perfect detection rate on File4 (IoUs over 50\%) indicated 
 effective handling of weak distortions. On File5, only three out of 100 markers were missed, showing resilience to more demanding conditions. 
-As seen in Figure \ref{fig:final_detection_examples}, some markers were still undetected, requiring future improvements.
+The missed markers (and other results) can be seen in Figure \ref{fig:final_detection_examples}.
 
 \begin{figure}[h]
   \centering
@@ -729,22 +730,23 @@ Deep learning approaches for ArUco marker detection and classification under cha
     \item \textbf{Architecture Insights}: Pre-trained models consistently outperformed custom architectures.
     
     \item \textbf{Technical Limitations}: GPU memory constraints restricted batch sizes and training duration, with each detection-model
-    epoch requiring 20 minutes. With greater compute, the batch size should be increased and the dataset expanded through the configuration
-    file to improve detection outcomes.
+    epoch requiring 20 minutes at the current state. With greater compute, the batch size should be increased and the dataset expanded
+    through the configuration file to improve detection outcomes. More settings and parameters could then easily be tested and compared.
 
-    \item \textbf{Augmentation Mistake}: Additional data augmentation on pre-augmented images proved counterproductive.
+    \item \textbf{Augmentation Mistake}: Additional data augmentation on pre-augmented images proved counterproductive for the reason
+    that the images were already augmented.
 \end{itemize}
 
 Future improvements that could yield interesting results include: 
 
 \begin{itemize}
     \item Expanding synthetic dataset generation with perspective transformations, partial occlusion, and other distortions
-    \item Implementing larger batch sizes and extended training
+    \item Implementing larger batch sizes and extended training (more compute required)
     \item Collecting real-world data to validate synthetic training results
     \item Testing more pre-trained detection models given sufficient computational resources
 \end{itemize}
 
-These outcomes illustrate the viability of deep learning for marker detection, although systematic improvements, resource expansion,
+These outcomes show the viability of deep learning for marker detection, although systematic improvements, resource expansion,
 and thorough validation remain highly essential.
 
 \printbibsection
