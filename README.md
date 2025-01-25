@@ -365,6 +365,6 @@ The classification final training showed varying results across different archit
 
 | Model Config | Details | Metrics |
 |-------------|---------|---------|
-| RetinaNet-ResNet50<br>Training Evaluation | Total test samples: 1000 | - Mean IoU: 99.70%<br>- Mean MAE: 99.76%<br>- IoUs over 50%: 100.00% |
-| RetinaNet-ResNet50<br>File 4 Evaluation | Total test samples: 100 | - Mean IoU: 89.00%<br>- Mean MAE: 89.01%<br>- IoUs over 50%: 100.00% |
-| RetinaNet-ResNet50<br>File 5 Evaluation | Total test samples: 100 | - Mean IoU: 85.64%<br>- Mean MAE: 88.94%<br>- IoUs over 50%: 97.00% |
+| RetinaNet-ResNet50<br>Training Evaluation | Total test samples: 1000 | - Mean IoU: 99.70%<br>- IoUs over 50%: 100.00% |
+| RetinaNet-ResNet50<br>File 4 Evaluation | Total test samples: 100 | - Mean IoU: 89.00%<br>- IoUs over 50%: 100.00% |
+| RetinaNet-ResNet50<br>File 5 Evaluation | Total test samples: 100 | - Mean IoU: 85.64%<br>- IoUs over 50%: 97.00% |
